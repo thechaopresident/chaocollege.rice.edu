@@ -159,11 +159,11 @@ window.CHAO_SITE = {
      Newest first. `date` is the visible label; `datetime` is machine-readable
      (YYYY-MM-DD) and may be left "". Delete an entry to remove its row.     */
   announcements: [
-    { date: "September 7, 2026", datetime: "2026-09-07", title: "We have a website!",
+    { date: "9/7/2026", datetime: "2026-09-07", title: "We have a website!",
       body: "It’s what you’re looking at right now", link: null },
     { date: "9/6/2026", datetime: "2026-09-06", title: "It's Sunday, but it’s like a Saturday!",
       body: "I love labor day weekend :)", link: null },
-    { date: "September 5, 2026", datetime: "2026-09-05", title: "We got a ping-pong table!",
+    { date: "9/5/2026", datetime: "2026-09-05", title: "We got a ping-pong table!",
       body: "Pretty self-explanatory…", link: null }
   ],
 
