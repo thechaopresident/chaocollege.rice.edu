@@ -16,3 +16,8 @@
 #
 # To publish them anyway, delete the line below and commit.
 brand/photo-originals/
+
+# Working copy of the content worklist. It goes stale the moment its rows are
+# applied into data/, so the data files are the source of truth, not this.
+# tools/apply-worklist.py is committed; regenerate a fresh CSV any time.
+content-worklist.csv

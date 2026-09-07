@@ -102,48 +102,59 @@ window.CHAO_PEOPLE = {
   /* ======================================================================
      STUDENT GOVERNMENT — the Chabinet
      ================================================================== */
+  /* EMAIL DISCREPANCIES — the contact sheet and the "EC Info Doc" disagree on
+     three addresses. The contact-sheet values are kept below because that sheet
+     is the designated contact list; a wrong address fails silently, so these
+     were NOT changed on one ambiguous second source. Confirm and correct:
+
+       Rex Rutchik     sheet: chaotreasurers@gmail.com   doc: rr125@rice.edu
+       Jake Pessin     sheet: jp231@rice.edu             doc: chaosenate@gmail.com
+       Zach Weinbrum   sheet: chaoparlimentarian@...     doc: chaoparliamentarian@...
+                       (these differ by one letter — only one can be real)
+
+     Class years below are from the EC Info Doc and are additions, not changes. */
   government: [
-    { name: "Elijah White", role: "President", pronouns: "he/him", email: "thechaopresident@gmail.com",
+    { name: "Elijah White", year: "'28", role: "President", pronouns: "he/him", email: "thechaopresident@gmail.com",
       description: "The President of Chao College is the highest executive officer of the Chabinet (Chao Cabinet).",
       photo: null, photoDrive: "https://drive.google.com/file/d/1UdrMI3v0yD_-w8DcDXGAVaStPfoPwk4r/view?usp=drive_link" },
 
-    { name: "Olivia Seo", role: "Chief Justice", pronouns: "she/her", email: "thechaocj@gmail.com",
+    { name: "Olivia Seo", year: "'27", role: "Chief Justice", pronouns: "she/her", email: "thechaocj@gmail.com",
       description: "The Chief Justice (CJ) of Chao College is the primary administrator of judicial policies set by Chao and the university, and shall oversee the safety of Chao's student body. They are Chao College's official liaison between Chao's student body and the Rice University Police Department (RUPD), Student Judicial Programs (SJP), the Student Wellbeing Office, and other health and safety leaders on campus.",
       photo: null, photoDrive: "https://drive.google.com/file/d/1abVCbekd9MTWV9Hh8pWI-B4i94zt8wB8/view?usp=sharing" },
 
-    { name: "Barbare Tetvadze", role: "Internal Vice President (IVP)", pronouns: "she/her", email: "thechaoivp@gmail.com",
+    { name: "Barbare Tetvadze", year: "'27", role: "Internal Vice President (IVP)", pronouns: "she/her", email: "thechaoivp@gmail.com",
       description: "Chao's Internal Vice President (IVP) is the second-highest executive member of the Chabinet regarding the physical space of Chao College, overseeing all of Chao's facilities, and maintaining Chao's equipment.",
       photo: null, photoDrive: "https://drive.google.com/file/d/15Tk9rhtGCA4ya_BFF3jypDZpVBZP1ynT/view?usp=drive_link" },
 
-    { name: "Sammi Frey", role: "External Vice President (EVP)", pronouns: "she/her", email: "chaoevp@gmail.com",
+    { name: "Sammi Frey", year: "'27", role: "External Vice President (EVP)", pronouns: "she/her", email: "chaoevp@gmail.com",
       description: "Chao's External Vice President (EVP) is the second-highest executive member of the Chabinet regarding relationships external to Chao College, facilitating and maintaining cross-college relations and campus-wide interfacing.",
       photo: null, photoDrive: "https://drive.google.com/file/d/1NeuAmjBixxlNcwr6yQFZLeo0-iUjLimZ/view?usp=drive_link" },
 
-    { name: "Matthias Canon", role: "Community Vice President (CVP)", pronouns: "he/him", email: "thechaocvp@gmail.com",
+    { name: "Matthias Canon", year: "'27", role: "Community Vice President (CVP)", pronouns: "he/him", email: "thechaocvp@gmail.com",
       description: "Chao's Community Vice President (CVP) is the second-highest executive member of the Chabinet regarding the student body of Chao College, facilitating and maintaining Chao's social and cultural wellbeing and traditions.",
       photo: null, photoDrive: null },
 
-    { name: "Ian Rodriguez", role: "Senior Treasurer", pronouns: "he/him", email: "chaotreasurers@gmail.com",
+    { name: "Ian Rodriguez", year: "'28", role: "Senior Treasurer", pronouns: "he/him", email: "chaotreasurers@gmail.com",
       description: "Chao's Treasurers are the highest financial officers of the Chabinet, overseeing all financial transactions at Chao College.",
       photo: null, photoDrive: "https://drive.google.com/file/d/1BkX62ydOcfiIsSiFgLltZ89nVMOOrpYp/view?usp=sharing" },
 
-    { name: "Rex Rutchik", role: "Junior Treasurer", pronouns: "he/him", email: "chaotreasurers@gmail.com",
+    { name: "Rex Rutchik", year: "'29", role: "Junior Treasurer", pronouns: "he/him", email: "chaotreasurers@gmail.com",
       description: "Chao's Treasurers are the highest financial officers of the Chabinet, overseeing all financial transactions at Chao College.",
-      photo: null, photoDrive: "https://drive.google.com/file/d/1mLDI6jK2mAe0iIPTLTmCeIElKmEA0eJL/view?usp=drive_link" },
+      photo: "rex-rutchik.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1mLDI6jK2mAe0iIPTLTmCeIElKmEA0eJL/view?usp=drive_link" },
 
-    { name: "Carolina Balboa", role: "Secretary", pronouns: "she/her", email: "chaosecretaries@gmail.com",
+    { name: "Carolina Balboa", year: "'28", role: "Secretary", pronouns: "she/her", email: "chaosecretaries@gmail.com",
       description: "Chao's Secretaries manage all of Chao College's communication systems, oversee all of Chao's historical documentation and maintain all of Chao's record-keeping.",
       photo: null, photoDrive: "https://drive.google.com/file/d/1vg8_e5Sm8Tl75_GK01mTYbRETMJWsWBh/view?usp=sharing" },
 
-    { name: "Raymond Xu", role: "Secretary", pronouns: "he/him", email: "chaosecretaries@gmail.com",
+    { name: "Raymond Xu", year: "'29", role: "Secretary", pronouns: "he/him", email: "chaosecretaries@gmail.com",
       description: "Chao's Secretaries manage all of Chao College's communication systems, oversee all of Chao's historical documentation and maintain all of Chao's record-keeping.",
       photo: null, photoDrive: "https://drive.google.com/file/d/1z20SoNAiRoP_G2EvN_2yqVws4lIQr-Wl/view?usp=sharing" },
 
-    { name: "Jake Pessin", role: "Senator", pronouns: "he/him", email: "jp231@rice.edu",
+    { name: "Jake Pessin", year: "'29", role: "Senator", pronouns: "he/him", email: "jp231@rice.edu",
       description: "Chao's Rice Student Association (RSA) Senator is the primary liaison between Chao's student body and the Student Association, alongside Chao's President. The Senator represents the interests of Chao's student body to the Rice Student Association.",
       photo: null, photoDrive: "https://drive.google.com/file/d/1ZVyCrcDrdmTvkuszlN_kP7SKOug918Cj/view?usp=drive_link" },
 
-    { name: "Zach Weinbrum", role: "Parlimentarian", pronouns: "he/him", email: "chaoparlimentarian@gmail.com",
+    { name: "Zach Weinbrum", year: "'28", role: "Parlimentarian", pronouns: "he/him", email: "chaoparlimentarian@gmail.com",
       description: "Chao's parliamentarian oversees all election-related processes and communication for executive government positions, attends all government-related meetings, and is the go-to student reference for Constitution and Bylaws accountability, interpretation and education.",
       photo: null, photoDrive: null }
   ],
@@ -154,7 +165,7 @@ window.CHAO_PEOPLE = {
      ================================================================== */
   court: [
     { name: "Amelia Davis", role: "University Court Representative", pronouns: "she/her", email: "awd3@rice.edu",
-      photo: null, photoDrive: "https://drive.google.com/file/d/1hRaxyA6TgiyqKUzpmHq389rqp0u9EX2-/view?usp=sharing" },
+      photo: "amelia-davis.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1hRaxyA6TgiyqKUzpmHq389rqp0u9EX2-/view?usp=sharing" },
     { name: "Coming Soon...", role: "Freshman Rep", pronouns: null, email: null, photo: null, photoDrive: null },
     { name: "Prasanna Bendalam", role: "Sophmore Rep", pronouns: "he/him", email: "pa67@rice.edu",
       photo: null, photoDrive: "https://drive.google.com/file/d/16NHr-P1wilsMSGahVfpsB_G2fYCMLeGJ/view?usp=sharing" },
@@ -173,6 +184,33 @@ window.CHAO_PEOPLE = {
      ================================================================== */
   committees: [
     { name: "Arts",
+      jurisdiction: "IVP",
+      responsibilities: [
+        { heading: "Chalkboard", items: [
+          "Keep clean, organized, and regularly updated",
+          "Include events, birthdays, announcements, and designs",
+          "Avoid clutter and incomplete work"
+        ] },
+        { heading: "Art & Spaces", items: [
+          "Curate and display artwork in common areas",
+          "Feature student work, external artists, and prints",
+          "Include descriptions for displayed pieces",
+          "Create a “mini museum” experience throughout Chao"
+        ] },
+        { heading: "Decorations", items: [
+          "Lead major holiday and event decorations",
+          "Handle smaller creative touches for events"
+        ] },
+        { heading: "Murals & Windows", items: [
+          "Design and execute when appropriate",
+          "Maintain a clean, intentional look"
+        ] },
+        { heading: "Events", items: [
+          "Host arts-related events (craft nights, study breaks, etc.)",
+          "Organize themed activities (e.g., bouquet-making, card-making)",
+          "Plan occasional art/documentary screenings"
+        ] }
+      ],
       description: "This committee defines Chao's visual and creative identity. Every space should feel intentional, dynamic, and well-maintained.",
       members: [
         { name: "Joy Onyeka",    pronouns: null,      email: "jao12@rice.edu", photo: null, photoDrive: null },
@@ -180,13 +218,29 @@ window.CHAO_PEOPLE = {
       ]},
 
     { name: "Associates & Alumni",
+      jurisdiction: "EVP",
+      responsibilities: [
+        "Plan college-wide associate events (minimum once per semester)",
+        "Coordinate smaller, individual associate-led events",
+        "Build and maintain an accessible, interactive associate network",
+        "Foster mentorship opportunities (professional and social)",
+        "Increase associate presence during major events (e.g., Beer Bike Week, Associates Night)"
+      ],
       description: "This committee ensures associates feel meaningfully connected to Chao and serve as mentors to students. The goal is to build a strong, engaged network that consistently interacts with and supports the college community.",
       members: [
         { name: "Abbie Wang", pronouns: "she/her", email: "aw156@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1LQs1wHVO4dlvhaxGMq4Z6daHBhog9y1X/view?usp=sharing" },
-        { name: "Ruby Gao",   pronouns: "she/her", email: "yg107@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/17NgaD_syd6Q9rWrgW7w_i8bQ7lWmSfpy/view?usp=drive_link" }
+        { name: "Ruby Gao",   pronouns: "she/her", email: "yg107@rice.edu", photo: "ruby-gao.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/17NgaD_syd6Q9rWrgW7w_i8bQ7lWmSfpy/view?usp=drive_link" }
       ]},
 
     { name: "Beer Bike Coordinators",
+      jurisdiction: "EVP",
+      responsibilities: [
+        "Decide the annual Beer Bike theme",
+        "Plan and execute Beer Bike Week",
+        "Hold weekly planning meetings (vendors, events, merch, etc.)",
+        "Coordinate with Bike and Chug Captains for race-day preparation",
+        "Plan and execute jacks during Beer Bike Week"
+      ],
       description: "The Beer Bike Coordinators (BBCs) work for months to deliver the best possible Beer Bike Week and shape what Chao's Beer Bike tradition will look like long-term. They collaborate with Bike and Chug Captains to build a strong race-day team and create a week that people are excited about.",
       members: [
         { name: "Vivian Mitchell",  pronouns: "she/her", email: "vm51@rice.edu", photo: null, photoDrive: null },
@@ -196,6 +250,13 @@ window.CHAO_PEOPLE = {
       ]},
 
     { name: "External Socials",
+      jurisdiction: "EVP",
+      responsibilities: [
+        "Plan Chao’s first public YAYAYAYAYA",
+        "Organize cross-college events",
+        "Build relationships with cultural and social organizations across campus",
+        "Host events that introduce Chao to the broader campus community"
+      ],
       description: "This committee builds Chao's outward-facing social presence by connecting with other colleges and campus groups. The focus is on visibility, collaboration, and high-energy events.",
       members: [
         { name: "John Sneizek", pronouns: "he/him", email: "js512@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1YuWYQI4NleNA0dIGU3-q_Yq7a-XngN9J/view?usp=drive_link" },
@@ -203,6 +264,13 @@ window.CHAO_PEOPLE = {
       ]},
 
     { name: "Internal Socials",
+      jurisdiction: "CVP",
+      responsibilities: [
+        "Plan signature internal events (College Nights, Floorlympics, FITQs)",
+        "Establish recurring weekly traditions (e.g., themed nights like Wine Wednesdays at Hanszen or Sunday Sundaes at Murt)",
+        "Collaborate with Floor and Class Representatives to maximize turnout",
+        "Strengthen Chao identity through mixers and exclusive events"
+      ],
       description: "This committee develops Chao's internal culture, creating consistent, high-attendance events that build community and make Chao an engaging place to live.",
       members: [
         { name: "Carson Walker", pronouns: "he/him",  email: "cw168@rice.edu", photo: null, photoDrive: null },
@@ -210,6 +278,15 @@ window.CHAO_PEOPLE = {
       ]},
 
     { name: "Jacks",
+      jurisdiction: "CVP",
+      responsibilities: [
+        "Design and execute jacks throughout the year",
+        "Develop chants and spirit elements",
+        "Ensure originality",
+        "Strategically plan timing and execution for maximum impact",
+        "Operate within rules while pushing creative boundaries",
+        "Establish a consistent, high-energy presence"
+      ],
       description: "This committee defines Chao's reputation through bold, creative, and memorable jacks. The goal is to set a new standard for originality and execution.",
       members: [
         { name: "Grace Doolittle", pronouns: null,     email: "ged1@rice.edu", photo: null, photoDrive: null },
@@ -217,6 +294,14 @@ window.CHAO_PEOPLE = {
       ]},
 
     { name: "Merch",
+      jurisdiction: "EVP",
+      responsibilities: [
+        "Release sticker designs within the first month of school",
+        "Organize at least three merch drops per year",
+        "Design and coordinate Beer Bike merchandise",
+        "Assist in setting up and maintaining the Chao U-Store",
+        "Develop creative, high-demand merchandise items"
+      ],
       description: "This committee is responsible for designing and distributing Chao merchandise, ensuring strong, recognizable college branding and high-quality offerings throughout the year.",
       members: [
         { name: "Joy Kim",       pronouns: "she/her", email: "jk127@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1p5S_C3rbksAhXQspVosvwOndnd6pPNMr/view?usp=sharing" },
@@ -224,6 +309,14 @@ window.CHAO_PEOPLE = {
       ]},
 
     { name: "Service",
+      jurisdiction: "EVP",
+      responsibilities: [
+        "Create and sustain Chao-specific service traditions",
+        "Build partnerships with off-campus organizations",
+        "Maintain and share a clear, updated calendar of service events",
+        "Promote campus-wide service opportunities",
+        "Collaborate with Chao’s CER on voter registration initiatives"
+      ],
       description: "This committee builds Chao's identity as a service-oriented college both on and off campus. They create opportunities for consistent engagement and establish long-term service traditions.",
       members: [
         { name: "Aidan Abney",     pronouns: "he/him", email: "aa518@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1G8CSBgL1kDGP8PUoGy2mIm2iqirV0aVv/view?usp=drivesdk" },
@@ -231,6 +324,14 @@ window.CHAO_PEOPLE = {
       ]},
 
     { name: "Sports",
+      jurisdiction: "EVP",
+      responsibilities: [
+        "Create and manage intramural team rosters",
+        "Recruit and connect with student-athletes",
+        "Strengthen Chao’s presence within varsity sports",
+        "Coordinate with IM Leagues and Rice Rec",
+        "Host watch events for major games (e.g., Super Bowl)"
+      ],
       description: "This committee organizes and supports Chao's athletic presence across intramural and varsity engagement, helping build both competitiveness and community.",
       members: [
         { name: "Saylor Robinson",   pronouns: "she/they", email: "sr206@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1-Hp-UxYT1tsds4yeWlW49I3H3PGFNG0D/view?usp=sharing" },
@@ -238,27 +339,61 @@ window.CHAO_PEOPLE = {
       ]},
 
     { name: "Culturals Representatives",
+      jurisdiction: "CVP",
+      responsibilities: [
+        "Work closely with affinity group heads to ensure consistent programming and event execution",
+        "Step in to support planning or logistics when affinity groups need additional help",
+        "Collaborate with Magisters to subsidize tickets for cultural events across campus",
+        "Promote cultural events and opportunities to the broader Chao community",
+        "Encourage participation in culturally diverse programming",
+        "Help integrate cultural awareness and celebration into existing college events"
+      ],
       description: "The cultural representatives foster a culturally vibrant and inclusive community by supporting affinity groups, promoting diverse programming, and increasing access to cultural events across campus.",
       members: [
         { name: "Asiyah Bray",       pronouns: "She/her", email: "akb12@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1p6o9CnxlDeelwSbPC1KPkDmqSyafzz3T/view?usp=drivesdk" },
         { name: "Eriyana Woolfolk",  pronouns: "she/her", email: "ew73@rice.edu",  photo: null, photoDrive: "https://drive.google.com/file/d/1X_wRmuS3052o6DZQsGFhpj9WCC_6bHRb/view?usp=drivesdk" }
       ]},
 
-    { name: "Improvments Representative",
+    { name: "Improvements Representatives",
+      jurisdiction: "IVP",
+      responsibilities: [
+        "Upgrade and maintain shared spaces (study rooms, game rooms, etc.)",
+        "Keep study rooms stocked with supplies",
+        "Maintain printer and computer resources",
+        "Oversee common room equipment and inventory",
+        "Allocate Ambiance Fund strategically with EC",
+        "Collaborate with IVP on improvements"
+      ],
       description: "The improvement representative ensures all shared spaces are functional, stocked, and continuously improving.",
       members: [
         { name: "Gabi Brent", pronouns: "he/him", email: "gb83@rice.edu", photo: null, photoDrive: null }
       ]},
 
     { name: "Kitchen Representatives",
+      jurisdiction: "IVP",
+      responsibilities: [
+        "Maintain organization and cleanliness",
+        "Ensure all essentials are stocked (utensils, cookware, appliances, cleaning supplies)",
+        "Manage fridge organization",
+        "Flag issues to IVP and SMR",
+        "Host cooking or baking events"
+      ],
       description: "The kitchen representatives create a fully functional, accessible kitchen where anyone can use the space easily",
       members: [
         { name: "Addmrya Robles", pronouns: "She/her", email: "ar305@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1ZRQ3BQLnyRkKUJubrkMNTbXejJY6_IbS/view?usp=drivesdk" },
         { name: "Zaira Moreno",   pronouns: "she/her", email: "zm31@rice.edu",  photo: null, photoDrive: null, optOut: true }
       ]},
 
-    { name: "Laundry Representative",
-      description: "The laundry room representative a clean, clutter-free laundry space with clear systems and accountability.",
+    { name: "Laundry Room Representative",
+      jurisdiction: "IVP",
+      responsibilities: [
+        "Enforce cleanliness standards",
+        "Implement and manage an unattended laundry system",
+        "Clearly post rules and expectations",
+        "Establish a system for unclaimed clothing",
+        "Communicate machine issues and updates with GroupMe and SMR"
+      ],
+      description: "Maintain a clean, clutter-free laundry space with clear systems and accountability.",
       members: [
         { name: "[PLACEHOLDER: name]", pronouns: null, email: null, photo: null, photoDrive: null, optOut: true }
       ]},

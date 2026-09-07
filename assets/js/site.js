@@ -204,7 +204,7 @@
           "<div>" +
             '<p class="footer__wordmark">' + esc(SITE.shortName || SITE.name) + "<br>College</p>" +
             (SITE.motto ? '<p class="motto">' + esc(SITE.motto) + "</p>" : "") +
-            "<p>" + fmt(c.mailStop) + " &middot; Rice University<br>" +
+            "<p>" + (c.mailStop ? fmt(c.mailStop) + " &middot; " : "") + "Rice University<br>" +
               fmt(c.street) + "<br>" + fmt(c.city) + "</p>" +
             "<p>" +
               (c.phone ? "&#9742; " + fmt(c.phone) + "<br>" : "") +
@@ -215,7 +215,7 @@
         "</div>" +
         '<div class="footer__bottom">' +
           "<span>&copy; " + new Date().getFullYear() + " " + esc(SITE.name) + ", Rice University</span>" +
-          "<span>" + fmt(SITE.footerNote) + "</span>" +
+          (SITE.footerNote ? "<span>" + fmt(SITE.footerNote) + "</span>" : "<span></span>") +
         "</div>" +
       "</div>";
   }
@@ -239,7 +239,7 @@
           '<p class="eyebrow">Find us at Rice</p>' +
           "<h2>" + esc(SITE.name) + "</h2>" +
           "<p>" + fmt(c.street) + " &middot; " + fmt(c.city) + "</p>" +
-          "<p>" + fmt(c.mailStop) + " &middot; Rice University</p>" +
+          "<p>" + (c.mailStop ? fmt(c.mailStop) + " &middot; " : "") + "Rice University</p>" +
           (c.mapLink ? '<p><a class="btn btn--outline" href="' + esc(c.mapLink) +
             '" target="_blank" rel="noopener">Get Directions</a></p>' : "") +
         "</div></div>" +
@@ -403,7 +403,8 @@
       '<div class="rcard__bar"></div>' +
       '<div class="rcard__body">' +
         (role ? '<p class="rcard__role">' + fmt(role) + "</p>" : "") +
-        '<p class="rcard__name">' + fmt(p.name) + "</p>" +
+        '<p class="rcard__name">' + fmt(p.name) +
+          (p.year ? ' <span class="rcard__year">' + esc(p.year) + "</span>" : "") + "</p>" +
         '<p class="rcard__pronouns">' + (p.pronouns ? esc(p.pronouns) : "&nbsp;") + "</p>" +
         figure({
           className: "rcard__photo",
@@ -569,15 +570,49 @@
   function renderCommittees() {
     var host = mount("committees");
     if (!host) return;
+    /* Jurisdiction codes as they appear in the committees document. */
+    var JURIS = {
+      EVP: "External Vice President",
+      IVP: "Internal Vice President",
+      CVP: "Community Vice President"
+    };
+
+    function respList(items) {
+      return "<ul>" + (items || []).map(function (r) {
+        if (typeof r === "string") return "<li>" + fmt(r) + "</li>";
+        return "<li><strong>" + fmt(r.heading) + "</strong>" + respList(r.items) + "</li>";
+      }).join("") + "</ul>";
+    }
+
     var blocks = (PPL.committees || []).map(function (c) {
+      var juris = c.jurisdiction
+        ? '<p class="juris">' + esc(JURIS[c.jurisdiction] || c.jurisdiction) +
+          " (" + esc(c.jurisdiction) + ") jurisdiction</p>"
+        : "";
+      var resp = (c.responsibilities && c.responsibilities.length)
+        ? '<details class="resp"><summary>Responsibilities</summary>' +
+          respList(c.responsibilities) + "</details>"
+        : "";
       return '<section style="margin-bottom:var(--space-9)">' +
-        '<div class="group-head"><h3>' + fmt(c.name) + "</h3>" +
+        '<div class="group-head"><h3>' + fmt(c.name) + "</h3>" + juris +
           (c.description ? "<p>" + fmt(c.description) + "</p>" : "") + "</div>" +
-        roster(c.members) + "</section>";
+        roster(c.members) + resp + "</section>";
     }).join("");
+    var B = SITE.blurbs || {};
+    var expect = (B.committeeExpectations && B.committeeExpectations.length)
+      ? '<details class="resp expect"><summary>General expectations for every committee</summary><ul>' +
+        B.committeeExpectations.map(function (e) { return "<li>" + fmt(e) + "</li>"; }).join("") +
+        "</ul></details>"
+      : "";
+    var propose = B.committeeProposal
+      ? '<p class="propose">' + fmt(B.committeeProposal.text) +
+        ' <a href="' + esc(B.committeeProposal.path) + '" target="_blank" rel="noopener">' +
+        esc(B.committeeProposal.label) + "</a></p>"
+      : "";
+
     host.innerHTML = '<div class="wrap section">' +
-      groupHead("Committees & Representatives", SITE.blurbs && SITE.blurbs.committees) +
-      blocks + "</div>";
+      groupHead("Committees & Representatives", B.committees) +
+      expect + propose + blocks + "</div>";
   }
 
   function renderStudentStaff() {
@@ -686,7 +721,16 @@
         '<p class="section__lead">' + fmt(o.intro) + "</p>" +
       "</div>" +
       '<section class="section section--tint"><div class="wrap">' +
-        "<h2>Coordinators</h2>" + coords +
+        "<h2>Coordinators</h2>" +
+        (o.coordinatorsPhoto
+          ? '<div class="oweek-photo">' + figure({
+              className: "oweek-photo__img",
+              image: ROOT + "assets/img/" + o.coordinatorsPhoto.image,
+              alt:   o.coordinatorsPhoto.alt,
+              focus: o.coordinatorsPhoto.focus
+            }) + "</div>"
+          : "") +
+        coords +
       "</div></section>" +
       '<section class="section"><div class="wrap wrap--narrow">' + sections +
         (o.links && o.links.length

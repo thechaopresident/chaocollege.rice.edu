@@ -182,8 +182,16 @@ window.CHAO_PAGES = {
     year: "[PLACEHOLDER: year]",
     /* DRAFT */
     intro: "Your first week at Chao turns a hallway of strangers into a Dragon family, whether you are ready or not.",
-    /* Coordinators. Add entries as they are named. */
+    /* Group photo of the coordinators, from the college photo folder.
+       Three people are in it; their names are still needed below. */
+    coordinatorsPhoto: {
+      image: "oweek-coords.jpg",
+      alt:   "Chao O-Week coordinators in front of an O-Week 26 chalkboard",
+      focus: "center 35%"
+    },
     coordinators: [
+      { name: "[PLACEHOLDER: name]", role: "O-Week Coordinator", pronouns: null, email: null, photo: null, photoDrive: null },
+      { name: "[PLACEHOLDER: name]", role: "O-Week Coordinator", pronouns: null, email: null, photo: null, photoDrive: null },
       { name: "[PLACEHOLDER: name]", role: "O-Week Coordinator", pronouns: null, email: null, photo: null, photoDrive: null }
     ],
     sections: [

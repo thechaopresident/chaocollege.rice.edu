@@ -32,7 +32,7 @@ window.CHAO_SITE = {
 
   /* --- Contact (footer + Find Us band) --------------------------------- */
   contact: {
-    mailStop: "[PLACEHOLDER: mail stop]",
+    mailStop: null,
     street:   "6380 Main St",
     city:     "Houston, TX 77005",
     phone:    "[PLACEHOLDER: college phone]",
@@ -120,6 +120,23 @@ window.CHAO_SITE = {
     ajs:      "[PLACEHOLDER: what AJs do at Chao, and what the initials stand for.]",
     ajsLink:  null,
 
+    /* COMMITTEES DOC — verbatim from "Chao Committees Descriptions". */
+    committeeExpectations: [
+      "Attend all Cab meetings and actively contribute to discussions",
+      "Communicate regularly with your VP and provide updates on progress",
+      "Plan ahead and execute events in a timely, organized manner",
+      "Take ownership of your committee's responsibilities and outcomes",
+      "Delegate tasks effectively and hold committee members accountable",
+      "Maintain clear, consistent communication with the college (GroupMe, etc.)",
+      "Be proactive: identify opportunities, solve problems, and help improve processes",
+      "Uphold and contribute to Chao's culture, energy, and standards"
+    ],
+    committeeProposal: {
+      text:  "Don't see a committee? Want to start one?",
+      label: "Committee Proposal and New Ideas Form",
+      path:  "https://forms.gle/DkDdqQBefKfBgDXLA"
+    },
+
     paas:     "Peer Academic Advisors (PAAs) are an integral part of the advising community at Rice, and have been nationally recognized by the National Academic Advising Association (NACADA).",
     paasLink: { label: "Rice Office of Academic Advising — Peer Academic Advisors", path: "https://oaa.rice.edu/advising-network/peer-academic-advisors" }
   },
@@ -142,12 +159,12 @@ window.CHAO_SITE = {
      Newest first. `date` is the visible label; `datetime` is machine-readable
      (YYYY-MM-DD) and may be left "". Delete an entry to remove its row.     */
   announcements: [
-    { date: "TBD", datetime: "", title: "[PLACEHOLDER: announcement headline]",
-      body: "[PLACEHOLDER: one or two sentences.]", link: null },
-    { date: "TBD", datetime: "", title: "[PLACEHOLDER: announcement headline]",
-      body: "[PLACEHOLDER: one or two sentences.]", link: null },
-    { date: "TBD", datetime: "", title: "[PLACEHOLDER: announcement headline]",
-      body: "[PLACEHOLDER: one or two sentences.]", link: null }
+    { date: "September 7, 2026", datetime: "2026-09-07", title: "We have a website!",
+      body: "It’s what you’re looking at right now", link: null },
+    { date: "9/6/2026", datetime: "2026-09-06", title: "It's Sunday, but it’s like a Saturday!",
+      body: "I love labor day weekend :)", link: null },
+    { date: "September 5, 2026", datetime: "2026-09-05", title: "We got a ping-pong table!",
+      body: "Pretty self-explanatory…", link: null }
   ],
 
   /* --- Homepage photo strip --------------------------------------------- *
@@ -191,5 +208,5 @@ window.CHAO_SITE = {
     ]}
   ],
 
-  footerNote: "[PLACEHOLDER: footer note]"
+  footerNote: null
 };
