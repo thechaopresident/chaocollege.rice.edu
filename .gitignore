@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+
+# Claude Code local tooling (preview server config)
+.claude/
+
+# Full-resolution photo originals.
+# ---------------------------------------------------------------------------
+# Deliberately NOT committed. This repository is PUBLIC, and these are
+# uncropped personal photos of identifiable people (including a child) that
+# were supplied for the college to crop — only the cropped versions in
+# assets/img/ were chosen for display.
+#
+# They live in the college's Google Drive. Keep a local copy of
+# brand/photo-originals/ if you need to re-crop; see assets/img/README.md.
+#
+# To publish them anyway, delete the line below and commit.
+brand/photo-originals/

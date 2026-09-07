@@ -1,0 +1,187 @@
+/* ============================================================================
+   CHAO COLLEGE — BRAND TOKENS
+   ----------------------------------------------------------------------------
+   THIS IS THE ONLY FILE YOU NEED TO EDIT WHEN THE BRANDING SHEET ARRIVES.
+
+   Everything visual on the site — nav bar, hero, buttons, footer, placeholder
+   artwork — is drawn from the variables below. Change a value here and it
+   propagates everywhere. Do not hardcode a color or font anywhere else.
+
+   Sections:
+     1. BRAND COLORS   <- swap these
+     2. TYPEFACES      <- swap these
+     3. SEMANTIC ROLES <- derived; usually leave alone
+     4. SCALE          <- spacing, radius, shadow, motion
+
+   See brand/BRANDING.md for a step-by-step swap checklist.
+   ========================================================================= */
+
+:root {
+
+  /* ==========================================================================
+     1. BRAND COLORS
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     Sampled directly from the Chao crest (brand/crest-master.png). These three
+     are exact, not approximations — they are the only solid colors in the
+     artwork:
+
+       navy   #41406E   shield ground, dragons' outline, lettering
+       cream  #F7F1E5   shield field, ribbon, dragons' bodies
+       blush  #D9A6A2   motto banner, shield dexter half, rose charges
+
+     The -dark / -light steps below are derived from those three. If the
+     official branding sheet later specifies its own tints, replace them here
+     and everything downstream follows.
+     ====================================================================== */
+
+  /* The three crest colors, verbatim. */
+  --brand-navy:           #41406E;
+  --brand-cream:          #F7F1E5;
+  --brand-blush:          #D9A6A2;
+
+  --brand-primary:        var(--brand-navy);   /* nav bar, footer, headings   */
+  --brand-primary-dark:   #2E2D50;             /* hover/pressed, footer       */
+  --brand-primary-light:  #6E6D9B;             /* tints, borders on dark      */
+
+  --brand-accent:         var(--brand-blush);  /* buttons, rules, highlights  */
+  --brand-accent-dark:    #96605C;             /* accent hover (AA on white)  */
+  --brand-accent-light:   #EFCECB;             /* accent tint on dark grounds */
+
+  /* Neutrals, warmed toward the crest cream so white sections and tinted
+     sections read as one paper stock. */
+  --neutral-000:          #FFFFFF;
+  --neutral-050:          #FBF8F2;
+  --neutral-100:          var(--brand-cream);
+  --neutral-200:          #E4DDD2;
+  --neutral-400:          #9C96A4;
+  --neutral-600:          #5B5A74;
+  --neutral-800:          #26253F;
+  --neutral-900:          #16162A;
+
+
+  /* ==========================================================================
+     2. TYPEFACES
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     STILL PLACEHOLDER. The crest sets the motto in a letterspaced serif, but
+     the branding sheet has not specified the web faces yet, so these are
+     web-safe stacks that need no font downloads. To use the
+     branded faces:
+
+       a) Google Fonts — add ONE line to <head> of every page (it is already
+          there, commented out, marked FONT-LINK):
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=NAME:wght@400;600;700&display=swap">
+       b) Licensed files — drop .woff2 into brand/fonts/ and uncomment the
+          @font-face blocks at the bottom of this file.
+
+       Then put the family name FIRST in the stacks below, keeping the
+       fallbacks after it.
+     ====================================================================== */
+
+  /* Big ceremonial type: the wordmark, hero, page titles. */
+  --font-display: Georgia, "Iowan Old Style", "Times New Roman", serif;
+
+  /* Running text: paragraphs, lists, cards. */
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+
+  /* Interface chrome: nav, buttons, labels, captions. Often same as body. */
+  --font-ui: var(--font-body);
+
+  /* Optional per-face tuning — some display faces sit heavy or wide. */
+  --display-weight:        700;
+  --display-tracking:      -0.015em;
+  --display-transform:     none;      /* try: uppercase */
+  --nav-weight:            600;
+  --nav-tracking:          0.01em;
+  --nav-transform:         none;      /* try: uppercase */
+
+
+  /* ==========================================================================
+     3. SEMANTIC ROLES  (derived — edit only for a deliberate exception)
+     ====================================================================== */
+
+  --color-page-bg:        var(--neutral-000);
+  --color-page-alt-bg:    var(--brand-cream);
+  --color-text:           var(--neutral-800);
+  --color-text-muted:     var(--neutral-600);
+  --color-text-invert:    var(--neutral-000);
+  --color-heading:        var(--brand-primary);
+  --color-rule:           var(--neutral-200);
+
+  --color-link:           var(--brand-primary);
+  --color-link-hover:     var(--brand-accent-dark);  /* 4.5:1 on cream */
+
+  --color-nav-bg:         var(--brand-primary);
+  --color-nav-text:       var(--neutral-000);
+  --color-nav-text-hover: var(--brand-accent-light);
+  --color-nav-menu-bg:    var(--neutral-000);
+  --color-nav-menu-text:  var(--brand-primary);
+
+  --color-btn-bg:         var(--brand-accent);
+  --color-btn-text:       var(--brand-primary-dark);
+  --color-btn-bg-hover:   var(--brand-accent-dark);
+  --color-btn-text-hover: var(--neutral-000);   /* 5.1:1 on --brand-accent-dark */
+
+  --color-ghost-border:   rgba(255, 255, 255, 0.55);
+  --color-ghost-bg:       rgba(255, 255, 255, 0.12);
+  --color-ghost-bg-hover: rgba(255, 255, 255, 0.28);
+
+  --color-footer-bg:      var(--brand-primary-dark);
+  --color-footer-text:    rgba(255, 255, 255, 0.82);
+  --color-footer-heading: var(--neutral-000);
+
+  --color-focus:          var(--brand-accent-light);
+
+  /* Placeholder artwork. Every image slot on the site paints itself with these
+     until a real photo is dropped in, so the whole site restyles when the
+     palette changes. Delete nothing here — unused slots simply stop showing. */
+  --placeholder-a:        var(--brand-primary);
+  --placeholder-b:        var(--brand-primary-light);
+  --placeholder-c:        var(--brand-accent);
+
+
+  /* ==========================================================================
+     4. SCALE
+     ====================================================================== */
+
+  --measure:              68ch;      /* max width of a paragraph column */
+  --page-max:             1200px;    /* max width of page content      */
+  --nav-height:           64px;
+
+  --space-1: 0.25rem;  --space-2: 0.5rem;   --space-3: 0.75rem;
+  --space-4: 1rem;     --space-5: 1.5rem;   --space-6: 2rem;
+  --space-7: 3rem;     --space-8: 4rem;     --space-9: 6rem;
+
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  16px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.10);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.10), 0 2px 4px rgba(0,0,0,.06);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,.16);
+
+  --ease:      cubic-bezier(.4, 0, .2, 1);
+  --duration:  180ms;
+}
+
+
+/* ============================================================================
+   OPTIONAL: self-hosted branded fonts.
+   Drop .woff2 files into brand/fonts/, uncomment, then put the family name at
+   the front of --font-display / --font-body above.
+   ========================================================================= */
+/*
+@font-face {
+  font-family: "Chao Display";
+  src: url("fonts/chao-display.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Chao Text";
+  src: url("fonts/chao-text.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+*/
