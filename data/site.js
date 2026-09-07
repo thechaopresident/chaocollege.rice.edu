@@ -36,7 +36,7 @@ window.CHAO_SITE = {
     street:   "6380 Main St",
     city:     "Houston, TX 77005",
     phone:    "[PLACEHOLDER: college phone]",
-    email:    "chaosecretaries@gmail.com",
+    email:    "chaocollege@rice.edu",
     mapEmbed: "https://www.google.com/maps?q=6380+Main+St,+Houston,+TX+77005&output=embed",
     mapLink:  "https://www.google.com/maps/search/?api=1&query=6380+Main+St+Houston+TX+77005"
   },

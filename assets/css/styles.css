@@ -485,6 +485,9 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
   color: var(--color-heading);
   height: 2.5em;                     /* exactly two lines, always */
   display: flex; align-items: center; justify-content: center;
+  /* The name and the class year are separate flex items, so the whitespace
+     between them is dropped — gap puts it back. */
+  flex-wrap: wrap; gap: 0 .32em;
 }
 /* Always rendered, even when a person has no pronouns listed, so the portrait
    below it starts at the same height on every card in the row. */

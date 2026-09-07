@@ -116,19 +116,19 @@ window.CHAO_PEOPLE = {
   government: [
     { name: "Elijah White", year: "'28", role: "President", pronouns: "he/him", email: "thechaopresident@gmail.com",
       description: "The President of Chao College is the highest executive officer of the Chabinet (Chao Cabinet).",
-      photo: null, photoDrive: "https://drive.google.com/file/d/1UdrMI3v0yD_-w8DcDXGAVaStPfoPwk4r/view?usp=drive_link" },
+      photo: "elijah-white.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1UdrMI3v0yD_-w8DcDXGAVaStPfoPwk4r/view?usp=drive_link" },
 
     { name: "Olivia Seo", year: "'27", role: "Chief Justice", pronouns: "she/her", email: "thechaocj@gmail.com",
       description: "The Chief Justice (CJ) of Chao College is the primary administrator of judicial policies set by Chao and the university, and shall oversee the safety of Chao's student body. They are Chao College's official liaison between Chao's student body and the Rice University Police Department (RUPD), Student Judicial Programs (SJP), the Student Wellbeing Office, and other health and safety leaders on campus.",
-      photo: null, photoDrive: "https://drive.google.com/file/d/1abVCbekd9MTWV9Hh8pWI-B4i94zt8wB8/view?usp=sharing" },
+      photo: "olivia-seo.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1abVCbekd9MTWV9Hh8pWI-B4i94zt8wB8/view?usp=sharing" },
 
     { name: "Barbare Tetvadze", year: "'27", role: "Internal Vice President (IVP)", pronouns: "she/her", email: "thechaoivp@gmail.com",
       description: "Chao's Internal Vice President (IVP) is the second-highest executive member of the Chabinet regarding the physical space of Chao College, overseeing all of Chao's facilities, and maintaining Chao's equipment.",
-      photo: null, photoDrive: "https://drive.google.com/file/d/15Tk9rhtGCA4ya_BFF3jypDZpVBZP1ynT/view?usp=drive_link" },
+      photo: "barbare-tetvadze.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/15Tk9rhtGCA4ya_BFF3jypDZpVBZP1ynT/view?usp=drive_link" },
 
     { name: "Sammi Frey", year: "'27", role: "External Vice President (EVP)", pronouns: "she/her", email: "chaoevp@gmail.com",
       description: "Chao's External Vice President (EVP) is the second-highest executive member of the Chabinet regarding relationships external to Chao College, facilitating and maintaining cross-college relations and campus-wide interfacing.",
-      photo: null, photoDrive: "https://drive.google.com/file/d/1NeuAmjBixxlNcwr6yQFZLeo0-iUjLimZ/view?usp=drive_link" },
+      photo: "sammi-frey.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1NeuAmjBixxlNcwr6yQFZLeo0-iUjLimZ/view?usp=drive_link" },
 
     { name: "Matthias Canon", year: "'27", role: "Community Vice President (CVP)", pronouns: "he/him", email: "thechaocvp@gmail.com",
       description: "Chao's Community Vice President (CVP) is the second-highest executive member of the Chabinet regarding the student body of Chao College, facilitating and maintaining Chao's social and cultural wellbeing and traditions.",
@@ -152,7 +152,7 @@ window.CHAO_PEOPLE = {
 
     { name: "Jake Pessin", year: "'29", role: "Senator", pronouns: "he/him", email: "jp231@rice.edu",
       description: "Chao's Rice Student Association (RSA) Senator is the primary liaison between Chao's student body and the Student Association, alongside Chao's President. The Senator represents the interests of Chao's student body to the Rice Student Association.",
-      photo: null, photoDrive: "https://drive.google.com/file/d/1ZVyCrcDrdmTvkuszlN_kP7SKOug918Cj/view?usp=drive_link" },
+      photo: "jake-pessin.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1ZVyCrcDrdmTvkuszlN_kP7SKOug918Cj/view?usp=drive_link" },
 
     { name: "Zach Weinbrum", year: "'28", role: "Parlimentarian", pronouns: "he/him", email: "chaoparlimentarian@gmail.com",
       description: "Chao's parliamentarian oversees all election-related processes and communication for executive government positions, attends all government-related meetings, and is the go-to student reference for Constitution and Bylaws accountability, interpretation and education.",
@@ -418,7 +418,7 @@ window.CHAO_PEOPLE = {
   /* "Coming Soon..." entries are unfilled positions awaiting a new student. */
   ajs: [
     { name: "Eriyana Woolfolk",         floor: "2nd Floor",  pronouns: "She/her", email: "ew73@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1X_wRmuS3052o6DZQsGFhpj9WCC_6bHRb/view?usp=drivesdk" },
-    { name: "Olivia Seo",               floor: "2nd Floor",  pronouns: "she/her", email: null,            photo: null, photoDrive: "https://drive.google.com/file/d/1abVCbekd9MTWV9Hh8pWI-B4i94zt8wB8/view?usp=sharing" },
+    { name: "Olivia Seo",               floor: "2nd Floor",  pronouns: "she/her", email: null,            photo: "olivia-seo.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1abVCbekd9MTWV9Hh8pWI-B4i94zt8wB8/view?usp=sharing" },
     { name: "John Sneizek",             floor: "3rd Floor",  pronouns: "he/him",  email: "js512@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1YuWYQI4NleNA0dIGU3-q_Yq7a-XngN9J/view?usp=drive_link" },
     { name: "Coming Soon...",           floor: "3rd Floor",  pronouns: null,      email: null,            photo: null, photoDrive: null },
     { name: "Sofia Raistakka",          floor: "4th Floor",  pronouns: null,      email: "sr227@rice.edu", photo: null, photoDrive: null },
