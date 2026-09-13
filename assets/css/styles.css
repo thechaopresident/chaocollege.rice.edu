@@ -605,3 +605,77 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
 /* O-Week coordinators group photo. */
 .oweek-photo { max-width: 620px; margin: 0 auto var(--space-7); }
 .oweek-photo__img { aspect-ratio: 4 / 3; border-radius: var(--radius-lg); }
+
+/* ============================================================================
+   CAROUSEL — homepage rotating photos
+   ========================================================================= */
+.carousel { position: relative; margin-top: var(--space-6); }
+.carousel__viewport {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-page-alt-bg);
+}
+.carousel__slide {
+  position: absolute; inset: 0;
+  opacity: 0; visibility: hidden;
+  transition: opacity 700ms var(--ease), visibility 0s linear 700ms;
+}
+.carousel__slide.is-active {
+  opacity: 1; visibility: visible;
+  transition: opacity 700ms var(--ease), visibility 0s;
+}
+.carousel__slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.carousel__nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 2;
+  width: 44px; height: 44px; padding: 0;
+  display: grid; place-items: center;
+  font-size: 1.6rem; line-height: 1;
+  color: var(--color-text-invert);
+  background: rgba(0, 0, 0, .42);
+  border: 1px solid var(--color-ghost-border);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background var(--duration) var(--ease);
+}
+.carousel__nav:hover { background: rgba(0, 0, 0, .68); }
+.carousel__nav--prev { left: var(--space-4); }
+.carousel__nav--next { right: var(--space-4); }
+
+.carousel__dots {
+  display: flex; justify-content: center; flex-wrap: wrap;
+  gap: var(--space-2); margin-top: var(--space-4);
+}
+.carousel__dot {
+  width: 9px; height: 9px; padding: 0;
+  border: 0; border-radius: 50%;
+  background: var(--color-rule);
+  cursor: pointer;
+  transition: background var(--duration) var(--ease), transform var(--duration) var(--ease);
+}
+.carousel__dot:hover { background: var(--brand-accent); }
+.carousel__dot.is-active { background: var(--brand-primary); transform: scale(1.35); }
+
+@media (max-width: 640px) {
+  .carousel__viewport { aspect-ratio: 4 / 3; }
+  .carousel__nav { width: 38px; height: 38px; font-size: 1.3rem; }
+  .carousel__nav--prev { left: var(--space-2); }
+  .carousel__nav--next { right: var(--space-2); }
+}
+
+/* ============================================================================
+   GALLERY — O-Week photo grid
+   ========================================================================= */
+.gallery {
+  display: grid; gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+}
+.gallery__item { margin: 0; }
+.gallery__item img {
+  width: 100%; aspect-ratio: 3 / 2; object-fit: cover;
+  border-radius: var(--radius-lg); display: block;
+  box-shadow: var(--shadow-sm);
+}

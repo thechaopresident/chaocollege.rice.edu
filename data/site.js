@@ -172,20 +172,34 @@ window.CHAO_SITE = {
      filename in assets/img/) to swap in a real photo.                       */
   photosHeading: "The college in motion.",
   photosLead:    "A few frames from the first year of Chao College.",
-  /* No visible captions on these — the tiles run clean. The `alt` strings are
-     for screen readers only and are verbatim from the preliminary draft site.
-     Note: the first image shows lion dance costumes rather than a dragon
-     mascot, so that alt text is worth correcting with the college.
-     Setting `caption` (or `title`) on an entry brings the label back. */
+  /* Homepage carousel. Slides rotate automatically; see renderCarousel() in
+     assets/js/site.js. No visible captions — the `alt` strings are for screen
+     readers only.
+
+     ALT TEXT NOTE: the four O-Week entries below were described from the
+     photographs (there was no caption supplied with them), so they are the one
+     place on this site where wording did not come from the college. They are
+     plain factual descriptions, not copy, but correct them freely.
+     The three older entries keep the captions from the preliminary draft site
+     — including the first, which says "dragon mascot" for what is actually a
+     lion dance costume. */
   photos: [
-    { title: null, caption: null, alt: "Chao College community celebration with the dragon mascot",
-      image: "hall-of-fame.jpg", focus: "center 40%" },
-    { title: null, caption: null, alt: "Chao students with the Rice servery chef",
-      image: "servery-event.jpg", focus: "center 30%" },
-    { title: null, caption: null, alt: "Chao College reception",
-      image: "reception.jpg", focus: "center 40%" },
-    { title: null, caption: null, alt: "Building tour exterior",
-      image: "construction-exterior.jpg", focus: "center center" }
+    { image: "oweek-stadium.jpg",         focus: "center center",
+      alt: "Chao students filling a section of the stands in Chao shirts during O-Week" },
+    { image: "hall-of-fame.jpg",          focus: "center 40%",
+      alt: "Chao College community celebration with the dragon mascot" },
+    { image: "oweek-welcome-signs.jpg",   focus: "center 45%",
+      alt: "Students holding handmade welcome signs on move-in day" },
+    { image: "servery-event.jpg",         focus: "center 30%",
+      alt: "Chao students with the Rice servery chef" },
+    { image: "oweek-theme-posters.jpg",   focus: "center center",
+      alt: "Chao students in front of hand-painted O-Week theme posters" },
+    { image: "reception.jpg",             focus: "center 40%",
+      alt: "Chao College reception" },
+    { image: "oweek-family-group.jpg",    focus: "center 40%",
+      alt: "An O-Week family group outside the college" },
+    { image: "construction-exterior.jpg", focus: "center center",
+      alt: "Building tour exterior" }
   ],
 
   /* --- Footer link columns ---------------------------------------------- */

@@ -253,6 +253,95 @@
   }
 
   /* ======================================================================
+     CAROUSEL — the rotating photo display on the homepage
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     Slides crossfade. It advances on its own, but stops while a visitor is
+     hovering or tabbing through it, and never auto-advances for anyone who
+     asks for reduced motion.
+     ================================================================== */
+
+  function carouselHTML(slides, label) {
+    var items = slides.map(function (sl, i) {
+      return '<div class="carousel__slide' + (i === 0 ? " is-active" : "") + '"' +
+        ' role="group" aria-roledescription="slide"' +
+        ' aria-label="' + (i + 1) + " of " + slides.length + '"' +
+        (i === 0 ? "" : ' aria-hidden="true"') + ">" +
+        '<img src="' + esc(ROOT + "assets/img/" + sl.image) + '" alt="' + esc(sl.alt || "") + '"' +
+        (sl.focus ? ' style="object-position:' + esc(sl.focus) + '"' : "") +
+        (i === 0 ? "" : ' loading="lazy"') + "></div>";
+    }).join("");
+
+    var dots = slides.map(function (sl, i) {
+      return '<button class="carousel__dot' + (i === 0 ? " is-active" : "") + '" type="button"' +
+        ' aria-label="Show photo ' + (i + 1) + '"' +
+        ' aria-current="' + (i === 0) + '"></button>';
+    }).join("");
+
+    return '<div class="carousel" data-carousel role="group"' +
+        ' aria-roledescription="carousel" aria-label="' + esc(label || "Photos") + '">' +
+        '<div class="carousel__viewport">' + items + "</div>" +
+        '<button class="carousel__nav carousel__nav--prev" type="button" aria-label="Previous photo">' +
+          '<span aria-hidden="true">&lsaquo;</span></button>' +
+        '<button class="carousel__nav carousel__nav--next" type="button" aria-label="Next photo">' +
+          '<span aria-hidden="true">&rsaquo;</span></button>' +
+        '<div class="carousel__dots">' + dots + "</div>" +
+      "</div>";
+  }
+
+  function wireCarousels(scope) {
+    var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    (scope || document).querySelectorAll("[data-carousel]").forEach(function (root) {
+      var slides = [].slice.call(root.querySelectorAll(".carousel__slide"));
+      var dots   = [].slice.call(root.querySelectorAll(".carousel__dot"));
+      if (slides.length < 2) return;
+      var at = 0, timer = null, held = false;
+
+      function show(i) {
+        at = (i + slides.length) % slides.length;
+        slides.forEach(function (sl, j) {
+          var on = j === at;
+          sl.classList.toggle("is-active", on);
+          if (on) sl.removeAttribute("aria-hidden");
+          else sl.setAttribute("aria-hidden", "true");
+        });
+        dots.forEach(function (d, j) {
+          d.classList.toggle("is-active", j === at);
+          d.setAttribute("aria-current", String(j === at));
+        });
+      }
+      function step(n) { show(at + n); restart(); }
+      function restart() {
+        if (timer) clearInterval(timer);
+        if (calm || held) return;
+        timer = setInterval(function () { show(at + 1); }, 5200);
+      }
+      function hold(on) { held = on; restart(); }
+
+      root.querySelector(".carousel__nav--prev").addEventListener("click", function () { step(-1); });
+      root.querySelector(".carousel__nav--next").addEventListener("click", function () { step(1); });
+      dots.forEach(function (d, j) { d.addEventListener("click", function () { show(j); restart(); }); });
+
+      root.addEventListener("mouseenter", function () { hold(true); });
+      root.addEventListener("mouseleave", function () { hold(false); });
+      root.addEventListener("focusin",    function () { hold(true); });
+      root.addEventListener("focusout",   function () {
+        if (!root.contains(document.activeElement)) hold(false);
+      });
+      root.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft")  { e.preventDefault(); step(-1); }
+        if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
+      });
+      /* Nothing should keep ticking in a background tab. */
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) { if (timer) clearInterval(timer); } else restart();
+      });
+
+      show(0); restart();
+    });
+  }
+
+  /* ======================================================================
      PAGE: HOME
      ================================================================== */
   function renderHome() {
@@ -316,17 +405,10 @@
 
     var p = mount("photos");
     if (p) {
-      var tiles = (SITE.photos || []).map(function (t) {
-        return figure({
-          title: t.title, caption: t.caption, focus: t.focus,
-          image: t.image ? ROOT + "assets/img/" + t.image : null,
-          alt: t.image ? (t.alt || t.title || t.caption) : ""
-        });
-      }).join("");
       p.innerHTML = '<div class="wrap">' +
         (SITE.photosHeading ? "<h2>" + fmt(SITE.photosHeading) + "</h2>" : "") +
         (SITE.photosLead ? '<p class="section__lead">' + fmt(SITE.photosLead) + "</p>" : "") +
-        '<div class="strip" style="margin-top:var(--space-6)">' + tiles + "</div></div>";
+        carouselHTML(SITE.photos || [], SITE.photosHeading || "Photos") + "</div>";
     }
   }
 
@@ -732,6 +814,16 @@
           : "") +
         coords +
       "</div></section>" +
+      (o.gallery && o.gallery.length
+        ? '<section class="section"><div class="wrap">' +
+            '<div class="gallery">' + o.gallery.map(function (g) {
+              return '<figure class="gallery__item">' +
+                '<img src="' + esc(ROOT + "assets/img/oweek/" + g.image) + '"' +
+                ' alt="' + esc(g.alt || "") + '" loading="lazy">' +
+              "</figure>";
+            }).join("") + "</div>" +
+          "</div></section>"
+        : "") +
       '<section class="section"><div class="wrap wrap--narrow">' + sections +
         (o.links && o.links.length
           ? "<h2>At Rice</h2><ul class=\"footer__list\">" + o.links.map(function (l) {
@@ -799,6 +891,7 @@
     if (page === "calendar")      renderCalendar();
 
     wireTabs(document);
+    wireCarousels(document);
 
     renderLocate();
     renderFooter();

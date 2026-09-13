@@ -207,6 +207,21 @@ window.CHAO_PAGES = {
       { heading: "What to Bring",          body: [ "[PLACEHOLDER: packing guidance.]" ] }
     ],
 
+    /* Photographs from the college's O-Week archive. Filenames describe the
+       scene; the `alt` strings were written from the photographs themselves,
+       since none came with captions. Correct them freely. */
+    gallery: [
+      { image: "welcome-signs.jpg",       alt: "Students holding handmade welcome signs on move-in day" },
+      { image: "move-in-procession.jpg",  alt: "Students walking up to the college carrying signs on move-in day" },
+      { image: "move-in-crew.jpg",        alt: "The move-in crew waiting to welcome new students" },
+      { image: "stadium.jpg",             alt: "Chao students filling a section of the stands in Chao shirts" },
+      { image: "commons-cheer.jpg",       alt: "Students cheering at tables in the Chao commons" },
+      { image: "theme-posters.jpg",       alt: "Chao students in front of hand-painted O-Week theme posters" },
+      { image: "family-group-1.jpg",      alt: "An O-Week family group outside the college" },
+      { image: "family-group-2.jpg",      alt: "An O-Week family group outside the college" },
+      { image: "family-group-3.jpg",      alt: "An O-Week family group outside the college" }
+    ],
+
     /* Rice's own O-Week pages, which cover the university-wide schedule. */
     links: [
       { label: "Rice O-Week",            path: "https://success.rice.edu/first-year-programs/o-week" },
