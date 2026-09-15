@@ -911,6 +911,15 @@
 
     host.innerHTML =
       '<div class="wrap section">' +
+        (o.year ? '<p class="eyebrow">O-Week ' + esc(o.year) + "</p>" : "") +
+        (o.dates && o.dates.label
+          ? '<p class="oweek-dates">' +
+              (o.dates.start && o.dates.end
+                ? '<time datetime="' + esc(o.dates.start) + '/' + esc(o.dates.end) + '">' +
+                    fmt(o.dates.label) + "</time>"
+                : fmt(o.dates.label)) +
+            "</p>"
+          : "") +
         '<p class="section__lead">' + fmt(o.intro) + "</p>" +
       "</div>" +
       '<section class="section section--tint"><div class="wrap">' +

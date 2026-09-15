@@ -743,3 +743,11 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
 .profile--card .profile__name { font-size: 1.3rem; }
 /* Justified text needs more width than a column gives it. */
 .profile--card .profile__body p { text-align: left; hyphens: manual; }
+
+/* O-Week date range, sitting under the eyebrow at the top of the page. */
+.oweek-dates {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  color: var(--color-heading);
+  margin: 0 0 var(--space-3);
+}

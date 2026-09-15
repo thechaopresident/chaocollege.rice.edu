@@ -203,7 +203,14 @@ window.CHAO_PAGES = {
      O-WEEK
      ================================================================== */
   oweek: {
-    year: "[PLACEHOLDER: year]",
+    year: "2027",
+    /* `label` is what readers see; `start` and `end` are ISO so the <time>
+       elements are machine-readable. Update all three together each year. */
+    dates: {
+      label: "Sunday, August 15 \u2013 Saturday, August 21, 2027",
+      start: "2027-08-15",
+      end:   "2027-08-21"
+    },
     /* DRAFT */
     intro: "Your first week at Chao turns a hallway of strangers into a Dragon family, whether you are ready or not.",
     /* Group photo of the coordinators, named in the caption beneath it rather
