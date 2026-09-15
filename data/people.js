@@ -432,7 +432,11 @@ window.CHAO_PEOPLE = {
   /* "Coming Soon..." entries are unfilled positions awaiting a new student. */
   ajs: [
     { name: "Eriyana Woolfolk",         floor: "2nd Floor",  pronouns: "she/her", email: "ew73@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1X_wRmuS3052o6DZQsGFhpj9WCC_6bHRb/view?usp=drivesdk" },
-    { name: "Olivia Seo",               floor: "2nd Floor",  pronouns: "she/her", email: null,            photo: "olivia-seo.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1abVCbekd9MTWV9Hh8pWI-B4i94zt8wB8/view?usp=sharing" },
+    /* Deliberate exception to the role/personal rule used elsewhere: Olivia is
+       reachable on the Chief Justice address in both capacities. It fits here,
+       since the AJs are the Chief Justice's point of contact per floor. Do not
+       "correct" this to a personal address. */
+    { name: "Olivia Seo",               floor: "2nd Floor",  pronouns: "she/her", email: "thechaocj@gmail.com", photo: "olivia-seo.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1abVCbekd9MTWV9Hh8pWI-B4i94zt8wB8/view?usp=sharing" },
     { name: "John Sniezek",             floor: "3rd Floor",  pronouns: "he/him",  email: "js512@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1YuWYQI4NleNA0dIGU3-q_Yq7a-XngN9J/view?usp=drive_link" },
     { name: "Coming Soon...",           floor: "3rd Floor",  pronouns: null,      email: null,            photo: null, photoDrive: null },
     { name: "Sofia Raistakka",          floor: "4th Floor",  pronouns: null,      email: "sr227@rice.edu", photo: null, photoDrive: null },
