@@ -98,9 +98,13 @@ window.CHAO_PAGES = {
         heading: "Spaces & Equipment",
         cards: [
           { title: "Book a Space",
-            /* DRAFT */
+            /* DRAFT. NOTE: "Requests get a response within two business days"
+               came from the preliminary draft site, when booking was a form.
+               Booking is now a shared spreadsheet you fill in yourself, so that
+               sentence may no longer be true — worth trimming. */
             body: "Chao's shared spaces are yours. Go ahead and book one. Requests get a response within two business days.",
-            path: null, cta: "[PLACEHOLDER: link to the reservation form]" },
+            path: "https://docs.google.com/spreadsheets/d/1DIsayLaIsKxKrMVQGrXRUi0AE_iwuW3pKbxvwdVFUg0/edit",
+            cta: "Open the reservation sheet" },
           { title: "Floor Kitchens & Lounges",
             /* DRAFT */
             body: "Each floor pairs private rooms with a shared kitchen and lounge, so you are never more than a few steps from a stove, a couch, or someone to talk to.",
@@ -109,12 +113,20 @@ window.CHAO_PAGES = {
             /* DRAFT */
             body: "The ground floor commons is where the whole college collides: full kitchen, game tables, and lounge seating built for nights that run later than planned.",
             path: null, cta: null },
-          { title: "Laundry",       body: "[PLACEHOLDER: laundry information.]", path: null, cta: null },
+          { title: "Laundry",
+            body: "For questions or issues with the laundry room, reach out to Brad Mahung, Chao's Student Maintenance Representative.",
+            path: "mailto:Chao.college.smr@gmail.com", cta: "Email the SMR" },
           { title: "Item Checkout", body: "[PLACEHOLDER: what can be checked out and from whom.]", path: null, cta: null },
-          { title: "Housing",       body: "[PLACEHOLDER: a line on room assignments and the housing draw.]",
-            path: "https://housing.rice.edu/undergraduate-housing", cta: "Rice Housing" },
-          { title: "Dining",        body: "[PLACEHOLDER: a line on servery hours and meal plans.]",
-            path: "https://dining.rice.edu/residential-dining", cta: "Rice Dining" }
+          /* DATED CONTENT — the two dates below are for autumn 2026 and will
+             go stale. Revisit each year, or move this to an announcement. */
+          { title: "Housing",
+            body: "The housing jack is September 24. To take part, the eligibility form must be filled out by September 21. Reach out to Barbare Tetvadze, Chao's Internal Vice President, with any questions.",
+            path: "https://docs.google.com/forms/d/e/1FAIpQLSf0cKHKgSyrkg9WNT_QiPaamJQ7f1_l28vRwhgWh0uwwi7O4A/viewform",
+            cta: "Housing eligibility form" },
+          { title: "Dining",
+            body: "Servery hours for the Rice serveries are published by Housing and Dining.",
+            path: "https://rice.app.box.com/s/07zf31m146n5efe7aqxods15n1xg6dke",
+            cta: "Servery hours" }
         ]
       },
       {
