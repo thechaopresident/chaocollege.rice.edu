@@ -253,74 +253,129 @@
   }
 
   /* ======================================================================
-     CAROUSEL — the rotating photo display on the homepage
+     PHOTO STRIP — the rotating display on the homepage
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     Slides crossfade. It advances on its own, but stops while a visitor is
-     hovering or tabbing through it, and never auto-advances for anyone who
-     asks for reduced motion.
+     Modeled on the strip Rice's other college sites use: a horizontal row of
+     cards that creeps sideways on its own. Three or four are in view at once
+     depending on width.
+
+     The slide list is repeated so the row can loop without a visible jump —
+     when the scroll passes the end of the first copy it is rewound by exactly
+     one copy's width, which lands on an identical frame.
+
+     It is a real scroll container, so trackpad and touch dragging work for
+     free; the arrows just scroll it by one card.
      ================================================================== */
 
-  function carouselHTML(slides, label) {
-    var items = slides.map(function (sl, i) {
-      return '<div class="carousel__slide' + (i === 0 ? " is-active" : "") + '"' +
-        ' role="group" aria-roledescription="slide"' +
-        ' aria-label="' + (i + 1) + " of " + slides.length + '"' +
-        (i === 0 ? "" : ' aria-hidden="true"') + ">" +
-        '<img src="' + esc(ROOT + "assets/img/" + sl.image) + '" alt="' + esc(sl.alt || "") + '"' +
+  var STRIP_SPEED = 26;          // px per second
+
+  function stripHTML(slides, label) {
+    if (!slides.length) return "";
+
+    function card(sl, dup) {
+      return '<figure class="strip__card"' + (dup ? ' aria-hidden="true"' : "") + ">" +
+        '<img src="' + esc(ROOT + "assets/img/" + sl.image) + '"' +
+        ' alt="' + esc(dup ? "" : (sl.alt || "")) + '"' +
         (sl.focus ? ' style="object-position:' + esc(sl.focus) + '"' : "") +
-        (i === 0 ? "" : ' loading="lazy"') + "></div>";
-    }).join("");
+        ' loading="lazy" draggable="false"></figure>';
+    }
 
-    var dots = slides.map(function (sl, i) {
-      return '<button class="carousel__dot' + (i === 0 ? " is-active" : "") + '" type="button"' +
-        ' aria-label="Show photo ' + (i + 1) + '"' +
-        ' aria-current="' + (i === 0) + '"></button>';
-    }).join("");
+    /* Two copies: one real, one a decorative duplicate for the loop. */
+    var real = slides.map(function (sl) { return card(sl, false); }).join("");
+    var dupe = slides.map(function (sl) { return card(sl, true);  }).join("");
 
-    return '<div class="carousel" data-carousel role="group"' +
-        ' aria-roledescription="carousel" aria-label="' + esc(label || "Photos") + '">' +
-        '<div class="carousel__viewport">' + items + "</div>" +
-        '<button class="carousel__nav carousel__nav--prev" type="button" aria-label="Previous photo">' +
+    return '<div class="strip" data-strip>' +
+        '<button class="strip__nav strip__nav--prev" type="button" aria-label="Scroll photos left">' +
           '<span aria-hidden="true">&lsaquo;</span></button>' +
-        '<button class="carousel__nav carousel__nav--next" type="button" aria-label="Next photo">' +
+        '<div class="strip__row" tabindex="0" role="region" aria-label="' + esc(label || "Photos") + '">' +
+          real + dupe +
+        "</div>" +
+        '<button class="strip__nav strip__nav--next" type="button" aria-label="Scroll photos right">' +
           '<span aria-hidden="true">&rsaquo;</span></button>' +
-        '<div class="carousel__dots">' + dots + "</div>" +
       "</div>";
   }
 
-  function wireCarousels(scope) {
+  function wireStrips(scope) {
     var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    (scope || document).querySelectorAll("[data-carousel]").forEach(function (root) {
-      var slides = [].slice.call(root.querySelectorAll(".carousel__slide"));
-      var dots   = [].slice.call(root.querySelectorAll(".carousel__dot"));
-      if (slides.length < 2) return;
-      var at = 0, timer = null, held = false;
+    (scope || document).querySelectorAll("[data-strip]").forEach(function (root) {
+      var row = root.querySelector(".strip__row");
+      if (!row) return;
 
-      function show(i) {
-        at = (i + slides.length) % slides.length;
-        slides.forEach(function (sl, j) {
-          var on = j === at;
-          sl.classList.toggle("is-active", on);
-          if (on) sl.removeAttribute("aria-hidden");
-          else sl.setAttribute("aria-hidden", "true");
-        });
-        dots.forEach(function (d, j) {
-          d.classList.toggle("is-active", j === at);
-          d.setAttribute("aria-current", String(j === at));
-        });
-      }
-      function step(n) { show(at + n); restart(); }
-      function restart() {
-        if (timer) clearInterval(timer);
-        if (calm || held) return;
-        timer = setInterval(function () { show(at + 1); }, 5200);
-      }
-      function hold(on) { held = on; restart(); }
+      var held = false, last = null, raf = null, resume = null;
+      /* Position is tracked as a float: at ~0.4px per frame, relying on
+         scrollLeft += would lose the remainder wherever the engine rounds. */
+      var pos = 0;
 
-      root.querySelector(".carousel__nav--prev").addEventListener("click", function () { step(-1); });
-      root.querySelector(".carousel__nav--next").addEventListener("click", function () { step(1); });
-      dots.forEach(function (d, j) { d.addEventListener("click", function () { show(j); restart(); }); });
+      /* Width of one copy of the list, including the gap that follows it. */
+      function copyWidth() {
+        var cards = row.querySelectorAll(".strip__card");
+        if (cards.length < 2) return 0;
+        var half = cards.length / 2;
+        return cards[half].offsetLeft - cards[0].offsetLeft;
+      }
+
+      function tick(now) {
+        if (last == null) last = now;
+        var dt = Math.min((now - last) / 1000, 0.05);   // ignore long tab-away gaps
+        last = now;
+        if (!held) {
+          var w = copyWidth();
+          pos += STRIP_SPEED * dt;
+          if (w && pos >= w) pos -= w;
+          row.scrollLeft = pos;
+        }
+        raf = requestAnimationFrame(tick);
+      }
+
+      function start() {
+        if (calm || raf != null) return;
+        last = null; pos = row.scrollLeft;
+        raf = requestAnimationFrame(tick);
+      }
+      function stop() {
+        if (raf != null) cancelAnimationFrame(raf);
+        raf = null;
+      }
+      function hold(on) {
+        held = on; last = null;
+        if (!on) pos = row.scrollLeft;   // resync after a drag or an arrow press
+      }
+
+      /* Resume the ticker only once the row has actually stopped moving.
+         A fixed timeout could fire mid-animation, and then the ticker and the
+         smooth scroll would both be writing scrollLeft and fight each other. */
+      function resumeWhenSettled() {
+        if (resume) clearTimeout(resume);
+        var lastX = null, still = 0, tries = 0;
+        (function settle() {
+          var x = Math.round(row.scrollLeft);
+          still = (x === lastX) ? still + 1 : 0;
+          lastX = x;
+          if (still >= 2 || ++tries > 30) { hold(false); return; }
+          resume = setTimeout(settle, 100);
+        })();
+      }
+
+      /* Manual paging: one card per press. */
+      function page(dir) {
+        var card = row.querySelector(".strip__card");
+        if (!card) return;
+        var step = card.getBoundingClientRect().width +
+                   parseFloat(getComputedStyle(row).columnGap || 0);
+        hold(true);
+        var from = row.scrollLeft;
+        row.scrollBy({ left: dir * step, behavior: calm ? "auto" : "smooth" });
+        /* If smooth scrolling isn't actually running (some embedded views
+           never animate it), fall back to jumping so the button always works. */
+        setTimeout(function () {
+          if (Math.abs(row.scrollLeft - from) < 1) row.scrollLeft = from + dir * step;
+          resumeWhenSettled();
+        }, 400);
+      }
+
+      root.querySelector(".strip__nav--prev").addEventListener("click", function () { page(-1); });
+      root.querySelector(".strip__nav--next").addEventListener("click", function () { page(1); });
 
       root.addEventListener("mouseenter", function () { hold(true); });
       root.addEventListener("mouseleave", function () { hold(false); });
@@ -328,16 +383,28 @@
       root.addEventListener("focusout",   function () {
         if (!root.contains(document.activeElement)) hold(false);
       });
-      root.addEventListener("keydown", function (e) {
-        if (e.key === "ArrowLeft")  { e.preventDefault(); step(-1); }
-        if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
+      /* Dragging or flicking the row should not fight the animation. */
+      row.addEventListener("pointerdown", function () { hold(true); });
+      window.addEventListener("pointerup", function () {
+        if (held) resumeWhenSettled();
       });
-      /* Nothing should keep ticking in a background tab. */
-      document.addEventListener("visibilitychange", function () {
-        if (document.hidden) { if (timer) clearInterval(timer); } else restart();
+      row.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft")  { e.preventDefault(); page(-1); }
+        if (e.key === "ArrowRight") { e.preventDefault(); page(1); }
       });
 
-      show(0); restart();
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) stop(); else start();
+      });
+
+      /* Only run while the strip is actually on screen. */
+      if (window.IntersectionObserver) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) { en.isIntersecting ? start() : stop(); });
+        }, { threshold: 0.05 }).observe(root);
+      } else {
+        start();
+      }
     });
   }
 
@@ -408,7 +475,7 @@
       p.innerHTML = '<div class="wrap">' +
         (SITE.photosHeading ? "<h2>" + fmt(SITE.photosHeading) + "</h2>" : "") +
         (SITE.photosLead ? '<p class="section__lead">' + fmt(SITE.photosLead) + "</p>" : "") +
-        carouselHTML(SITE.photos || [], SITE.photosHeading || "Photos") + "</div>";
+        stripHTML(SITE.photos || [], SITE.photosHeading || "Photos") + "</div>";
     }
   }
 
@@ -891,7 +958,7 @@
     if (page === "calendar")      renderCalendar();
 
     wireTabs(document);
-    wireCarousels(document);
+    wireStrips(document);
 
     renderLocate();
     renderFooter();

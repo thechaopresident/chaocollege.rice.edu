@@ -300,9 +300,6 @@ a:hover { color: var(--color-link-hover); }
 a.card { text-decoration: none; transition: border-color var(--duration) var(--ease), box-shadow var(--duration) var(--ease), transform var(--duration) var(--ease); }
 a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); transform: translateY(-2px); }
 
-/* Photo strip */
-.strip { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-.strip .ph { aspect-ratio: 4 / 3; border-radius: var(--radius-lg); }
 
 /* Announcement list */
 .announce { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
@@ -607,66 +604,6 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
 .oweek-photo__img { aspect-ratio: 4 / 3; border-radius: var(--radius-lg); }
 
 /* ============================================================================
-   CAROUSEL — homepage rotating photos
-   ========================================================================= */
-.carousel { position: relative; margin-top: var(--space-6); }
-.carousel__viewport {
-  position: relative;
-  aspect-ratio: 3 / 2;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: var(--color-page-alt-bg);
-}
-.carousel__slide {
-  position: absolute; inset: 0;
-  opacity: 0; visibility: hidden;
-  transition: opacity 700ms var(--ease), visibility 0s linear 700ms;
-}
-.carousel__slide.is-active {
-  opacity: 1; visibility: visible;
-  transition: opacity 700ms var(--ease), visibility 0s;
-}
-.carousel__slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-.carousel__nav {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  z-index: 2;
-  width: 44px; height: 44px; padding: 0;
-  display: grid; place-items: center;
-  font-size: 1.6rem; line-height: 1;
-  color: var(--color-text-invert);
-  background: rgba(0, 0, 0, .42);
-  border: 1px solid var(--color-ghost-border);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background var(--duration) var(--ease);
-}
-.carousel__nav:hover { background: rgba(0, 0, 0, .68); }
-.carousel__nav--prev { left: var(--space-4); }
-.carousel__nav--next { right: var(--space-4); }
-
-.carousel__dots {
-  display: flex; justify-content: center; flex-wrap: wrap;
-  gap: var(--space-2); margin-top: var(--space-4);
-}
-.carousel__dot {
-  width: 9px; height: 9px; padding: 0;
-  border: 0; border-radius: 50%;
-  background: var(--color-rule);
-  cursor: pointer;
-  transition: background var(--duration) var(--ease), transform var(--duration) var(--ease);
-}
-.carousel__dot:hover { background: var(--brand-accent); }
-.carousel__dot.is-active { background: var(--brand-primary); transform: scale(1.35); }
-
-@media (max-width: 640px) {
-  .carousel__viewport { aspect-ratio: 4 / 3; }
-  .carousel__nav { width: 38px; height: 38px; font-size: 1.3rem; }
-  .carousel__nav--prev { left: var(--space-2); }
-  .carousel__nav--next { right: var(--space-2); }
-}
-
-/* ============================================================================
    GALLERY — O-Week photo grid
    ========================================================================= */
 .gallery {
@@ -678,4 +615,74 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
   width: 100%; aspect-ratio: 3 / 2; object-fit: cover;
   border-radius: var(--radius-lg); display: block;
   box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================================
+   PHOTO STRIP — homepage rotating row
+   Three or four cards in view, creeping sideways. The row is a real scroll
+   container, so trackpad and touch dragging work without any extra code.
+   ========================================================================= */
+.strip {
+  --strip-gap: var(--space-4);
+  --cards: 1.15;                       /* mobile shows a peek of the next */
+  position: relative;
+  margin-top: var(--space-6);
+}
+.strip__row {
+  display: flex;
+  gap: var(--strip-gap);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: auto;               /* the ticker sets scrollLeft directly */
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;               /* Firefox */
+  -ms-overflow-style: none;
+  padding-bottom: 2px;                 /* room for the focus ring */
+}
+.strip__row::-webkit-scrollbar { display: none; }
+.strip__row:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+
+.strip__card {
+  flex: 0 0 calc((100% - (var(--cards) - 1) * var(--strip-gap)) / var(--cards));
+  margin: 0;
+}
+.strip__card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-lg);
+  background: var(--color-page-alt-bg);
+  box-shadow: var(--shadow-sm);
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.strip__nav {
+  position: absolute; top: calc(50% - var(--space-3));
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 40px; height: 40px; padding: 0;
+  display: grid; place-items: center;
+  font-size: 1.5rem; line-height: 1;
+  color: var(--color-text-invert);
+  background: rgba(0, 0, 0, .45);
+  border: 1px solid var(--color-ghost-border);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background var(--duration) var(--ease), opacity var(--duration) var(--ease);
+}
+.strip__nav:hover { background: rgba(0, 0, 0, .7); }
+.strip__nav--prev { left: calc(-1 * var(--space-3)); }
+.strip__nav--next { right: calc(-1 * var(--space-3)); }
+
+@media (min-width: 560px)  { .strip { --cards: 2; } }
+@media (min-width: 900px)  { .strip { --cards: 3; } }
+@media (min-width: 1280px) { .strip { --cards: 4; } }
+
+/* No room to hang the arrows outside the row on small screens. */
+@media (max-width: 720px) {
+  .strip__nav { width: 34px; height: 34px; font-size: 1.2rem; }
+  .strip__nav--prev { left: var(--space-2); }
+  .strip__nav--next { right: var(--space-2); }
 }
