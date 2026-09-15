@@ -250,16 +250,20 @@ Drive, Chao Secretaries). Counts match the sheet exactly: 5 leadership entries,
 
 ### Things to confirm
 
-These are reproduced exactly as they appear on the sheet — correct them in
-`data/people.js` if the college wants them corrected:
+Names and committee titles have since been corrected against a roster supplied
+by the college, so `data/people.js` no longer matches the contact sheet in every
+case. Corrected: Improvements, Laundry Room and Student Maintenance
+Representative; and the names Valtierra, Sniezek, Kathy Xie, Asyiah Bray and
+Addmyra Robles. The Laundry Room Representative is now named.
 
-- `Improvments Representative` → *Improvements*
-- `Student Matinence Representative` → *Maintenance*
-- `Sophmore Rep` (×2) → *Sophomore*
+Still open, all straight from the sheet:
+
+- `Sophmore Rep` (×2) → *Sophomore*?
 - Prasanna Bendalam is listed as `pa67@rice.edu` under Court but `pb67@rice.edu`
   under AJs and PAAs.
-- The Laundry Representative row is `OPT OUT / NA` — currently a placeholder name.
 - Three PAAs are marked Head PAA (`Y`): Ashley Wang, Graham Bixby, Jehad Mahmoud.
+- Rex Rutchik and Jake Pessin each have two plausible addresses — a shared role
+  address on the sheet and a personal one in the EC Info Doc.
 
 From the draft site:
 

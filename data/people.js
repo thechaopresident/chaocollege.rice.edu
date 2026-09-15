@@ -180,9 +180,10 @@ window.CHAO_PEOPLE = {
   /* ======================================================================
      COMMITTEES & REPRESENTATIVES
      Descriptions are verbatim from the sheet, one per committee.
-     NOTE: spellings below ("Improvments", "Matinence", "Sophmore",
-     "Sophmore") are reproduced exactly as they appear on the sheet.
-     Correct them here if the college wants them corrected.
+     Names and committee titles have been corrected against the roster the
+     college supplied, so they no longer match the contact sheet's spellings
+     in every case. "Sophmore Rep" in the court list below is still the
+     sheet's spelling and has not been confirmed either way.
      ================================================================== */
   committees: [
     { name: "Arts",
@@ -411,7 +412,7 @@ window.CHAO_PEOPLE = {
         { name: "Bianca Dotson", pronouns: null,      email: null, photo: null, photoDrive: null }
       ]},
 
-    { name: "Student Matinence Representative",
+    { name: "Student Maintenance Representative",
       description: "The Student Maintenance Representative is the first person to tell about anything broken, blocked or out of stock in Chao's shared spaces, and works with the IVP and Housing and Dining to get it fixed.",
       members: [
         { name: "Bradford Mahung", pronouns: "he/him", email: "Chao.college.smr@gmail.com", photo: null, photoDrive: null }
