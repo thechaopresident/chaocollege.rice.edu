@@ -167,8 +167,6 @@ window.CHAO_SITE = {
       link: "https://docs.google.com/forms/d/e/1FAIpQLSf0cKHKgSyrkg9WNT_QiPaamJQ7f1_l28vRwhgWh0uwwi7O4A/viewform" },
     { date: "9/7/2026", datetime: "2026-09-07", title: "We have a website!",
       body: "It’s what you’re looking at right now", link: null },
-    { date: "9/6/2026", datetime: "2026-09-06", title: "It's Sunday, but it’s like a Saturday!",
-      body: "I love labor day weekend :)", link: null },
     { date: "9/5/2026", datetime: "2026-09-05", title: "We got a ping-pong table!",
       body: "Pretty self-explanatory…", link: null }
   ],

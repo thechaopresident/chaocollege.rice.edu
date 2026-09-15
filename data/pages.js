@@ -91,7 +91,10 @@ window.CHAO_PAGES = {
      URL, or null (renders as a card with no link).
      ================================================================== */
   resources: {
-    intro: "[PLACEHOLDER: one-sentence introduction to the resources page.]",
+    /* WRITTEN FOR THE SITE, not supplied by the college — Gabi asked for these
+       three strings (this intro, the Wellbeing card and the Funding Requests
+       card) to be drafted. They are deliberately plain. Reword freely. */
+    intro: "Everything at Chao you can book, request, or ask about, and who to talk to for each.",
     groups: [
       {
         id: "spaces",
@@ -135,7 +138,12 @@ window.CHAO_PAGES = {
             /* DRAFT */
             body: "Chao's staff and student government keep the real cost of college life low, subsidizing tickets and keeping merch and formals affordable for everyone, not just whoever can swipe first. If money is ever the reason you are sitting something out, tell Chao's Coordinator or student government. Help is available and it stays between you and them.",
             path: null, cta: null },
-          { title: "Funding Requests", body: "[PLACEHOLDER: how to request funding from the college.]", path: null, cta: null },
+          /* WRITTEN FOR THE SITE — see the note at the top of this section.
+             STILL MISSING: the actual request process. If there is a form or a
+             deadline, add it here as the card's `path` and `cta`. */
+          { title: "Funding Requests",
+            body: "Chao's funds exist to make student ideas happen. If you want to run an event, start a project, or try something that could become a tradition, bring it to the Treasurers — we want to hear it.",
+            path: null, cta: null },
           { title: "Treasurers",
             /* CONTACT SHEET */
             body: "Chao's Treasurers are the highest financial officers of the Chabinet, overseeing all financial transactions at Chao College.",
@@ -175,7 +183,8 @@ window.CHAO_PAGES = {
             body: "The Culturals Representatives build an inclusive community by backing affinity groups, running cultural programming, and making sure every celebration on campus has a way in for Chao residents.",
             path: "people/committees/", cta: "Meet the Culturals Reps" },
           { title: "Wellbeing & Counseling",
-            body: "[PLACEHOLDER: a line pointing students to campus wellbeing support.]",
+            /* WRITTEN FOR THE SITE — see the note at the top of this section. */
+            body: "Rice's Wellbeing and Counseling Center offers free, confidential support to every student. If you are not sure where to start, any of Chao's RHAs can point you in the right direction.",
             path: "https://wellbeing.rice.edu", cta: "Rice Wellbeing and Counseling Center" },
           { title: "Student Judicial Programs",
             body: "[PLACEHOLDER: a line on when to contact SJP.]",
