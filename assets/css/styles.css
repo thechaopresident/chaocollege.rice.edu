@@ -613,9 +613,15 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
   margin: 0 0 var(--space-6); padding-top: 0; }
 .propose { font-family: var(--font-ui); font-size: .92rem; margin: 0 0 var(--space-7); }
 
-/* O-Week coordinators group photo. */
-.oweek-photo { max-width: 620px; margin: 0 auto var(--space-7); }
+/* O-Week coordinators group photo, named in a caption beneath it. */
+.oweek-photo { max-width: 620px; margin: 0 auto; }
 .oweek-photo__img { aspect-ratio: 4 / 3; border-radius: var(--radius-lg); }
+.oweek-photo__caption {
+  margin-top: var(--space-3);
+  text-align: center;
+  font-family: var(--font-ui); font-size: .92rem;
+  color: var(--color-text-muted);
+}
 
 /* ============================================================================
    GALLERY — O-Week photo grid

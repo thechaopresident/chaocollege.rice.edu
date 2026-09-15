@@ -903,7 +903,7 @@
     if (!host || !PAGES.oweek) return;
     var o = PAGES.oweek;
 
-    var coords = roster(o.coordinators);
+
     var sections = (o.sections || []).map(function (s) {
       return '<section class="prose" style="margin-bottom:var(--space-7)"><h2>' +
         fmt(s.heading) + "</h2>" + paras(s.body) + "</section>";
@@ -916,14 +916,18 @@
       '<section class="section section--tint"><div class="wrap">' +
         "<h2>Coordinators</h2>" +
         (o.coordinatorsPhoto
-          ? '<div class="oweek-photo">' + figure({
+          ? '<figure class="oweek-photo">' + figure({
               className: "oweek-photo__img",
               image: ROOT + "assets/img/" + o.coordinatorsPhoto.image,
               alt:   o.coordinatorsPhoto.alt,
               focus: o.coordinatorsPhoto.focus
-            }) + "</div>"
+            }) +
+            (o.coordinatorsPhoto.caption
+              ? '<figcaption class="oweek-photo__caption">' +
+                  fmt(o.coordinatorsPhoto.caption) + "</figcaption>"
+              : "") +
+            "</figure>"
           : "") +
-        coords +
       "</div></section>" +
       (o.gallery && o.gallery.length
         ? '<section class="section"><div class="wrap">' +

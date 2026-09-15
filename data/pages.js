@@ -206,23 +206,21 @@ window.CHAO_PAGES = {
     year: "[PLACEHOLDER: year]",
     /* DRAFT */
     intro: "Your first week at Chao turns a hallway of strangers into a Dragon family, whether you are ready or not.",
-    /* Group photo of the coordinators, from the college photo folder.
-       Three people are in it; their names are still needed below. */
+    /* Group photo of the coordinators, named in the caption beneath it rather
+       than given a card each — there is nothing to put on a card except the
+       name the caption already carries. `alt` describes the scene for screen
+       readers; the caption does the naming, so the two do not repeat. */
     coordinatorsPhoto: {
-      image: "oweek-coords.jpg",
-      alt:   "Chao O-Week coordinators in front of an O-Week 26 chalkboard",
-      focus: "center 35%"
+      image:   "oweek-coords.jpg",
+      alt:     "Chao O-Week coordinators in front of an O-Week 26 chalkboard",
+      focus:   "center 35%",
+      caption: "From left: Abbie Wang, Samantha Mahung and Prasanna Bendalam"
     },
-    coordinators: [
-      { name: "[PLACEHOLDER: name]", role: "O-Week Coordinator", pronouns: null, email: null, photo: null, photoDrive: null },
-      { name: "[PLACEHOLDER: name]", role: "O-Week Coordinator", pronouns: null, email: null, photo: null, photoDrive: null },
-      { name: "[PLACEHOLDER: name]", role: "O-Week Coordinator", pronouns: null, email: null, photo: null, photoDrive: null }
-    ],
     sections: [
       { heading: "Your First Week At Chao",
-        /* DRAFT */
+        /* DRAFT, with one change: "floor mates" -> "peers", at Gabi's request. */
         body: [
-          "O-Week pairs every new student with upperclass advisors and a small crew of floor mates, and gets you through registration, campus life, and Rice tradition before your first class even starts.",
+          "O-Week pairs every new student with upperclass advisors and a small crew of peers, and gets you through registration, campus life, and Rice tradition before your first class even starts.",
           "By Friday you will know your way around campus, your O-Week group by name, and the people down the hall well enough to borrow their charger."
         ] },
       { heading: "Letter to New Students", body: [ "[PLACEHOLDER: letter text.]" ] },
