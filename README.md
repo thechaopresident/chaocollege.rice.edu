@@ -256,7 +256,6 @@ These are reproduced exactly as they appear on the sheet — correct them in
 - `Improvments Representative` → *Improvements*
 - `Student Matinence Representative` → *Maintenance*
 - `Sophmore Rep` (×2) → *Sophomore*
-- `Parlimentarian` → *Parliamentarian*
 - Prasanna Bendalam is listed as `pa67@rice.edu` under Court but `pb67@rice.edu`
   under AJs and PAAs.
 - The Laundry Representative row is `OPT OUT / NA` — currently a placeholder name.
@@ -278,6 +277,9 @@ From the draft site:
 
 From Rice's own sites:
 
+- **Settled:** the parliamentarian is `chaoparliamentarian@gmail.com` — the
+  contact sheet had it a letter short. The role title was misspelled the same
+  way and is corrected.
 - **Opening date conflict.** Rice News reports the college opening in August
   2026; Rice Magazine (Winter 2026) says the building opened Fall 2025. "August
   2026" is on the page now — confirm which is meant.

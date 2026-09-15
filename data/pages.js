@@ -229,7 +229,13 @@ window.CHAO_PAGES = {
           "O-Week pairs every new student with upperclass advisors and a small crew of peers, and gets you through registration, campus life, and Rice tradition before your first class even starts.",
           "By Friday you will know your way around campus, your O-Week group by name, and the people down the hall well enough to borrow their charger."
         ] },
-      { heading: "Letter to New Students", body: [ "[PLACEHOLDER: letter text.]" ] },
+      /* MUST BE WRITTEN BY THE COORDINATORS. This one is not a slot to fill
+         with drafted copy: the coordinators are named directly above it on the
+         page, so whatever sits here reads as theirs. Leave it empty until they
+         write it. A drafted version was offered and rejected for exactly this
+         reason. */
+      { heading: "Letter to New Students",
+        body: [ "[PLACEHOLDER: letter from the O-Week coordinators, in their own words]" ] },
       /* Replaces the separate Move-In, Housing and What to Bring sections —
          all three are sent by email rather than published here. Written for
          the site at Gabi's request; reword freely. */

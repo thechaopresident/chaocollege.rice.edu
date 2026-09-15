@@ -109,8 +109,10 @@ window.CHAO_PEOPLE = {
 
        Rex Rutchik     sheet: chaotreasurers@gmail.com   doc: rr125@rice.edu
        Jake Pessin     sheet: jp231@rice.edu             doc: chaosenate@gmail.com
-       Zach Weinbrum   sheet: chaoparlimentarian@...     doc: chaoparliamentarian@...
-                       (these differ by one letter — only one can be real)
+       Zach Weinbrum   SETTLED: chaoparliamentarian@gmail.com. The contact
+                       sheet had it a letter short; the EC Info Doc was right.
+                       The role title was misspelled the same way and is now
+                       corrected too.
 
      Class years below are from the EC Info Doc and are additions, not changes. */
   government: [
@@ -154,7 +156,7 @@ window.CHAO_PEOPLE = {
       description: "Chao's Rice Student Association (RSA) Senator is the primary liaison between Chao's student body and the Student Association, alongside Chao's President. The Senator represents the interests of Chao's student body to the Rice Student Association.",
       photo: "jake-pessin.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1ZVyCrcDrdmTvkuszlN_kP7SKOug918Cj/view?usp=drive_link" },
 
-    { name: "Zach Weinbrum", year: "'28", role: "Parlimentarian", pronouns: "he/him", email: "chaoparlimentarian@gmail.com",
+    { name: "Zach Weinbrum", year: "'28", role: "Parliamentarian", pronouns: "he/him", email: "chaoparliamentarian@gmail.com",
       description: "Chao's parliamentarian oversees all election-related processes and communication for executive government positions, attends all government-related meetings, and is the go-to student reference for Constitution and Bylaws accountability, interpretation and education.",
       photo: null, photoDrive: null }
   ],
@@ -179,7 +181,7 @@ window.CHAO_PEOPLE = {
      COMMITTEES & REPRESENTATIVES
      Descriptions are verbatim from the sheet, one per committee.
      NOTE: spellings below ("Improvments", "Matinence", "Sophmore",
-     "Parlimentarian") are reproduced exactly as they appear on the sheet.
+     "Sophmore") are reproduced exactly as they appear on the sheet.
      Correct them here if the college wants them corrected.
      ================================================================== */
   committees: [
