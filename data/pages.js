@@ -231,9 +231,13 @@ window.CHAO_PAGES = {
           "By Friday you will know your way around campus, your O-Week group by name, and the people down the hall well enough to borrow their charger."
         ] },
       { heading: "Letter to New Students", body: [ "[PLACEHOLDER: letter text.]" ] },
-      { heading: "Move-In",                body: [ "[PLACEHOLDER: move-in date, time, and logistics.]" ] },
-      { heading: "Housing",                body: [ "[PLACEHOLDER: housing and room assignment information.]" ] },
-      { heading: "What to Bring",          body: [ "[PLACEHOLDER: packing guidance.]" ] }
+      /* Replaces the separate Move-In, Housing and What to Bring sections —
+         all three are sent by email rather than published here. Written for
+         the site at Gabi's request; reword freely. */
+      { heading: "Before You Arrive",
+        body: [
+          "Check your email frequently in the weeks before O-Week. Information about housing, what to bring, and move-in instructions will all be sent there."
+        ] }
     ],
 
     /* Photographs from the college's O-Week archive. Filenames describe the
