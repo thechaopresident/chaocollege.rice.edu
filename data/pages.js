@@ -116,13 +116,11 @@ window.CHAO_PAGES = {
           { title: "Laundry",
             body: "For questions or issues with the laundry room, reach out to Brad Mahung, Chao's Student Maintenance Representative.",
             path: "mailto:Chao.college.smr@gmail.com", cta: "Email the SMR" },
-          { title: "Item Checkout", body: "[PLACEHOLDER: what can be checked out and from whom.]", path: null, cta: null },
-          /* DATED CONTENT — the two dates below are for autumn 2026 and will
-             go stale. Revisit each year, or move this to an announcement. */
+          /* Dates live in the homepage announcements, not here, so this card
+             does not go stale. */
           { title: "Housing",
-            body: "The housing jack is September 24. To take part, the eligibility form must be filled out by September 21. Reach out to Barbare Tetvadze, Chao's Internal Vice President, with any questions.",
-            path: "https://docs.google.com/forms/d/e/1FAIpQLSf0cKHKgSyrkg9WNT_QiPaamJQ7f1_l28vRwhgWh0uwwi7O4A/viewform",
-            cta: "Housing eligibility form" },
+            body: "For important housing dates, including the housing jack and the eligibility form deadline, see the announcements on the home page. Reach out to Barbare Tetvadze, Chao's Internal Vice President, with any questions.",
+            path: "index.html#announcements", cta: "See announcements" },
           { title: "Dining",
             body: "Servery hours for the Rice serveries are published by Housing and Dining.",
             path: "https://rice.app.box.com/s/07zf31m146n5efe7aqxods15n1xg6dke",

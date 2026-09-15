@@ -963,10 +963,31 @@
     renderLocate();
     renderFooter();
 
-    /* Deep links like /people/#committees must clear the sticky header. */
+    /* Deep links like index.html#announcements.
+       The page is built by script after parse, and images settle later still,
+       so the browser's own jump to the anchor lands before the content above
+       it exists and is then pushed away. Re-apply as the layout settles, and
+       stop the moment the reader scrolls for themselves. */
     if (window.location.hash) {
-      var target = document.querySelector(window.location.hash);
-      if (target) setTimeout(function () { target.scrollIntoView(); }, 0);
+      var target;
+      try { target = document.querySelector(window.location.hash); }
+      catch (e) { target = null; }                 /* hashes that aren't selectors */
+
+      if (target) {
+        var own = true;
+        var stopIfUserScrolls = function () { own = false; };
+        window.addEventListener("wheel", stopIfUserScrolls, { passive: true, once: true });
+        window.addEventListener("touchstart", stopIfUserScrolls, { passive: true, once: true });
+        window.addEventListener("keydown", stopIfUserScrolls, { once: true });
+
+        var settle = function () {
+          if (!own) return;
+          target.scrollIntoView({ behavior: "auto", block: "start" });
+        };
+        settle();
+        [60, 200, 500, 900].forEach(function (ms) { setTimeout(settle, ms); });
+        window.addEventListener("load", function () { setTimeout(settle, 60); });
+      }
     }
   }
 
