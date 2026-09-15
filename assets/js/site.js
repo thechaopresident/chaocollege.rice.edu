@@ -574,8 +574,9 @@
   }
 
   function roster(list, opts) {
+    opts = opts || {};
     if (!list || !list.length) return "";
-    return '<div class="grid grid--4">' +
+    return '<div class="' + (opts.layout || "grid grid--4") + '">' +
       list.map(function (p) { return rosterCard(p, opts); }).join("") + "</div>";
   }
 
@@ -777,7 +778,7 @@
       }).join("") + "</ul>";
     }
 
-    var blocks = (PPL.committees || []).map(function (c) {
+    function committee(c) {
       var juris = c.jurisdiction
         ? '<p class="juris">' + esc(JURIS[c.jurisdiction] || c.jurisdiction) +
           " (" + esc(c.jurisdiction) + ") jurisdiction</p>"
@@ -786,11 +787,30 @@
         ? '<details class="resp"><summary>Responsibilities</summary>' +
           respList(c.responsibilities) + "</details>"
         : "";
-      return '<section style="margin-bottom:var(--space-9)">' +
+      return '<section class="committee">' +
         '<div class="group-head"><h3>' + fmt(c.name) + "</h3>" + juris +
           (c.description ? "<p>" + fmt(c.description) + "</p>" : "") + "</div>" +
-        roster(c.members) + resp + "</section>";
-    }).join("");
+        roster(c.members, { layout: "roster-row" }) + resp + "</section>";
+    }
+
+    /* Most committees are one or two people, and a full-width row for two
+       cards is mostly empty space. Those sit two committees to a row; anything
+       larger keeps the full width. Source order is preserved, so a large
+       committee closes off whatever pair was being built. */
+    var SMALL = 2;
+    var rows = [], pair = [];
+    function flush() {
+      if (!pair.length) return;
+      rows.push('<div class="committee-pair">' + pair.join("") + "</div>");
+      pair = [];
+    }
+    (PPL.committees || []).forEach(function (c) {
+      var n = (c.members || []).length;
+      if (n > SMALL) { flush(); rows.push('<div class="committee-full">' + committee(c) + "</div>"); }
+      else { pair.push(committee(c)); if (pair.length === 2) flush(); }
+    });
+    flush();
+    var blocks = rows.join("");
     var B = SITE.blurbs || {};
     var expect = (B.committeeExpectations && B.committeeExpectations.length)
       ? '<details class="resp expect"><summary>General expectations for every committee</summary><ul>' +
