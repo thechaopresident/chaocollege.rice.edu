@@ -20,11 +20,13 @@ window.CHAO_PAGES = {
      ABOUT
      ================================================================== */
   about: {
-    intro: "[PLACEHOLDER: one-paragraph introduction to Chao College.]",
+    /* No page intro — the sections start straight away. Set a string here if
+       one is ever wanted; the renderer skips it while this is null. */
+    intro: null,
 
     sections: [
       {
-        heading: "About the Chaos",
+        heading: "About the Chao Family",
         /* DRIVE — verbatim. Do not reword. */
         body: [
           "The Chao family has long been known for its pioneering contributions to the global performance and essential materials industries, for its housing and infrastructure products businesses, and for its legacy of civic and philanthropic leadership in Houston and beyond. The late Ting Tsung (T.T.) Chao built a global enterprise in Asia before moving his business to Houston in the 1980s with his wife, Wei Fong. He and their sons James and Albert went on to found Westlake Corp., now a Fortune 500 company. Four of the siblings' children are Rice alumni, as are Albert's wife and James' daughter-in-law. In 2008, the family's foundation awarded a grant to establish the Chao Center for Asian Studies in the School of Humanities. The family has also supported initiatives such as the establishment of Chao chair professorships and student scholarships, as well as the ongoing Asian American Community Study in the Kinder Institute for Urban Research. Other grant awards have supported the development of affordable life-saving technology through the Rice360 Institute for Global Health Technologies, the Rice Emerging Scholars Program, Brockman Hall for Opera in the Shepherd School of Music and William T. Cannady Hall for Architecture."
@@ -45,10 +47,13 @@ window.CHAO_PAGES = {
         source: null
       },
       {
-        /* The draft's History and Namesake pages are still lorem ipsum, so
-           there is nothing to lift. These stay open. */
-        heading: "Our History & Namesake",
-        body: [ "[PLACEHOLDER: the college's founding and the story of its namesake.]" ],
+        /* WRITTEN FOR THE SITE at Gabi's request, to the sense of "you are the
+           history — we are brand new, so the traditions are yours to build".
+           Reword freely. */
+        heading: "History",
+        body: [
+          "Chao has no history yet. You are the history. The college is brand new, which means the stories and traditions that will define it are still waiting to be built, by the people here now."
+        ],
         source: null
       }
     ],

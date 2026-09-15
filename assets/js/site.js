@@ -510,8 +510,10 @@
 
     host.innerHTML =
       '<div class="wrap section">' +
-        '<p class="section__lead">' + fmt(a.intro) + "</p>" +
-        '<div class="grid grid--2" style="margin-top:var(--space-7);align-items:start">' +
+        (a.intro ? '<p class="section__lead">' + fmt(a.intro) + "</p>" : "") +
+        '<div class="grid grid--2"' +
+          (a.intro ? ' style="margin-top:var(--space-7);align-items:start"'
+                   : ' style="align-items:start"') + ">" +
           "<div>" + sections + "</div>" +
           "<aside><h2>At a Glance</h2>" +
             '<dl class="info-list">' + facts + "</dl>" +
