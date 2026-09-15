@@ -35,7 +35,10 @@ window.CHAO_SITE = {
     mailStop: null,
     street:   "6380 Main St",
     city:     "Houston, TX 77005",
-    phone:    "[PLACEHOLDER: college phone]",
+    /* No general college number — reach the Magisters or the College
+       Coordinator instead; their numbers are on the People > Team page. The
+       footer omits the line entirely while this is null. */
+    phone:    null,
     email:    "chaocollege@rice.edu",
     mapEmbed: "https://www.google.com/maps?q=6380+Main+St,+Houston,+TX+77005&output=embed",
     mapLink:  "https://www.google.com/maps/search/?api=1&query=6380+Main+St+Houston+TX+77005"

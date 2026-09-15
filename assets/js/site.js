@@ -604,15 +604,27 @@
       return esc(n.name) +
         (n.pronouns ? ' <span class="profile__pronouns">(' + esc(n.pronouns) + ")</span>" : "");
     }).join(" &amp; ");
-    var mails = people.filter(function (n) { return n.email; }).map(function (n) {
-      return '<a href="mailto:' + esc(n.email) + '">' + esc(n.email) + "</a>";
-    }).join(" &middot; ");
+    /* One contact line per person. Where an entry covers two people, each line
+       is prefixed with a first name — otherwise a phone number belonging to one
+       of them would sit in a list with no indication whose it is. */
+    var contacts = people.map(function (n) {
+      var bits = [];
+      if (n.email) bits.push('<a href="mailto:' + esc(n.email) + '">' + esc(n.email) + "</a>");
+      if (n.phone) {
+        var digits = String(n.phone).replace(/[^0-9]/g, "");
+        var tel = digits.length === 10 ? "+1" + digits : digits;
+        bits.push('<a href="tel:' + esc(tel) + '">' + esc(n.phone) + "</a>");
+      }
+      if (!bits.length) return "";
+      var who = people.length > 1 ? esc(String(n.name).split(" ")[0]) + ": " : "";
+      return who + bits.join(" &middot; ");
+    }).filter(Boolean).join("<br>");
 
     return '<article class="profile' + (asCard ? " profile--card" : "") + '">' +
       '<div class="profile__head">' +
         (entry.role ? '<p class="profile__role">' + esc(entry.role) + "</p>" : "") +
         '<h3 class="profile__name">' + names + "</h3>" +
-        (mails ? '<p class="profile__contact">' + mails + "</p>" : "") +
+        (contacts ? '<p class="profile__contact">' + contacts + "</p>" : "") +
       "</div>" +
       '<div class="profile__body">' +
         figure({
