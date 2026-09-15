@@ -162,6 +162,7 @@ a:hover { color: var(--color-link-hover); }
 
 .nav__menu { display: flex; align-items: center; gap: var(--space-1); list-style: none; margin: 0; padding: 0; }
 .nav__item { position: relative; }
+.nav__parent { display: inline-flex; align-items: center; }
 .nav__link, .nav__toggle {
   display: inline-flex; align-items: center; gap: var(--space-2);
   font-family: var(--font-ui);
@@ -175,7 +176,11 @@ a:hover { color: var(--color-link-hover); }
   border-radius: var(--radius-sm);
   transition: color var(--duration) var(--ease);
 }
+/* The caret sits tight against its label rather than reading as its own item. */
+.nav__parent .nav__link { padding-right: var(--space-1); }
+.nav__parent .nav__toggle { padding-left: var(--space-1); }
 .nav__link:hover, .nav__toggle:hover,
+.nav__parent:hover .nav__link,
 .nav__link[aria-current="page"] { color: var(--color-nav-text-hover); }
 .nav__link[aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; }
 .nav__caret { width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
@@ -217,8 +222,17 @@ a:hover { color: var(--color-link-hover); }
     max-height: calc(100vh - var(--nav-height)); overflow-y: auto;
   }
   .site-header--open .nav__menu { display: flex; }
-  .nav__link, .nav__toggle { width: 100%; justify-content: space-between; padding-block: var(--space-4);
-    border-bottom: 1px solid var(--color-ghost-border); border-radius: 0; }
+  .nav__item { width: 100%; }
+  /* The row rule goes on whichever element is the row: a plain link, or the
+     label-plus-caret wrapper. */
+  .nav__item > .nav__link,
+  .nav__parent { width: 100%; border-bottom: 1px solid var(--color-ghost-border); }
+  .nav__parent { justify-content: space-between; }
+  .nav__link, .nav__toggle { padding-block: var(--space-4); border-radius: 0; }
+  .nav__parent .nav__link { flex: 1; border-bottom: 0; }
+  /* A comfortable tap target for the caret, separate from the label's.
+     min-height keeps it at the 44px commonly recommended for touch. */
+  .nav__parent .nav__toggle { padding-inline: var(--space-4); min-height: 44px; }
   .nav__submenu { position: static; display: none; box-shadow: none; background: transparent;
     padding: var(--space-2) 0 var(--space-3) var(--space-4); }
   .nav__item--open .nav__submenu { display: block; }

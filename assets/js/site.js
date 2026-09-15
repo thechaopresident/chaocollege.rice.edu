@@ -120,15 +120,18 @@
           (isExternal(c.path) ? ' target="_blank" rel="noopener"' : "") +
           ">" + esc(c.label) + "</a></li>";
       }).join("");
-      /* The parent label is a real link too — the caret opens the submenu. */
+      /* The label itself navigates to the section's own page; the caret beside
+         it is a separate button that opens the submenu. Without that split the
+         parent page would be unreachable on touch, where there is no hover. */
       return '<li class="nav__item" data-has-menu>' +
-        '<button class="nav__toggle" type="button" aria-expanded="false" aria-controls="' + id + '">' +
-          esc(item.label) + '<span class="nav__caret" aria-hidden="true"></span>' +
-        "</button>" +
-        '<ul class="nav__submenu" id="' + id + '">' +
-          '<li><a href="' + esc(url(item.path)) + '">' + esc(item.label) + " Overview</a></li>" +
-          sub +
-        "</ul></li>";
+        '<span class="nav__parent">' +
+          navLink(item, cur) +
+          '<button class="nav__toggle" type="button" aria-expanded="false"' +
+            ' aria-controls="' + id + '" aria-label="' + esc(item.label) + ' menu">' +
+            '<span class="nav__caret" aria-hidden="true"></span>' +
+          "</button>" +
+        "</span>" +
+        '<ul class="nav__submenu" id="' + id + '">' + sub + "</ul></li>";
     }).join("");
 
     var cta = SITE.navCta
