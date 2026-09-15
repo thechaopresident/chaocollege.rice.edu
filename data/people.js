@@ -399,7 +399,7 @@ window.CHAO_PEOPLE = {
       ]},
 
     { name: "Student Matinence Representative",
-      description: "[PLACEHOLDER: position description]",
+      description: "The Student Maintenance Representative is the first person to tell about anything broken, blocked or out of stock in Chao's shared spaces, and works with the IVP and Housing and Dining to get it fixed.",
       members: [
         { name: "Bradford Mahung", pronouns: "he/him", email: "Chao.college.smr@gmail.com", photo: null, photoDrive: null }
       ]}

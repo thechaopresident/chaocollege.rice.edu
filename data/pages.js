@@ -163,8 +163,7 @@ window.CHAO_PAGES = {
             /* DRAFT */
             body: "Feedback goes straight to the Chao Cabinet and shapes real decisions on events, facilities, and policy. Say it with your name, or do not, we will still read it.",
             path: null, cta: "[PLACEHOLDER: link to the feedback form]" },
-          { title: "Constitution & Bylaws", body: "[PLACEHOLDER: link to Chao's constitution and bylaws.]", path: null, cta: null },
-          { title: "Contact the Chabinet",  body: "[PLACEHOLDER: how to reach student government.]", path: "people/government/", cta: "See Student Government" }
+          { title: "Constitution & Bylaws", body: "[PLACEHOLDER: link to Chao's constitution and bylaws.]", path: null, cta: null }
         ]
       },
       {
@@ -192,7 +191,7 @@ window.CHAO_PAGES = {
             body: "Rice's Wellbeing and Counseling Center offers free, confidential support to every student. If you are not sure where to start, any of Chao's RHAs can point you in the right direction.",
             path: "https://wellbeing.rice.edu", cta: "Rice Wellbeing and Counseling Center" },
           { title: "Student Judicial Programs",
-            body: "[PLACEHOLDER: a line on when to contact SJP.]",
+            body: "Student Judicial Programs handles alleged violations of Rice's Code of Student Conduct.",
             path: "https://sjp.rice.edu", cta: "Rice Student Judicial Programs" }
         ]
       }

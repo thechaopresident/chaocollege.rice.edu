@@ -109,15 +109,15 @@ window.CHAO_SITE = {
      linked beside them. The associates line is from the preliminary draft
      site. Everything else is still open.                                   */
   blurbs: {
-    government: "[PLACEHOLDER: one or two sentences about Chao's student government.]",
-    court:      "[PLACEHOLDER: one or two sentences about the Court and class representatives.]",
-    committees: "[PLACEHOLDER: one or two sentences about how Chao's committees work.]",
+    government: "The Chabinet is Chao's elected student government. Officers look after the college's finances, facilities, social life, and generally make the college you know and love possible.",
+    court:      "Chao's representative to the university judicial system, alongside the representatives elected to be a voice for each class year.",
+    committees: "Chao's committees run the parts of college life that take a team \u2014 Beer Bike, socials, service, merch, sports, the arts and the shared spaces. Each sits under one of the vice presidents.",
     associates: "Rice faculty, staff, and Houston community members who volunteer their time to mentor and support Chao students.",
 
     rhas:     "RHAs are students who have been trained on a variety of wellbeing topics. These students work at their college to provide health education opportunities, health supplies and peer guidance.",
     rhasLink: { label: "Rice Student Wellbeing — Peer Resources", path: "https://wellbeing.rice.edu/student-wellbeing/peer-resources" },
 
-    ajs:      "[PLACEHOLDER: what AJs do at Chao, and what the initials stand for.]",
+    ajs:      "Chao's AJs are volunteers on each floor to be the Chief Justice's point of contact for more local happenings on a particular floor.",
     ajsLink:  null,
 
     /* COMMITTEES DOC — verbatim from "Chao Committees Descriptions". */

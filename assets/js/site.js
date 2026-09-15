@@ -836,7 +836,7 @@
 
     host.innerHTML = '<div class="wrap section">' + tabs([
       { label: "RHAs", html: panel("Rice Health Advisors", B.rhas, B.rhasLink, rhas) },
-      { label: "AJs",  html: panel("AJs", B.ajs, B.ajsLink, ajs) },
+      { label: "AJs",  html: panel("Associate Justices", B.ajs, B.ajsLink, ajs) },
       { label: "PAAs", html: panel("Peer Academic Advisors", B.paas, B.paasLink, paas) }
     ], "staff") + "</div>";
   }
