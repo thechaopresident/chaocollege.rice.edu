@@ -841,8 +841,10 @@
       return { name: r.name, role: r.floor, pronouns: r.pronouns,
                email: r.email, photo: r.photo, focus: r.focus, optOut: r.optOut };
     });
+    /* Every PAA is shown simply as "PAA". The `head` flag is still recorded in
+       data/people.js from the contact sheet, but is no longer displayed. */
     var paas = (PPL.paas || []).map(function (r) {
-      return { name: r.name, role: r.head ? "Head PAA" : "PAA", pronouns: r.pronouns,
+      return { name: r.name, role: "PAA", pronouns: r.pronouns,
                email: r.email, photo: r.photo, focus: r.focus, optOut: r.optOut };
     });
 
