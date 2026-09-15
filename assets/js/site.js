@@ -592,7 +592,7 @@
       '<dl class="info-list">' + rows.join("") + "</dl></div>";
   }
 
-  function profile(entry) {
+  function profile(entry, asCard) {
     var people = entry.people || [{ name: entry.name, email: entry.email, pronouns: entry.pronouns }];
     var names = people.map(function (n) {
       return esc(n.name) +
@@ -602,7 +602,7 @@
       return '<a href="mailto:' + esc(n.email) + '">' + esc(n.email) + "</a>";
     }).join(" &middot; ");
 
-    return '<article class="profile">' +
+    return '<article class="profile' + (asCard ? " profile--card" : "") + '">' +
       '<div class="profile__head">' +
         (entry.role ? '<p class="profile__role">' + esc(entry.role) + "</p>" : "") +
         '<h3 class="profile__name">' + names + "</h3>" +
@@ -681,20 +681,59 @@
     host.innerHTML = '<div class="wrap section"><div class="grid grid--3">' + cards + "</div></div>";
   }
 
+  /* Deal profiles into columns so the columns come out near the same height.
+     CSS `columns` will not do this: it fills in source order and, with three
+     uneven cards, picks a split that left one column 965px short. Sorting by
+     bio length and always adding to the currently-shortest column gets the
+     even split instead. Height tracks bio length because the portrait floats. */
+  function packColumns(entries, n) {
+    var cols = [], heights = [], i;
+    for (i = 0; i < n; i++) { cols.push([]); heights.push(0); }
+
+    /* Weight is bio length plus a constant for the parts every card carries
+       regardless of bio: role, name, contact line and the floated portrait.
+       Without the constant a column holding two short cards looks lighter than
+       it is, and the split drifts off the even one once more people are added. */
+    var CARD_CHROME = 700;
+    entries.map(function (e, idx) {
+      return { e: e, idx: idx, weight: (e.bio || "").length + CARD_CHROME };
+    }).sort(function (a, b) {
+      return b.weight - a.weight || a.idx - b.idx;
+    }).forEach(function (item) {
+      var at = heights.indexOf(Math.min.apply(null, heights));
+      cols[at].push(item.e);
+      heights[at] += item.weight;
+    });
+
+    return '<div class="team__cols">' + cols.map(function (col) {
+      return '<div class="team__col">' +
+        col.map(function (e) { return profile(e, true); }).join("") +
+      "</div>";
+    }).join("") + "</div>";
+  }
+
   function renderTeam() {
     var host = mount("team");
     if (!host) return;
-    /* One pill per role group, in the order the data lists them. */
-    var order = [], byRole = {};
-    (PPL.leadership || []).forEach(function (e) {
-      var key = e.group || e.role || "Team";
-      if (!byRole[key]) { byRole[key] = []; order.push(key); }
-      byRole[key].push(e);
-    });
-    var groups = order.map(function (key) {
-      return { label: key, html: byRole[key].map(profile).join("") };
-    });
-    host.innerHTML = '<div class="wrap section">' + tabs(groups, "team") + "</div>";
+    var all = PPL.leadership || [];
+
+    /* The Magisters and the College Coordinator lead the page at full width.
+       Their portraits float and the text wraps, so a 122-word bio and a
+       382-word one both fill their block and neither can leave a gap.
+
+       The Resident Associates follow in balanced columns. Their bios are
+       uneven (148 / 288 / 141 words), which is exactly the case a fixed grid
+       handles badly — CSS columns pack them by height instead, so the short
+       ones sit together beside the long one rather than leaving a hole. */
+    var isRA  = function (e) { return (e.group || e.role) === "Resident Associates"; };
+    var leads = all.filter(function (e) { return !isRA(e); });
+    var ras   = all.filter(isRA);
+
+    host.innerHTML = '<div class="wrap section">' +
+      leads.map(function (e) { return profile(e, false); }).join("") +
+      (ras.length ? '<div class="group-head team__divider"><h2>Resident Associates</h2></div>' +
+                    packColumns(ras, 2) : "") +
+      "</div>";
   }
 
   function renderGovernment() {

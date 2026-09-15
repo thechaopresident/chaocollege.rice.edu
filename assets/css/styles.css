@@ -686,3 +686,40 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
   .strip__nav--prev { left: var(--space-2); }
   .strip__nav--next { right: var(--space-2); }
 }
+
+/* ============================================================================
+   TEAM PAGE — leads at full width, the rest packed into balanced columns
+   ========================================================================= */
+.team__divider { margin-top: var(--space-9); }
+
+/* Two real columns, filled by packColumns() in assets/js/site.js rather than
+   by the CSS column balancer, which could not be steered to the even split. */
+.team__cols { display: flex; gap: var(--space-7); align-items: flex-start; }
+.team__col  { flex: 1 1 0; min-width: 0; }
+@media (max-width: 820px) { .team__cols { flex-direction: column; } }
+
+.profile--card {
+  max-width: none;
+  margin: 0 0 var(--space-7);
+  width: 100%;
+}
+.profile--card:last-child { margin-bottom: 0; }
+/* No separator rules inside the packed columns — the column gap does that job,
+   and a border would land mid-column. */
+.profile--card + .profile--card { margin-top: 0; padding-top: 0; border-top: 0; }
+
+/* A small floated portrait, not a full-width banner. A banner adds the same
+   ~330px to every card, which stops height tracking bio length and leaves the
+   column balancer nothing to work with. Floated, card height follows the text,
+   and the three bios (148 / 288 / 141 words) balance nearly evenly. */
+.profile--card .profile__photo {
+  float: left;
+  width: 132px;
+  aspect-ratio: 1 / 1;
+  margin: 0 var(--space-4) var(--space-2) 0;
+  shape-margin: var(--space-3);
+}
+.profile--card .profile__head { text-align: left; }
+.profile--card .profile__name { font-size: 1.3rem; }
+/* Justified text needs more width than a column gives it. */
+.profile--card .profile__body p { text-align: left; hyphens: manual; }
