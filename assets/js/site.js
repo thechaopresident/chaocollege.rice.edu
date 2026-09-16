@@ -843,7 +843,8 @@
       : "";
 
     host.innerHTML = '<div class="wrap section">' +
-      groupHead("Committees & Representatives", B.committees) +
+      /* Title omitted: the banner <h1> above already says this. */
+      groupHead(null, B.committees) +
       expect + propose + blocks + "</div>";
   }
 
