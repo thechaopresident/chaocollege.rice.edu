@@ -38,10 +38,13 @@ window.CHAO_PAGES = {
       },
       {
         heading: "Our Facilities",
-        /* DRAFT — verbatim from the "About: Facilities" page. */
+        /* DRAFT — was verbatim from the "About: Facilities" page, but that
+           text put kitchens on the residential floors, which do not exist.
+           The floor sentence now describes the flobbies instead; the commons
+           kitchen is real and stays. */
         body: [
-          "Chao's building holds every space a Dragon uses: quiet floors for studying, kitchens for cooking, and a commons built for bumping into people you like.",
-          "Each floor pairs private rooms with a shared kitchen and lounge, so you are never more than a few steps from a stove, a couch, or someone to talk to.",
+          "Chao's building holds every space a Dragon uses: quiet floors for studying, a commons built for bumping into people you like, and the kitchen that feeds both.",
+          "Each floor pairs private rooms with its own lobby, a flobby, so you are never more than a few steps from a couch or someone to talk to.",
           "The ground floor commons is where the whole college collides: full kitchen, game tables, and lounge seating built for nights that run later than planned."
         ],
         source: null
@@ -113,10 +116,14 @@ window.CHAO_PAGES = {
             body: "Chao's shared spaces are yours. Go ahead and book one. Requests get a response within two business days.",
             path: "https://docs.google.com/spreadsheets/d/1DIsayLaIsKxKrMVQGrXRUi0AE_iwuW3pKbxvwdVFUg0/edit",
             cta: "Open the reservation sheet" },
-          { title: "Floor Kitchens & Lounges",
-            /* DRAFT */
-            body: "Each floor pairs private rooms with a shared kitchen and lounge, so you are never more than a few steps from a stove, a couch, or someone to talk to.",
-            path: null, cta: null },
+          /* DRAFT. There are no kitchens on the residential floors — the only
+             kitchen is in the commons — so this card no longer mentions one.
+             NOTE: "floor reps" has no matching group in data/people.js, so the
+             link goes to the Improvements Representatives, whose stated job is
+             upgrading and maintaining shared spaces. Repoint if that is wrong. */
+          { title: "Flobbies",
+            body: "Each floor has its own lobby, a flobby: shared space a few steps from your room to study, hang out, or run into someone. If you have ideas or thoughts about yours, bring them to the Improvements Representatives.",
+            path: "people/committees/", cta: "Meet the Improvements Reps" },
           { title: "The Commons",
             /* DRAFT */
             body: "The ground floor commons is where the whole college collides: full kitchen, game tables, and lounge seating built for nights that run later than planned.",
