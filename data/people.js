@@ -140,7 +140,7 @@ window.CHAO_PEOPLE = {
 
     { name: "Ian Rodriguez", year: "'28", role: "Senior Treasurer", pronouns: "he/him", email: "chaotreasurers@gmail.com",
       description: "Chao's Treasurers are the highest financial officers of the Chabinet, overseeing all financial transactions at Chao College.",
-      photo: null, photoDrive: "https://drive.google.com/file/d/1BkX62ydOcfiIsSiFgLltZ89nVMOOrpYp/view?usp=sharing" },
+      photo: "ian-rodriguez.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1BkX62ydOcfiIsSiFgLltZ89nVMOOrpYp/view?usp=sharing" },
 
     { name: "Rex Rutchik", year: "'29", role: "Junior Treasurer", pronouns: "he/him", email: "chaotreasurers@gmail.com",
       description: "Chao's Treasurers are the highest financial officers of the Chabinet, overseeing all financial transactions at Chao College.",
@@ -148,11 +148,11 @@ window.CHAO_PEOPLE = {
 
     { name: "Carolina Balboa", year: "'28", role: "Secretary", pronouns: "she/her", email: "chaosecretaries@gmail.com",
       description: "Chao's Secretaries manage all of Chao College's communication systems, oversee all of Chao's historical documentation and maintain all of Chao's record-keeping.",
-      photo: null, photoDrive: "https://drive.google.com/file/d/1vg8_e5Sm8Tl75_GK01mTYbRETMJWsWBh/view?usp=sharing" },
+      photo: "carolina-balboa.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1vg8_e5Sm8Tl75_GK01mTYbRETMJWsWBh/view?usp=sharing" },
 
     { name: "Raymond Xu", year: "'29", role: "Secretary", pronouns: "he/him", email: "chaosecretaries@gmail.com",
       description: "Chao's Secretaries manage all of Chao College's communication systems, oversee all of Chao's historical documentation and maintain all of Chao's record-keeping.",
-      photo: null, photoDrive: "https://drive.google.com/file/d/1z20SoNAiRoP_G2EvN_2yqVws4lIQr-Wl/view?usp=sharing" },
+      photo: "raymond-xu.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1z20SoNAiRoP_G2EvN_2yqVws4lIQr-Wl/view?usp=sharing" },
 
     { name: "Jake Pessin", year: "'29", role: "Senator", pronouns: "he/him", email: "chaosenate@gmail.com",
       description: "Chao's Rice Student Association (RSA) Senator is the primary liaison between Chao's student body and the Student Association, alongside Chao's President. The Senator represents the interests of Chao's student body to the Rice Student Association.",
@@ -172,7 +172,7 @@ window.CHAO_PEOPLE = {
       photo: "amelia-davis.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1hRaxyA6TgiyqKUzpmHq389rqp0u9EX2-/view?usp=sharing" },
     { name: "Coming Soon...", role: "Freshman Rep", pronouns: null, email: null, photo: null, photoDrive: null },
     { name: "Prasanna Bendalam", role: "Sophomore Rep", pronouns: "he/him", email: "pb67@rice.edu",
-      photo: null, photoDrive: "https://drive.google.com/file/d/16NHr-P1wilsMSGahVfpsB_G2fYCMLeGJ/view?usp=sharing" },
+      photo: "prasanna-bendalam.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/16NHr-P1wilsMSGahVfpsB_G2fYCMLeGJ/view?usp=sharing" },
     { name: "Manny Tejada", role: "Sophomore Rep", pronouns: "he/him", email: "mt181@rice.edu",
       photo: "manny-tejada.jpg", focus: "center center", photoDrive: null },
     { name: "Coming Soon...", role: "Junior Rep", pronouns: null, email: null, photo: null, photoDrive: null },
@@ -264,7 +264,7 @@ window.CHAO_PEOPLE = {
       ],
       description: "This committee builds Chao's outward-facing social presence by connecting with other colleges and campus groups. The focus is on visibility, collaboration, and high-energy events.",
       members: [
-        { name: "John Sniezek", pronouns: "he/him", email: "js512@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1YuWYQI4NleNA0dIGU3-q_Yq7a-XngN9J/view?usp=drive_link" },
+        { name: "John Sniezek", pronouns: "he/him", email: "js512@rice.edu", photo: "john-sniezek.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1YuWYQI4NleNA0dIGU3-q_Yq7a-XngN9J/view?usp=drive_link" },
         { name: "Manny Tejada", pronouns: "he/him", email: "mt181@rice.edu", photo: "manny-tejada.jpg", focus: "center center", photoDrive: null }
       ]},
 
@@ -279,7 +279,7 @@ window.CHAO_PEOPLE = {
       description: "This committee develops Chao's internal culture, creating consistent, high-attendance events that build community and make Chao an engaging place to live.",
       members: [
         { name: "Carson Walker", pronouns: "he/him",  email: "cw168@rice.edu", photo: null, photoDrive: null },
-        { name: "Njwi Achoh",    pronouns: "she/her", email: "nba5@rice.edu",  photo: null, photoDrive: "https://drive.google.com/file/d/1jS3SoioE92DQiAJIFzaAWbTi2vLDtp1e/view?usp=drivesdk" }
+        { name: "Njwi Achoh",    pronouns: "she/her", email: "nba5@rice.edu",  photo: "njwi-achoh.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1jS3SoioE92DQiAJIFzaAWbTi2vLDtp1e/view?usp=drivesdk" }
       ]},
 
     { name: "Jacks",
@@ -295,7 +295,7 @@ window.CHAO_PEOPLE = {
       description: "This committee defines Chao's reputation through bold, creative, and memorable jacks. The goal is to set a new standard for originality and execution.",
       members: [
         { name: "Grace Doolittle", pronouns: null,     email: "ged1@rice.edu", photo: null, photoDrive: null },
-        { name: "John Tucker",     pronouns: "he/him", email: "jrt15@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/13jT9AWbwLVfFCpHxGAC5__3sfdgT63M0/view?usp=drivesdk" }
+        { name: "John Tucker",     pronouns: "he/him", email: "jrt15@rice.edu", photo: "john-tucker.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/13jT9AWbwLVfFCpHxGAC5__3sfdgT63M0/view?usp=drivesdk" }
       ]},
 
     { name: "Merch",
@@ -309,7 +309,7 @@ window.CHAO_PEOPLE = {
       ],
       description: "This committee is responsible for designing and distributing Chao merchandise, ensuring strong, recognizable college branding and high-quality offerings throughout the year.",
       members: [
-        { name: "Joy Kim",       pronouns: "she/her", email: "jk127@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1p5S_C3rbksAhXQspVosvwOndnd6pPNMr/view?usp=sharing" },
+        { name: "Joy Kim",       pronouns: "she/her", email: "jk127@rice.edu", photo: "joy-kim.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1p5S_C3rbksAhXQspVosvwOndnd6pPNMr/view?usp=sharing" },
         { name: "Kathy Xie", pronouns: "she/her", email: "kx18@rice.edu",  photo: null, photoDrive: null, optOut: true }
       ]},
 
@@ -324,7 +324,7 @@ window.CHAO_PEOPLE = {
       ],
       description: "This committee builds Chao's identity as a service-oriented college both on and off campus. They create opportunities for consistent engagement and establish long-term service traditions.",
       members: [
-        { name: "Aidan Abney",     pronouns: "he/him", email: "aa518@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1G8CSBgL1kDGP8PUoGy2mIm2iqirV0aVv/view?usp=drivesdk" },
+        { name: "Aidan Abney",     pronouns: "he/him", email: "aa518@rice.edu", photo: "aidan-abney.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1G8CSBgL1kDGP8PUoGy2mIm2iqirV0aVv/view?usp=drivesdk" },
         { name: "Aftab Mohammad",  pronouns: "he/him", email: "am562@rice.edu", photo: null, photoDrive: null }
       ]},
 
@@ -340,7 +340,7 @@ window.CHAO_PEOPLE = {
       description: "This committee organizes and supports Chao's athletic presence across intramural and varsity engagement, helping build both competitiveness and community.",
       members: [
         { name: "Saylor Robinson",   pronouns: "she/they", email: "sr206@rice.edu", photo: "saylor-robinson.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1-Hp-UxYT1tsds4yeWlW49I3H3PGFNG0D/view?usp=sharing" },
-        { name: "Qais Altarabishi",  pronouns: "he/him",   email: "qa7@rice.edu",   photo: null, photoDrive: "https://drive.google.com/file/d/1ys1XBR_I_yA3KqEFmJuYEjEwchwmWIIW/view?usp=sharing" }
+        { name: "Qais Altarabishi",  pronouns: "he/him",   email: "qa7@rice.edu",   photo: "qais-altarabishi.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1ys1XBR_I_yA3KqEFmJuYEjEwchwmWIIW/view?usp=sharing" }
       ]},
 
     { name: "Culturals Representatives",
@@ -355,8 +355,8 @@ window.CHAO_PEOPLE = {
       ],
       description: "The cultural representatives foster a culturally vibrant and inclusive community by supporting affinity groups, promoting diverse programming, and increasing access to cultural events across campus.",
       members: [
-        { name: "Asyiah Bray",       pronouns: "she/her", email: "akb12@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1p6o9CnxlDeelwSbPC1KPkDmqSyafzz3T/view?usp=drivesdk" },
-        { name: "Eriyana Woolfolk",  pronouns: "she/her", email: "ew73@rice.edu",  photo: null, photoDrive: "https://drive.google.com/file/d/1X_wRmuS3052o6DZQsGFhpj9WCC_6bHRb/view?usp=drivesdk" }
+        { name: "Asyiah Bray",       pronouns: "she/her", email: "akb12@rice.edu", photo: "asyiah-bray.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1p6o9CnxlDeelwSbPC1KPkDmqSyafzz3T/view?usp=drivesdk" },
+        { name: "Eriyana Woolfolk",  pronouns: "she/her", email: "ew73@rice.edu",  photo: "eriyana-woolfolk.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1X_wRmuS3052o6DZQsGFhpj9WCC_6bHRb/view?usp=drivesdk" }
       ]},
 
     { name: "Improvements Representatives",
@@ -386,7 +386,7 @@ window.CHAO_PEOPLE = {
       ],
       description: "The kitchen representatives create a fully functional, accessible kitchen where anyone can use the space easily",
       members: [
-        { name: "Addmyra Robles", pronouns: "she/her", email: "ar305@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1ZRQ3BQLnyRkKUJubrkMNTbXejJY6_IbS/view?usp=drivesdk" },
+        { name: "Addmyra Robles", pronouns: "she/her", email: "ar305@rice.edu", photo: "addmyra-robles.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1ZRQ3BQLnyRkKUJubrkMNTbXejJY6_IbS/view?usp=drivesdk" },
         { name: "Zaira Moreno",   pronouns: "she/her", email: "zm31@rice.edu",  photo: null, photoDrive: null, optOut: true }
       ]},
 
@@ -424,45 +424,48 @@ window.CHAO_PEOPLE = {
   /* ======================================================================
      STUDENT STAFF — RHAs, AJs, PAAs
      ================================================================== */
+  /* These carried no `photo` field at all, so an RHA card could never show one
+     however many portraits existed elsewhere. The field is present now. */
   rhas: [
-    { name: "Ian Rodriguez", head: true,  pronouns: "he/him",  email: "ir33@rice.edu" },
-    { name: "Amy Cheng",     head: false, pronouns: null,      email: "ac303@rice.edu" },
-    { name: "Rebecca Tang",  head: false, pronouns: "she/her", email: "rt66@rice.edu" },
-    { name: "Susana Cuadra", head: false, pronouns: "she/her", email: "sfc3@rice.edu" }
+    { name: "Ian Rodriguez", head: true,  pronouns: "he/him",  email: "ir33@rice.edu",
+      photo: "ian-rodriguez.jpg", focus: "center center" },
+    { name: "Amy Cheng",     head: false, pronouns: null,      email: "ac303@rice.edu", photo: null },
+    { name: "Rebecca Tang",  head: false, pronouns: "she/her", email: "rt66@rice.edu",  photo: null },
+    { name: "Susana Cuadra", head: false, pronouns: "she/her", email: "sfc3@rice.edu",  photo: null, optOut: true }
   ],
 
   /* "Coming Soon..." entries are unfilled positions awaiting a new student. */
   ajs: [
-    { name: "Eriyana Woolfolk",         floor: "2nd Floor",  pronouns: "she/her", email: "ew73@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1X_wRmuS3052o6DZQsGFhpj9WCC_6bHRb/view?usp=drivesdk" },
+    { name: "Eriyana Woolfolk",         floor: "2nd Floor",  pronouns: "she/her", email: "ew73@rice.edu", photo: "eriyana-woolfolk.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1X_wRmuS3052o6DZQsGFhpj9WCC_6bHRb/view?usp=drivesdk" },
     /* Deliberate exception to the role/personal rule used elsewhere: Olivia is
        reachable on the Chief Justice address in both capacities. It fits here,
        since the AJs are the Chief Justice's point of contact per floor. Do not
        "correct" this to a personal address. */
     { name: "Olivia Seo",               floor: "2nd Floor",  pronouns: "she/her", email: "thechaocj@gmail.com", photo: "olivia-seo.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1abVCbekd9MTWV9Hh8pWI-B4i94zt8wB8/view?usp=sharing" },
-    { name: "John Sniezek",             floor: "3rd Floor",  pronouns: "he/him",  email: "js512@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1YuWYQI4NleNA0dIGU3-q_Yq7a-XngN9J/view?usp=drive_link" },
+    { name: "John Sniezek",             floor: "3rd Floor",  pronouns: "he/him",  email: "js512@rice.edu", photo: "john-sniezek.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1YuWYQI4NleNA0dIGU3-q_Yq7a-XngN9J/view?usp=drive_link" },
     { name: "Coming Soon...",           floor: "3rd Floor",  pronouns: null,      email: null,            photo: null, photoDrive: null },
     { name: "Sofia Raistakka",          floor: "4th Floor",  pronouns: null,      email: "sr227@rice.edu", photo: null, photoDrive: null },
     { name: "Brett Leben",              floor: "4th Floor",  pronouns: "he/him",  email: "bl115@rice.edu", photo: null, photoDrive: null },
     { name: "Tyler Neilson",            floor: "5th Floor",  pronouns: null,      email: "tn75@rice.edu",  photo: null, photoDrive: null },
     { name: "Coming Soon...",           floor: "5th Floor",  pronouns: null,      email: null,            photo: null, photoDrive: null },
-    { name: "Julian Villamar-Robbins",  floor: "6th Floor",  pronouns: "he/him",  email: "jv70@rice.edu",  photo: null, photoDrive: "https://drive.google.com/file/d/1MBTUquiDUjVF4k3vwVZ88RwU-3kPYUmw/view?usp=drivesdk" },
+    { name: "Julian Villamar-Robbins",  floor: "6th Floor",  pronouns: "he/him",  email: "jv70@rice.edu",  photo: "julian-villamar-robbins.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1MBTUquiDUjVF4k3vwVZ88RwU-3kPYUmw/view?usp=drivesdk" },
     { name: "Coming Soon...",           floor: "7th Floor",  pronouns: null,      email: null,            photo: null, photoDrive: null },
-    { name: "Jisoo Yoon",               floor: "8th Floor",  pronouns: "she/her", email: "jy182@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1p6emb5bkK7Tpb1jT44xTnWvxjUaLIdqf/view?usp=drivesdk" },
-    { name: "Raymond Xu",               floor: "9th Floor",  pronouns: "he/him",  email: "rx20@rice.edu",  photo: null, photoDrive: null },
-    { name: "Prasanna Bendalam",        floor: "10th Floor", pronouns: "he/him",  email: "pb67@rice.edu",  photo: null, photoDrive: "https://drive.google.com/file/d/16NHr-P1wilsMSGahVfpsB_G2fYCMLeGJ/view?usp=sharing" }
+    { name: "Jisoo Yoon",               floor: "8th Floor",  pronouns: "she/her", email: "jy182@rice.edu", photo: "jisoo-yoon.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1p6emb5bkK7Tpb1jT44xTnWvxjUaLIdqf/view?usp=drivesdk" },
+    { name: "Raymond Xu",               floor: "9th Floor",  pronouns: "he/him",  email: "rx20@rice.edu",  photo: "raymond-xu.jpg", focus: "center center", photoDrive: null },
+    { name: "Prasanna Bendalam",        floor: "10th Floor", pronouns: "he/him",  email: "pb67@rice.edu",  photo: "prasanna-bendalam.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/16NHr-P1wilsMSGahVfpsB_G2fYCMLeGJ/view?usp=sharing" }
   ],
 
   /* `head` is kept from the contact sheet but is no longer shown on the site —
      every PAA is displayed simply as "PAA". */
   paas: [
     { name: "Ashley Wang",        head: true,  pronouns: "she/her",   email: "aw151@rice.edu", photo: null, photoDrive: null },
-    { name: "Carolina Balboa",    head: false, pronouns: "she/her",   email: "cb153@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1vg8_e5Sm8Tl75_GK01mTYbRETMJWsWBh/view?usp=sharing" },
+    { name: "Carolina Balboa",    head: false, pronouns: "she/her",   email: "cb153@rice.edu", photo: "carolina-balboa.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1vg8_e5Sm8Tl75_GK01mTYbRETMJWsWBh/view?usp=sharing" },
     { name: "Graham Bixby",       head: true,  pronouns: "they/them", email: "db80@rice.edu",  photo: null, photoDrive: "https://drive.google.com/file/d/12fmDURJwUVikLtDcRlOjsObQf-I0aS69/view?usp=drive_link" },
     { name: "Jimin Han",          head: false, pronouns: "he/him",    email: "jh332@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1LPePH8Fk8G-DhjZGPwUoEh-__xA6GYF_/view?usp=drive_link" },
-    { name: "Jehad Mahmoud",      head: true,  pronouns: "he/him",    email: "jm233@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/17KXMDlnlRI42t5D9r28wnMvXI0y8ZZnA/view?usp=drivesdk" },
-    { name: "Mariam Elsharkawy",  head: false, pronouns: "she/her",   email: "me57@rice.edu",  photo: null, photoDrive: "https://drive.google.com/file/d/1Rw8XZ2WgDxtA_krQoSZ7BiWY9mZ52Lib/view?usp=sharing" },
-    { name: "Prasanna Bendalam",  head: false, pronouns: "he/him",    email: "pb67@rice.edu",  photo: null, photoDrive: "https://drive.google.com/file/d/16NHr-P1wilsMSGahVfpsB_G2fYCMLeGJ/view?usp=sharing" },
-    { name: "Qais Altarabishi",   head: false, pronouns: "he/him",    email: "qa7@rice.edu",   photo: null, photoDrive: "https://drive.google.com/file/d/1ys1XBR_I_yA3KqEFmJuYEjEwchwmWIIW/view?usp=sharing" },
+    { name: "Jehad Mahmoud",      head: true,  pronouns: "he/him",    email: "jm233@rice.edu", photo: "jehad-mahmoud.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/17KXMDlnlRI42t5D9r28wnMvXI0y8ZZnA/view?usp=drivesdk" },
+    { name: "Mariam Elsharkawy",  head: false, pronouns: "she/her",   email: "me57@rice.edu",  photo: "mariam-elsharkawy.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1Rw8XZ2WgDxtA_krQoSZ7BiWY9mZ52Lib/view?usp=sharing" },
+    { name: "Prasanna Bendalam",  head: false, pronouns: "he/him",    email: "pb67@rice.edu",  photo: "prasanna-bendalam.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/16NHr-P1wilsMSGahVfpsB_G2fYCMLeGJ/view?usp=sharing" },
+    { name: "Qais Altarabishi",   head: false, pronouns: "he/him",    email: "qa7@rice.edu",   photo: "qais-altarabishi.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1ys1XBR_I_yA3KqEFmJuYEjEwchwmWIIW/view?usp=sharing" },
     { name: "Grace Zhang",        head: false, pronouns: "she/her",   email: "gz25@rice.edu",  photo: null, photoDrive: null, optOut: true }
   ],
 
