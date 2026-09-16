@@ -172,7 +172,7 @@ window.CHAO_PEOPLE = {
     { name: "Prasanna Bendalam", role: "Sophomore Rep", pronouns: "he/him", email: "pb67@rice.edu",
       photo: null, photoDrive: "https://drive.google.com/file/d/16NHr-P1wilsMSGahVfpsB_G2fYCMLeGJ/view?usp=sharing" },
     { name: "Manny Tejada", role: "Sophomore Rep", pronouns: "he/him", email: "mt181@rice.edu",
-      photo: null, photoDrive: null, optOut: true },
+      photo: "manny-tejada.jpg", focus: "center center", photoDrive: null },
     { name: "Coming Soon...", role: "Junior Rep", pronouns: null, email: null, photo: null, photoDrive: null },
     { name: "Coming Soon...", role: "Senior Rep", pronouns: null, email: null, photo: null, photoDrive: null }
   ],
@@ -231,7 +231,7 @@ window.CHAO_PEOPLE = {
       ],
       description: "This committee ensures associates feel meaningfully connected to Chao and serve as mentors to students. The goal is to build a strong, engaged network that consistently interacts with and supports the college community.",
       members: [
-        { name: "Abbie Wang", pronouns: "she/her", email: "aw156@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1LQs1wHVO4dlvhaxGMq4Z6daHBhog9y1X/view?usp=sharing" },
+        { name: "Abbie Wang", pronouns: "she/her", email: "aw156@rice.edu", photo: "abbie-wang.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1LQs1wHVO4dlvhaxGMq4Z6daHBhog9y1X/view?usp=sharing" },
         { name: "Ruby Gao",   pronouns: "she/her", email: "yg107@rice.edu", photo: "ruby-gao.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/17NgaD_syd6Q9rWrgW7w_i8bQ7lWmSfpy/view?usp=drive_link" }
       ]},
 
@@ -246,8 +246,8 @@ window.CHAO_PEOPLE = {
       ],
       description: "The Beer Bike Coordinators (BBCs) work for months to deliver the best possible Beer Bike Week and shape what Chao's Beer Bike tradition will look like long-term. They collaborate with Bike and Chug Captains to build a strong race-day team and create a week that people are excited about.",
       members: [
-        { name: "Vivian Mitchell",  pronouns: "she/her", email: "vm51@rice.edu", photo: null, photoDrive: null },
-        { name: "Kristine Wong",    pronouns: "she/her", email: "kw81@rice.edu", photo: null, photoDrive: null },
+        { name: "Vivian Mitchell",  pronouns: "she/her", email: "vm51@rice.edu", photo: "vivian-mitchell.jpg", focus: "center center", photoDrive: null },
+        { name: "Kristine Wong",    pronouns: "she/her", email: "kw81@rice.edu", photo: "kristine-wong.jpg", focus: "center center", photoDrive: null },
         { name: "Crystal Valtierra", pronouns: null,      email: "cv50@rice.edu", photo: null, photoDrive: null },
         { name: "Jerry Fan",        pronouns: "he/him",  email: "jf160@rice.edu", photo: null, photoDrive: null }
       ]},
@@ -263,7 +263,7 @@ window.CHAO_PEOPLE = {
       description: "This committee builds Chao's outward-facing social presence by connecting with other colleges and campus groups. The focus is on visibility, collaboration, and high-energy events.",
       members: [
         { name: "John Sniezek", pronouns: "he/him", email: "js512@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1YuWYQI4NleNA0dIGU3-q_Yq7a-XngN9J/view?usp=drive_link" },
-        { name: "Manny Tejada", pronouns: "he/him", email: "mt181@rice.edu", photo: null, photoDrive: null, optOut: true }
+        { name: "Manny Tejada", pronouns: "he/him", email: "mt181@rice.edu", photo: "manny-tejada.jpg", focus: "center center", photoDrive: null }
       ]},
 
     { name: "Internal Socials",
@@ -337,7 +337,7 @@ window.CHAO_PEOPLE = {
       ],
       description: "This committee organizes and supports Chao's athletic presence across intramural and varsity engagement, helping build both competitiveness and community.",
       members: [
-        { name: "Saylor Robinson",   pronouns: "she/they", email: "sr206@rice.edu", photo: null, photoDrive: "https://drive.google.com/file/d/1-Hp-UxYT1tsds4yeWlW49I3H3PGFNG0D/view?usp=sharing" },
+        { name: "Saylor Robinson",   pronouns: "she/they", email: "sr206@rice.edu", photo: "saylor-robinson.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1-Hp-UxYT1tsds4yeWlW49I3H3PGFNG0D/view?usp=sharing" },
         { name: "Qais Altarabishi",  pronouns: "he/him",   email: "qa7@rice.edu",   photo: null, photoDrive: "https://drive.google.com/file/d/1ys1XBR_I_yA3KqEFmJuYEjEwchwmWIIW/view?usp=sharing" }
       ]},
 
