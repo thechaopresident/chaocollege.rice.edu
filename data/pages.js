@@ -131,11 +131,11 @@ window.CHAO_PAGES = {
           { title: "Laundry",
             body: "For questions or issues with the laundry room, reach out to Brad Mahung, Chao's Student Maintenance Representative.",
             path: "mailto:Chao.college.smr@gmail.com", cta: "Email the SMR" },
-          /* Dates live in the homepage announcements, not here, so this card
-             does not go stale. */
-          { title: "Housing",
-            body: "For important housing dates, including the housing jack and the eligibility form deadline, see the announcements on the home page. Reach out to Barbare Tetvadze, Chao's Internal Vice President, with any questions.",
-            path: "index.html#announcements", cta: "See announcements" },
+          /* WRITTEN FOR THE SITE at Gabi's request — a reminder to treat the
+             kitchen well. Reword freely. */
+          { title: "Kitchen",
+            body: "The commons kitchen belongs to the whole college. Clean up after yourself, put things back where you found them, and leave it the way you would want to find it.",
+            path: "people/committees/", cta: "Meet the Kitchen Reps" },
           { title: "Dining",
             body: "Servery hours for the Rice serveries are published by Housing and Dining.",
             path: "https://rice.app.box.com/s/07zf31m146n5efe7aqxods15n1xg6dke",
