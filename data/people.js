@@ -22,7 +22,9 @@
    "center 20%". Omit it for a centered crop.
 
    `optOut: true` means that person declined a photo on the sheet. Do not add
-   one for them.
+   one for them. It is not shown on the site — the card looks the same as any
+   other card without a photo — it exists purely so nobody later goes looking
+   for a picture that was declined.
 
    GROUPED ENTRIES
    ---------------
@@ -399,7 +401,7 @@ window.CHAO_PEOPLE = {
       ],
       description: "Maintain a clean, clutter-free laundry space with clear systems and accountability.",
       members: [
-        { name: "Alejandro Hernandez Espinoza", pronouns: null, email: null, photo: null, photoDrive: null }
+        { name: "Alejandro Hernandez Espinoza", pronouns: null, email: "ah280@rice.edu", photo: null, photoDrive: null }
       ]},
 
     /* NEW — not on the contact sheet and not in the committees document, so it

@@ -546,6 +546,10 @@
     return /[A-Z]/.test(m) ? m : "";
   }
 
+  /* `optOut` is not rendered. It stays in the data as an instruction to whoever
+     adds photos later — do not source one for these people — but the card gives
+     no sign of it. Plenty of cards have no photo for ordinary reasons, so
+     singling these out said more than it needed to. */
   function rosterCard(p, opts) {
     opts = opts || {};
     var role = opts.role || p.role || "";
@@ -568,7 +572,6 @@
           initial: initialOf(p.name)
         }) +
         '<p class="rcard__contact">' + mail +
-          (p.optOut ? '<br><span class="rcard__note">Photo not shown by request</span>' : "") +
         "</p>" +
       "</div></article>";
   }
