@@ -471,6 +471,8 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
   max-width: var(--measure); margin: var(--space-3) auto 0;
   color: var(--color-text-muted); font-size: .95rem;
 }
+/* Blurb with no heading above it: nothing to be separated from. */
+.group-head p:first-child { margin-top: 0; }
 
 /* --- Roster card -------------------------------------------------------- *
    Every card is the same shape: role, name, fixed-ratio portrait, contact.

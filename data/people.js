@@ -176,7 +176,8 @@ window.CHAO_PEOPLE = {
     { name: "Manny Tejada", role: "Sophomore Rep", pronouns: "he/him", email: "mt181@rice.edu",
       photo: "manny-tejada.jpg", focus: "center center", photoDrive: null },
     { name: "Coming Soon...", role: "Junior Rep", pronouns: null, email: null, photo: null, photoDrive: null },
-    { name: "Coming Soon...", role: "Senior Rep", pronouns: null, email: null, photo: null, photoDrive: null }
+    { name: "Coming Soon...", role: "Senior Rep", pronouns: null, email: null, photo: null, photoDrive: null },
+    { name: "Kate Dawson", role: "Off-Campus Rep", pronouns: null, email: "kd73@rice.edu", photo: null, photoDrive: null }
   ],
 
   /* ======================================================================

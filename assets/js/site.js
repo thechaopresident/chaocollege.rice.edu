@@ -583,8 +583,11 @@
       list.map(function (p) { return rosterCard(p, opts); }).join("") + "</div>";
   }
 
+  /* A falsy title renders the blurb alone: some pages already carry the same
+     wording as an <h1> in the banner, and repeating it is noise.            */
   function groupHead(title, lead) {
-    return '<div class="group-head"><h2>' + fmt(title) + "</h2>" +
+    return '<div class="group-head">' +
+      (title ? "<h2>" + fmt(title) + "</h2>" : "") +
       (lead ? "<p>" + fmt(lead) + "</p>" : "") + "</div>";
   }
 
@@ -771,7 +774,8 @@
     var host = mount("court");
     if (!host) return;
     host.innerHTML = '<div class="wrap section">' +
-      groupHead("Court & Class Representatives", SITE.blurbs && SITE.blurbs.court) +
+      /* Title omitted: the banner <h1> above already says this. */
+      groupHead(null, SITE.blurbs && SITE.blurbs.court) +
       roster(PPL.court) +
       "</div>";
   }
