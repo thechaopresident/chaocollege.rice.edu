@@ -113,7 +113,7 @@ window.CHAO_SITE = {
      site. Everything else is still open.                                   */
   blurbs: {
     government: "The Chabinet is Chao's elected student government. Officers look after the college's finances, facilities, social life, and generally make the college you know and love possible.",
-    court:      "Chao's representative to the university judicial system, alongside the representatives elected to be a voice for each class year.",
+    court:      "Chao's representative to the university judicial system, alongside the representatives elected to be a voice for each class year. Reach out to yours whenever you have something you want heard \u2014 that is what they are there for.",
     committees: "Chao's committees run the parts of college life that take a team \u2014 Beer Bike, socials, service, merch, sports, the arts and the shared spaces. Each sits under one of the vice presidents.",
     associates: "Rice faculty, staff, and Houston community members who volunteer their time to mentor and support Chao students.",
 
