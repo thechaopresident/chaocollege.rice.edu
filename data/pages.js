@@ -157,7 +157,7 @@ window.CHAO_PAGES = {
       },
       {
         id: "forms",
-        heading: "Governance & Feedback",
+        heading: "Governance & Communication",
         cards: [
           { title: "Give Feedback",
             /* DRAFT */
