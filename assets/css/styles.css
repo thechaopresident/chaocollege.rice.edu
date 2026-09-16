@@ -797,11 +797,11 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
 }
 .roster-row .rcard { flex: 0 1 190px; }
 
-/* Each committee sits on its own panel so it reads as one object. The cream
+/* Each committee sits on its own panel so it reads as one object. The blush
    ground separates it from the white page, and the member cards inside stay
    white and so still sit forward of it.                                     */
 .committee {
-  background: var(--color-page-alt-bg);
+  background: var(--color-panel-bg);
   border: 1px solid var(--color-rule);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);

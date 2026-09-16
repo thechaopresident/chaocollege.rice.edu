@@ -13,9 +13,11 @@ The palette is already set, sampled from `brand/crest-master.png`:
 ```
 
 These three are the only solid colors in the crest, so they are exact. The
-derived steps — `--brand-primary-dark/-light`, `--brand-accent-dark/-light` —
-were chosen to hold WCAG AA contrast in the places they are actually used
-(see step 4).
+derived steps — `--brand-primary-dark/-light`, `--brand-accent-dark/-light`,
+`--brand-accent-tint` — were chosen to hold WCAG AA contrast in the places they
+are actually used (see step 4). `--brand-accent-tint` is the palest blush and
+is the ground for panels that carry text, such as each committee, so it has to
+stay light enough for muted text to clear AA on it (currently 5.4:1).
 
 Only change these if the official branding sheet contradicts the crest. If it
 does, keep the relationships intact: `-light` must be legible **on** the navy

@@ -46,6 +46,7 @@
   --brand-accent:         var(--brand-blush);  /* buttons, rules, highlights  */
   --brand-accent-dark:    #96605C;             /* accent hover (AA on white)  */
   --brand-accent-light:   #EFCECB;             /* accent tint on dark grounds */
+  --brand-accent-tint:    #F6E3E0;             /* palest blush, for panels    */
 
   /* Neutrals, warmed toward the crest cream so white sections and tinted
      sections read as one paper stock. */
@@ -102,6 +103,9 @@
 
   --color-page-bg:        var(--neutral-000);
   --color-page-alt-bg:    var(--brand-cream);
+  /* Ground for a panel that should read as one object lifted off the page,
+     such as a committee. Kept pale so muted text on it still clears AA.   */
+  --color-panel-bg:       var(--brand-accent-tint);
   --color-text:           var(--neutral-800);
   --color-text-muted:     var(--neutral-600);
   --color-text-invert:    var(--neutral-000);
