@@ -797,17 +797,33 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
 }
 .roster-row .rcard { flex: 0 1 190px; }
 
+/* Each committee sits on its own panel so it reads as one object. The cream
+   ground separates it from the white page, and the member cards inside stay
+   white and so still sit forward of it.                                     */
+.committee {
+  background: var(--color-page-alt-bg);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-6);
+}
+
 .committee-pair {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-7);
-  align-items: start;
-  margin-bottom: var(--space-9);
+  gap: var(--space-5);
+  /* Stretched, not start-aligned: two panels of visibly different height
+     beside each other look like a mistake in a way bare sections did not. */
+  align-items: stretch;
+  margin-bottom: var(--space-5);
 }
 /* An odd one left at the end spans the row instead of sitting half-width with
    nothing beside it. */
 .committee-pair > .committee:only-child { grid-column: 1 / -1; }
-.committee-full { margin-bottom: var(--space-9); }
+.committee-full { margin-bottom: var(--space-5); }
 @media (max-width: 860px) {
-  .committee-pair { grid-template-columns: 1fr; gap: var(--space-9); }
+  .committee-pair { grid-template-columns: 1fr; gap: var(--space-5); }
+}
+@media (max-width: 480px) {
+  .committee { padding: var(--space-5) var(--space-4); }
 }
