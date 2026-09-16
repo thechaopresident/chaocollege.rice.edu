@@ -278,7 +278,7 @@ window.CHAO_PEOPLE = {
       ],
       description: "This committee develops Chao's internal culture, creating consistent, high-attendance events that build community and make Chao an engaging place to live.",
       members: [
-        { name: "Carson Walker", pronouns: "he/him",  email: "cw168@rice.edu", photo: null, photoDrive: null },
+        { name: "Carson Walker", pronouns: "he/him",  email: "cw168@rice.edu", photo: "carson-walker.jpg", focus: "center center", photoDrive: null },
         { name: "Njwi Achoh",    pronouns: "she/her", email: "nba5@rice.edu",  photo: "njwi-achoh.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1jS3SoioE92DQiAJIFzaAWbTi2vLDtp1e/view?usp=drivesdk" }
       ]},
 
@@ -371,7 +371,7 @@ window.CHAO_PEOPLE = {
       ],
       description: "The improvement representative ensures all shared spaces are functional, stocked, and continuously improving.",
       members: [
-        { name: "Gabi Brent", pronouns: "he/him", email: "gb83@rice.edu", photo: null, photoDrive: null },
+        { name: "Gabi Brent", pronouns: "he/him", email: "gb83@rice.edu", photo: "gabi-brent.jpg", focus: "center center", photoDrive: null },
         { name: "Sean Drzewiczewski", pronouns: null, email: "sd167@rice.edu", photo: null, photoDrive: null }
       ]},
 
