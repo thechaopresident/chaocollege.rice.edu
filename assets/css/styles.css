@@ -720,7 +720,12 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
    by the CSS column balancer, which could not be steered to the even split. */
 .team__cols { display: flex; gap: var(--space-7); align-items: flex-start; }
 .team__col  { flex: 1 1 0; min-width: 0; }
-@media (max-width: 820px) { .team__cols { flex-direction: column; } }
+@media (max-width: 820px) {
+  .team__cols { flex-direction: column; }
+  /* One full-width column runs to about 100 characters a line. The lead
+     profiles are already capped at --measure; match them. */
+  .team__col { max-width: var(--measure); margin-inline: auto; width: 100%; }
+}
 
 .profile--card {
   max-width: none;
@@ -738,10 +743,27 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
    and the three bios (148 / 288 / 141 words) balance nearly evenly. */
 .profile--card .profile__photo {
   float: left;
-  width: 132px;
+  /* The column is about 550px, so this still leaves ~345px for the text to
+     wrap in — roughly 50 characters, which reads fine. */
+  width: 190px;
   aspect-ratio: 1 / 1;
   margin: 0 var(--space-4) var(--space-2) 0;
   shape-margin: var(--space-3);
+}
+/* The float only works while the column is wide. The two columns go
+   side-by-side from 820px, so between there and about 1080px each column is
+   only ~400px and a 190px float leaves 26 characters a line. Below 1080px the
+   photo sits on top instead and the text gets the full column width.
+   (The general .profile__photo rule cannot do this: the selector above is more
+   specific and wins inside a media query.) */
+@media (max-width: 1080px) {
+  .profile--card .profile__photo {
+    float: none;
+    width: 100%;
+    max-width: 260px;
+    margin: 0 auto var(--space-5);
+  }
+  .profile--card .profile__head { text-align: center; }
 }
 .profile--card .profile__head { text-align: left; }
 .profile--card .profile__name { font-size: 1.3rem; }
