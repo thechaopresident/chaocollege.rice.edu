@@ -276,7 +276,9 @@ a:hover { color: var(--color-link-hover); }
 /* --- Page banner (interior pages) --------------------------------------- */
 .banner {
   position: relative; color: var(--color-text-invert);
-  padding-block: var(--space-9);
+  /* Was a flat 6rem top and bottom, which put 192px of padding around about
+     90px of content. Scales with the viewport now instead. */
+  padding-block: clamp(2rem, 4.5vw, 3.25rem);
 }
 .banner::after { content: ""; position: absolute; inset: 0; z-index: 1; background: rgba(0,0,0,.42); }
 .banner__inner { position: relative; z-index: 2; }
@@ -289,9 +291,11 @@ a:hover { color: var(--color-link-hover); }
   margin: 0;
 }
 .banner p { color: rgba(255,255,255,.9); margin: var(--space-3) 0 0; max-width: var(--measure); font-family: var(--font-ui); }
-.breadcrumb {
+/* `.banner p` also matches this element and is more specific, so it was
+   winning and flattening the gap to zero. Scoped to beat it. */
+.banner .breadcrumb {
   font-family: var(--font-ui); font-size: .85rem;
-  color: rgba(255,255,255,.75); margin: 0 0 var(--space-4);
+  color: rgba(255,255,255,.75); margin: 0 0 var(--space-2);
 }
 .breadcrumb a { color: inherit; }
 
