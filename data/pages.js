@@ -163,7 +163,13 @@ window.CHAO_PAGES = {
             /* DRAFT */
             body: "Feedback goes straight to the Chao Cabinet and shapes real decisions on events, facilities, and policy. Say it with your name, or do not, we will still read it.",
             path: null, cta: "[PLACEHOLDER: link to the feedback form]" },
-          { title: "Constitution & Bylaws", body: "[PLACEHOLDER: link to Chao's constitution and bylaws.]", path: null, cta: null }
+          { title: "Constitution & Bylaws", body: "[PLACEHOLDER: link to Chao's constitution and bylaws.]", path: null, cta: null },
+          /* Form link supplied by Gabi; the wording here is written for the
+             site. The link arrived wrapped in Rice's urldefense scanner and
+             has been unwrapped to the plain forms.gle target. */
+          { title: "Weekly Email",
+            body: "The Secretaries send a college-wide email each week. To have your event included, submit it through the form.",
+            path: "https://forms.gle/sdqcVMR9prTSYPVd9", cta: "Submit an event" }
         ]
       },
       {
