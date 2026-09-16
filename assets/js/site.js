@@ -583,6 +583,14 @@
       list.map(function (p) { return rosterCard(p, opts); }).join("") + "</div>";
   }
 
+  /* Anchor id built from a name rather than a list position, so a link keeps
+     working when the list is reordered. Renaming the thing does move its
+     anchor — any link pointing at it has to be updated to match.          */
+  function slug(s) {
+    return String(s == null ? "" : s).toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  }
+
   /* A falsy title renders the blurb alone: some pages already carry the same
      wording as an <h1> in the banner, and repeating it is noise.            */
   function groupHead(title, lead) {
@@ -806,7 +814,7 @@
         ? '<details class="resp"><summary>Responsibilities</summary>' +
           respList(c.responsibilities) + "</details>"
         : "";
-      return '<section class="committee">' +
+      return '<section class="committee" id="' + esc(slug(c.name)) + '">' +
         '<div class="group-head"><h3>' + fmt(c.name) + "</h3>" + juris +
           (c.description ? "<p>" + fmt(c.description) + "</p>" : "") + "</div>" +
         roster(c.members, { layout: "roster-row" }) + resp + "</section>";

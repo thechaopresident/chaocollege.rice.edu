@@ -123,7 +123,7 @@ window.CHAO_PAGES = {
              upgrading and maintaining shared spaces. Repoint if that is wrong. */
           { title: "Flobbies",
             body: "Each floor has its own lobby, a flobby: shared space a few steps from your room to study, hang out, or run into someone. If you have ideas or thoughts about yours, bring them to the Improvements Representatives.",
-            path: "people/committees/", cta: "Meet the Improvements Reps" },
+            path: "people/committees/#improvements-representatives", cta: "Meet the Improvements Reps" },
           { title: "The Commons",
             /* DRAFT */
             body: "The ground floor commons is where the whole college collides: full kitchen, game tables, and lounge seating built for nights that run later than planned.",
@@ -135,7 +135,7 @@ window.CHAO_PAGES = {
              kitchen well. Reword freely. */
           { title: "Kitchen",
             body: "The commons kitchen belongs to the whole college. Clean up after yourself, put things back where you found them, and leave it the way you would want to find it.",
-            path: "people/committees/", cta: "Meet the Kitchen Reps" },
+            path: "people/committees/#kitchen-representatives", cta: "Meet the Kitchen Reps" },
           { title: "Dining",
             body: "Servery hours for the Rice serveries are published by Housing and Dining.",
             path: "https://rice.app.box.com/s/07zf31m146n5efe7aqxods15n1xg6dke",
@@ -198,7 +198,7 @@ window.CHAO_PAGES = {
           { title: "Diversity & Affinity",
             /* DRAFT */
             body: "The Culturals Representatives build an inclusive community by backing affinity groups, running cultural programming, and making sure every celebration on campus has a way in for Chao residents.",
-            path: "people/committees/", cta: "Meet the Culturals Reps" },
+            path: "people/committees/#culturals-representatives", cta: "Meet the Culturals Reps" },
           { title: "Wellbeing & Counseling",
             /* WRITTEN FOR THE SITE — see the note at the top of this section. */
             body: "Rice's Wellbeing and Counseling Center offers free, confidential support to every student. If you are not sure where to start, any of Chao's RHAs can point you in the right direction.",
