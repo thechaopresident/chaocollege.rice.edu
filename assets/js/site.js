@@ -41,6 +41,14 @@
     return esc(s).replace(/\[PLACEHOLDER[^\]]*\]/g,
       function (m) { return '<span class="tbd">' + m + "</span>"; });
   }
+  /* A dialable link for a number written however it reads best on the page.
+     Ten digits are assumed to be US and get the +1 the tel: scheme wants;
+     anything else is passed through as typed.                              */
+  function telLink(number) {
+    var digits = String(number).replace(/[^0-9]/g, "");
+    var tel = digits.length === 10 ? "+1" + digits : digits;
+    return '<a href="tel:' + esc(tel) + '">' + esc(number) + "</a>";
+  }
   function paras(arr) {
     if (!arr) return "";
     return (Array.isArray(arr) ? arr : [arr])
@@ -210,7 +218,7 @@
             "<p>" + (c.mailStop ? fmt(c.mailStop) + " &middot; " : "") + "Rice University<br>" +
               fmt(c.street) + "<br>" + fmt(c.city) + "</p>" +
             "<p>" +
-              (c.phone ? "&#9742; " + fmt(c.phone) + "<br>" : "") +
+              (c.phone ? "&#9742; " + telLink(c.phone) + "<br>" : "") +
               (c.email ? '&#9993; <a href="mailto:' + esc(c.email) + '">' + esc(c.email) + "</a>" : "") +
             "</p>" +
           "</div>" +
@@ -619,16 +627,12 @@
         (n.pronouns ? ' <span class="profile__pronouns">(' + esc(n.pronouns) + ")</span>" : "");
     }).join(" &amp; ");
     /* One contact line per person. Where an entry covers two people, each line
-       is prefixed with a first name — otherwise a phone number belonging to one
-       of them would sit in a list with no indication whose it is. */
+       is prefixed with a first name — otherwise a contact belonging to one of
+       them would sit in a list with no indication whose it is. */
     var contacts = people.map(function (n) {
       var bits = [];
       if (n.email) bits.push('<a href="mailto:' + esc(n.email) + '">' + esc(n.email) + "</a>");
-      if (n.phone) {
-        var digits = String(n.phone).replace(/[^0-9]/g, "");
-        var tel = digits.length === 10 ? "+1" + digits : digits;
-        bits.push('<a href="tel:' + esc(tel) + '">' + esc(n.phone) + "</a>");
-      }
+      if (n.phone) bits.push(telLink(n.phone));
       if (!bits.length) return "";
       var who = people.length > 1 ? esc(String(n.name).split(" ")[0]) + ": " : "";
       return who + bits.join(" &middot; ");
