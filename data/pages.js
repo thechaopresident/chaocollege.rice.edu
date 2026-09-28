@@ -160,21 +160,18 @@ window.CHAO_PAGES = {
             body: "Chao's staff and student government keep the real cost of college life low, subsidizing tickets and keeping merch and formals affordable for everyone, not just whoever can swipe first. If money is ever the reason you are sitting something out, tell Chao's Coordinator or student government. Help is available and it stays between you and them.",
             path: null, cta: null },
           /* WRITTEN FOR THE SITE — see the note at the top of this section.
-             STILL MISSING: the actual request process. If there is a form or a
-             deadline, add it here as the card's `path` and `cta`. */
+             Carries the Treasurers' address, which used to sit on a card of
+             its own. STILL MISSING: the actual request process — if there is
+             a form or a deadline, it belongs in this body. */
           { title: "Funding Requests",
             body: "Chao's funds exist to make student ideas happen. If you want to run an event, start a project, or try something that could become a tradition, bring it to the Treasurers — we want to hear it.",
-            path: null, cta: null },
+            path: "mailto:chaotreasurers@gmail.com", cta: "Email the Treasurers" },
           /* Live sheet kept by the Treasurers, so this describes what it holds
              rather than any figure that will be out of date by tomorrow. */
           { title: "Budget",
             body: "The Treasurers keep Chao's budget in the open: what every line is allocated for the semester, what has been spent against it, and what is left.",
             path: "https://docs.google.com/spreadsheets/d/1NIBax-QfZ97Nqax1fTy5fJSdm2Szv9kfmn8wa3B69Sg/edit?gid=1118247155#gid=1118247155",
-            cta: "Open the budget sheet" },
-          { title: "Treasurers",
-            /* CONTACT SHEET */
-            body: "Chao's Treasurers are the highest financial officers of the Chabinet, overseeing all financial transactions at Chao College.",
-            path: "mailto:chaotreasurers@gmail.com", cta: "Email the Treasurers" }
+            cta: "Open the budget sheet" }
         ]
       },
       {
