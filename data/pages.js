@@ -254,13 +254,23 @@ window.CHAO_PAGES = {
           "O-Week pairs every new student with upperclass advisors and a small crew of peers, and gets you through registration, campus life, and Rice tradition before your first class even starts.",
           "By Friday you will know your way around campus, your O-Week group by name, and the people down the hall well enough to borrow their charger."
         ] },
-      /* MUST BE WRITTEN BY THE COORDINATORS. This one is not a slot to fill
-         with drafted copy: the coordinators are named directly above it on the
-         page, so whatever sits here reads as theirs. Leave it empty until they
-         write it. A drafted version was offered and rejected for exactly this
-         reason. */
+      /* WRITTEN BY THE COORDINATORS, verbatim. Their words, their spellings,
+         their sign-off: reflowed into paragraphs from the text they supplied
+         and otherwise untouched. Do not tidy or rewrite it. */
       { heading: "Letter to New Students",
-        body: [ "[PLACEHOLDER: letter from the O-Week coordinators, in their own words]" ] },
+        body: [
+          "Welcome to Rice, and welcome to Chao!",
+          "We are your Orientation Week Coordinators, Prasanna, Sammie, and Abbie and we are so excited to finally meet you. Out of all the places you could have called home at Rice, you have become part of something truly special. You are joining Chao during its earliest chapters, and that means each of you will help shape the traditions, memories, and community that future generations of Chaosens will look back on.",
+          "Starting college is exciting, but it can also feel a little overwhelming. You may be counting down the days until move-in, feeling nervous about meeting new people, or wondering what these next few years will hold. No matter what emotions you are bringing with you, we want you to know one thing from the very beginning:",
+          "You belong here.",
+          "O-Week is more than your first week on campus. It is the start of friendships that may last a lifetime, memories that will stay with you long after graduation, and a community that will support you through every high and low of your Rice journey. Our hope is that by the end of this week, the unfamiliar begins to feel familiar and Chao starts to feel like home.",
+          "Throughout this week, you will meet your Advisors, Affiliates, and fellow New Students. Lean into those conversations. Introduce yourself to someone new. Be open to the unexpected. Some of the people you meet during O-Week may become your closest friends, your favorite study partners, your biggest supporters, and the people who make Rice feel like home.",
+          "You are becoming part of a family and a community that is still being built. Every tradition you start, every memory you make, and every connection you form will become part of Chao's story.",
+          "Thank you for letting us be part of the beginning of yours.",
+          "Once again, welcome to Rice, welcome to Chao, and welcome home.",
+          "KaChao,",
+          "Prasanna, Sammie, and Abbie"
+        ] },
       /* Replaces the separate Move-In, Housing and What to Bring sections —
          all three are sent by email rather than published here. Written for
          the site at Gabi's request; reword freely. */
