@@ -563,7 +563,10 @@
     var role = opts.role || p.role || "";
     var mail = p.email
       ? '<a href="mailto:' + esc(p.email) + '">' + esc(p.email) + "</a>"
-      : '<span class="rcard__note">[PLACEHOLDER: email]</span>';
+      /* Unfilled positions and people whose address is not known yet. This
+         renders to visitors, so it reads as a status rather than as an
+         editing note. */
+      : '<span class="rcard__note">Coming soon</span>';
 
     return '<article class="rcard">' +
       '<div class="rcard__bar"></div>' +

@@ -206,8 +206,13 @@ review. Find every remaining one:
 grep -rn "\[PLACEHOLDER" --include=*.js --include=*.html .
 ```
 
-Before launch, when none remain, delete the `.tbd` rule at the end of
-`assets/css/styles.css`.
+**None currently render.** The `.tbd` rule in `assets/css/styles.css` stays in
+place so that anything added later is just as obvious; it costs nothing while
+no placeholder exists.
+
+A placeholder is for copy nobody has written yet. Something that exists but is
+not ready — a form still being built, a seat not yet filled — says
+**Coming soon** in the reader's own words instead.
 
 ---
 
@@ -359,8 +364,9 @@ is a local convenience and harmless to ship, but nothing serves from it.
 
 ### Before launch
 
-- [ ] Fill the three remaining `[PLACEHOLDER: …]` slots, then delete the `.tbd`
-      rule at the end of `assets/css/styles.css` so nothing can render hatched.
+- [x] No `[PLACEHOLDER: …]` reaches a visitor. Where something genuinely is not
+      ready — the feedback form, the constitution, an unfilled position's
+      address — the card says **Coming soon** instead.
 - [ ] Sign off the **DRAFT**-tagged copy — it came from the preliminary site and
       has not been approved (see *Where the content came from*).
 - [ ] Confirm the Donate URL and set `navCta` in `data/site.js`.

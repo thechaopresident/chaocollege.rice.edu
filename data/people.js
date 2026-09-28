@@ -409,7 +409,7 @@ window.CHAO_PEOPLE = {
        has no jurisdiction, description or responsibilities yet. Add them the
        way the other entries carry them once they exist. */
     { name: "Eco",
-      description: "[PLACEHOLDER: what the Eco representatives do]",
+      description: "The Eco Representatives promote sustainability at Chao. They plan fun events that encourage environmental awareness and appreciation.",
       members: [
         { name: "Sammi Frey",    pronouns: "she/her", email: "sf68@rice.edu", photo: null, photoDrive: null },
         { name: "Bianca Dotson", pronouns: null,      email: null, photo: null, photoDrive: null }
