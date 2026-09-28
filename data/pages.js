@@ -127,9 +127,13 @@ window.CHAO_PAGES = {
             /* DRAFT */
             body: "The ground floor commons is where the whole college collides: full kitchen, game tables, and lounge seating built for nights that run later than planned.",
             path: null, cta: null },
-          { title: "Laundry",
-            body: "For questions or issues with the laundry room, reach out to Brad Mahung, Chao's Student Maintenance Representative.",
-            path: "mailto:Chao.college.smr@gmail.com", cta: "Email the SMR" },
+          /* Replaces the Laundry card. Rice Facilities takes maintenance
+             requests for the whole building through TRIRIGA, laundry machines
+             included, so the SMR is named here rather than on a card of their
+             own. Wording written for the site. */
+          { title: "Work Orders",
+            body: "Report anything broken in the building \u2014 lights, laundry machines, doors, air conditioning \u2014 to Rice Facilities. If you are not sure whether something is a work order, ask Chao's Student Maintenance Representative.",
+            path: "https://rice.tririga.com/app/tririga/#", cta: "Submit a work order" },
           /* WRITTEN FOR THE SITE at Gabi's request — a reminder to treat the
              kitchen well. Reword freely. */
           { title: "Kitchen",
@@ -155,6 +159,12 @@ window.CHAO_PAGES = {
           { title: "Funding Requests",
             body: "Chao's funds exist to make student ideas happen. If you want to run an event, start a project, or try something that could become a tradition, bring it to the Treasurers — we want to hear it.",
             path: null, cta: null },
+          /* Live sheet kept by the Treasurers, so this describes what it holds
+             rather than any figure that will be out of date by tomorrow. */
+          { title: "Budget",
+            body: "The Treasurers keep Chao's budget in the open: what every line is allocated for the semester, what has been spent against it, and what is left.",
+            path: "https://docs.google.com/spreadsheets/d/1NIBax-QfZ97Nqax1fTy5fJSdm2Szv9kfmn8wa3B69Sg/edit?gid=1118247155#gid=1118247155",
+            cta: "Open the budget sheet" },
           { title: "Treasurers",
             /* CONTACT SHEET */
             body: "Chao's Treasurers are the highest financial officers of the Chabinet, overseeing all financial transactions at Chao College.",
