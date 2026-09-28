@@ -122,12 +122,15 @@ window.CHAO_PAGES = {
           { title: "Common Spaces",
             body: "Chao's shared spaces are the flobby on each floor, the commons, and the upper commons. If you have an idea for making any of them better, bring it to the Improvements Representatives.",
             path: "people/committees/#improvements-representatives", cta: "Meet the Improvements Reps" },
-          /* Gabi asked for this card; the form link and the process behind it
-             have not been supplied yet, so both are placeholders rather than
-             a guess at Rice's or Chao's rules. */
+          /* Three routes, supplied by Gabi; a card carries one link, so the
+             form takes it and the other two are named in the body. The
+             address is the Chief Justice's, per data/people.js.
+             STILL MISSING: what counts as a private party, and how far ahead
+             it has to be registered. */
           { title: "Private Party Registration",
-            body: "[PLACEHOLDER: what counts as a private party, how far ahead to register it, and who approves it.]",
-            path: null, cta: "[PLACEHOLDER: link to the private party registration form]" },
+            body: "Register a private party with the Chief Justice. Any one of these is enough: text 724-717-4931, email thechaocj@gmail.com, or fill in the form.",
+            path: "https://docs.google.com/forms/d/e/1FAIpQLSdMLi5YGcB2EdTH3pms2JGIj146x4YQ0VmJoBb5ePGwRLtFfQ/viewform",
+            cta: "Open the registration form" },
           /* Replaces the Laundry card. Rice Facilities takes maintenance
              requests for the whole building through TRIRIGA, laundry machines
              included, so the SMR is named here rather than on a card of their
