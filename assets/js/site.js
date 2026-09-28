@@ -946,7 +946,12 @@
         '<div class="grid grid--3">' + cards + "</div></div></section>";
     }).join("");
 
-    host.innerHTML = '<div class="wrap section"><p class="section__lead">' + fmt(r.intro) + "</p></div>" + groups;
+    /* With no intro the whole band goes, not just the text — an empty
+       .section would still hold its padding open. */
+    var lead = r.intro
+      ? '<div class="wrap section"><p class="section__lead">' + fmt(r.intro) + "</p></div>"
+      : "";
+    host.innerHTML = lead + groups;
   }
 
   /* ======================================================================

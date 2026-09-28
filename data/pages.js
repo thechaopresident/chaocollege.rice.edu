@@ -99,10 +99,12 @@ window.CHAO_PAGES = {
      URL, or null (renders as a card with no link).
      ================================================================== */
   resources: {
-    /* WRITTEN FOR THE SITE, not supplied by the college — Gabi asked for these
-       three strings (this intro, the Wellbeing card and the Funding Requests
-       card) to be drafted. They are deliberately plain. Reword freely. */
-    intro: "Everything at Chao you can book, request, or ask about, and who to talk to for each.",
+    /* WRITTEN FOR THE SITE, not supplied by the college — Gabi asked for the
+       Wellbeing card and the Funding Requests card to be drafted. They are
+       deliberately plain. Reword freely.
+       The page opens straight on the first group; setting an intro here puts
+       a lead paragraph back above them. */
+    intro: null,
     groups: [
       {
         id: "spaces",
