@@ -108,14 +108,13 @@ window.CHAO_PAGES = {
         id: "spaces",
         heading: "Spaces & Equipment",
         cards: [
+          /* Booking moved off the shared spreadsheet onto a booking page that
+             checks for clashes itself, so the old line about waiting two
+             business days for a response no longer describes anything. */
           { title: "Book a Space",
-            /* DRAFT. NOTE: "Requests get a response within two business days"
-               came from the preliminary draft site, when booking was a form.
-               Booking is now a shared spreadsheet you fill in yourself, so that
-               sentence may no longer be true — worth trimming. */
-            body: "Chao's shared spaces are yours. Go ahead and book one. Requests get a response within two business days.",
-            path: "https://docs.google.com/spreadsheets/d/1DIsayLaIsKxKrMVQGrXRUi0AE_iwuW3pKbxvwdVFUg0/edit",
-            cta: "Open the reservation sheet" },
+            body: "Chao's shared spaces are yours. Book the PDR, Flex Room, 1st Floor Study Room or Music Room \u2014 the slot is yours the moment you submit.",
+            path: "https://claude.ai/artifact/HtMkm7iUQLaLCnF7hvyNBK",
+            cta: "Reserve a space" },
           /* DRAFT. There are no kitchens on the residential floors — the only
              kitchen is in the commons — so this card no longer mentions one.
              NOTE: "floor reps" has no matching group in data/people.js, so the
