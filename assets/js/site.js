@@ -993,6 +993,12 @@
             "</p>"
           : "") +
         (o.intro ? '<p class="section__lead">' + fmt(o.intro) + "</p>" : "") +
+        /* One prominent link beside the lead, for a year whose guide lives
+           somewhere else entirely. */
+        (o.introLink
+          ? '<p><a class="btn btn--outline" href="' + esc(o.introLink.path) +
+            '" target="_blank" rel="noopener">' + esc(o.introLink.label) + "</a></p>"
+          : "") +
       "</div>" +
       (o.coordinatorsPhoto
         ? '<section class="section section--tint"><div class="wrap">' +

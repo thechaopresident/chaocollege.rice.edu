@@ -283,7 +283,13 @@ window.CHAO_PAGES = {
         path:  "oweek/2026/",
         /* STILL MISSING: the dates DragO-Week actually ran. */
         dates: null,
-        intro: "[PLACEHOLDER: a line or two about DragO-Week, Chao's 2026 O-Week.]",
+        intro: "The O-Week Book is your complete guide to everything DragO-Week related.",
+        /* Link arrived wrapped in Rice's urldefense scanner; unwrapped to the
+           plain canva.link target. */
+        introLink: {
+          label: "Open the O-Week Book",
+          path:  "https://canva.link/inaugural-chao-o-week-book"
+        },
         /* Group photo of the coordinators, named in the caption beneath it rather
          than given a card each — there is nothing to put on a card except the
          name the caption already carries. `alt` describes the scene for screen
