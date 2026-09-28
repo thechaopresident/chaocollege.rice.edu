@@ -108,11 +108,10 @@ window.CHAO_PAGES = {
     groups: [
       {
         id: "spaces",
-        path: "resources/spaces/",
+        /* The first section lives at /resources/ itself, so clicking
+           Resources lands on it rather than on a page of links. */
+        path: "resources/",
         heading: "Spaces & Equipment",
-        /* WRITTEN FOR THE SITE — one line per section, for the cards on
-           /resources/. They describe what is on each page. Reword freely. */
-        blurb: "Booking a room, the common spaces and the kitchen, and reporting anything that breaks.",
         cards: [
           /* Booking moved off the shared spreadsheet onto a booking page that
              checks for clashes itself, so the old line about waiting two
@@ -150,16 +149,15 @@ window.CHAO_PAGES = {
             body: "The commons kitchen belongs to the whole college. Clean up after yourself, put things back where you found them, and leave it the way you would want to find it.",
             path: "people/committees/#kitchen-representatives", cta: "Meet the Kitchen Reps" },
           { title: "Dining",
-            body: "Servery hours for the Rice serveries are published by Housing and Dining.",
-            path: "https://rice.app.box.com/s/07zf31m146n5efe7aqxods15n1xg6dke",
-            cta: "Servery hours" }
+            body: "Servery hours and the current menus for every Rice servery.",
+            path: "https://dining.rice.edu/",
+            cta: "Rice Dining" }
         ]
       },
       {
         id: "funding",
         path: "resources/funding/",
         heading: "Funding",
-        blurb: "Where Chao's money goes, how to ask for some, and keeping cost from shutting anyone out.",
         cards: [
           { title: "Financial Inclusivity",
             /* DRAFT */
@@ -184,7 +182,6 @@ window.CHAO_PAGES = {
         id: "forms",
         path: "resources/governance/",
         heading: "Governance & Communication",
-        blurb: "Telling the Cabinet what you think, the rules they work under, and getting an event into the weekly email.",
         cards: [
           { title: "Give Feedback",
             /* DRAFT */
@@ -203,7 +200,6 @@ window.CHAO_PAGES = {
         id: "support",
         path: "resources/support/",
         heading: "Academic & Wellbeing Support",
-        blurb: "The advisors, health advisors and campus offices behind you, academically and otherwise.",
         cards: [
           { title: "RHAs",
             /* DRAFT */

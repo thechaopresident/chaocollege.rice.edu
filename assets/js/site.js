@@ -943,24 +943,19 @@
       }).join("");
     }
 
-    /* A page naming a group shows that group alone; /resources/ shows one
-       card per group instead. The group's heading is the banner <h1> on its
-       own page, so it is not repeated as an <h2> below it. */
+    /* A page names its group in data-group; /resources/ names none and gets
+       the first, so clicking Resources lands on a section rather than on a
+       page of links. The heading is shown only where the banner <h1> above
+       does not already say it — that is, on /resources/ alone. */
     var want = document.body.getAttribute("data-group");
-    if (want) {
-      var g = groups.filter(function (x) { return x.id === want; })[0];
-      if (!g) return;
-      host.innerHTML = '<section class="section"><div class="wrap">' +
-        (g.blurb ? '<p class="section__lead">' + fmt(g.blurb) + "</p>" : "") +
-        '<div class="grid grid--3">' + cards(g) + "</div></div></section>";
-      return;
-    }
+    var g = want
+      ? groups.filter(function (x) { return x.id === want; })[0]
+      : groups[0];
+    if (!g) return;
 
-    var index = groups.map(function (g) {
-      return '<a class="card" href="' + esc(url(g.path)) + '">' +
-        "<h3>" + fmt(g.heading) + "</h3><p>" + fmt(g.blurb) + "</p></a>";
-    }).join("");
-    host.innerHTML = '<div class="wrap section"><div class="grid grid--2">' + index + "</div></div>";
+    host.innerHTML = '<section class="section"><div class="wrap">' +
+      (want ? "" : "<h2>" + fmt(g.heading) + "</h2>") +
+      '<div class="grid grid--3">' + cards(g) + "</div></div></section>";
   }
 
   /* ======================================================================

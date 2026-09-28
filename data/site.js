@@ -61,7 +61,7 @@ window.CHAO_SITE = {
        PAGES.resources.groups. */
     { label: "Resources", path: "resources/",
       children: [
-        { label: "Spaces & Equipment",          path: "resources/spaces/" },
+        { label: "Spaces & Equipment",          path: "resources/" },
         { label: "Funding",                     path: "resources/funding/" },
         { label: "Governance & Communication",  path: "resources/governance/" },
         { label: "Academic & Wellbeing Support", path: "resources/support/" }
