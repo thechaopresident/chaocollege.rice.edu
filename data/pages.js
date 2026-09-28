@@ -112,7 +112,7 @@ window.CHAO_PAGES = {
              checks for clashes itself, so the old line about waiting two
              business days for a response no longer describes anything. */
           { title: "Book a Space",
-            body: "Chao's shared spaces are yours. Book the PDR, Flex Room, 1st Floor Study Room or Music Room \u2014 the slot is yours the moment you submit.",
+            body: "Chao's shared spaces are yours. Book the PDR, Flex Room, 1st Floor Study Room or Music Room.",
             path: "https://claude.ai/artifact/HtMkm7iUQLaLCnF7hvyNBK",
             cta: "Reserve a space" },
           /* DRAFT. There are no kitchens on the residential floors — the only
