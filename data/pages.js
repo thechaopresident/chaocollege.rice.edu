@@ -115,18 +115,19 @@ window.CHAO_PAGES = {
             body: "Chao's shared spaces are yours. Book the PDR, Flex Room, 1st Floor Study Room or Music Room.",
             path: "https://claude.ai/artifact/HtMkm7iUQLaLCnF7hvyNBK",
             cta: "Reserve a space" },
-          /* DRAFT. There are no kitchens on the residential floors — the only
-             kitchen is in the commons — so this card no longer mentions one.
-             NOTE: "floor reps" has no matching group in data/people.js, so the
-             link goes to the Improvements Representatives, whose stated job is
-             upgrading and maintaining shared spaces. Repoint if that is wrong. */
-          { title: "Flobbies",
-            body: "Each floor has its own lobby, a flobby: shared space a few steps from your room to study, hang out, or run into someone. If you have ideas or thoughts about yours, bring them to the Improvements Representatives.",
+          /* One card for every shared space rather than one per space. Wording
+             written for the site. The link goes to the Improvements
+             Representatives, whose stated job is upgrading and maintaining
+             these spaces. */
+          { title: "Common Spaces",
+            body: "Chao's shared spaces are the flobby on each floor, the commons, and the upper commons. If you have an idea for making any of them better, bring it to the Improvements Representatives.",
             path: "people/committees/#improvements-representatives", cta: "Meet the Improvements Reps" },
-          { title: "The Commons",
-            /* DRAFT */
-            body: "The ground floor commons is where the whole college collides: full kitchen, game tables, and lounge seating built for nights that run later than planned.",
-            path: null, cta: null },
+          /* Gabi asked for this card; the form link and the process behind it
+             have not been supplied yet, so both are placeholders rather than
+             a guess at Rice's or Chao's rules. */
+          { title: "Private Party Registration",
+            body: "[PLACEHOLDER: what counts as a private party, how far ahead to register it, and who approves it.]",
+            path: null, cta: "[PLACEHOLDER: link to the private party registration form]" },
           /* Replaces the Laundry card. Rice Facilities takes maintenance
              requests for the whole building through TRIRIGA, laundry machines
              included, so the SMR is named here rather than on a card of their
