@@ -13,11 +13,13 @@ map band, contact footer).
 ## Run it locally
 
 ```bash
-python3 -m http.server 4173
+python3 tools/devserver.py 4173
 ```
 
-Then open <http://localhost:4173>. (Opening `index.html` by double-clicking
-also works — all paths are relative.)
+Then open <http://localhost:4173>. `tools/devserver.py` is `http.server` with
+caching turned off and IPv6 enabled, so edits show on reload and `localhost`
+resolves on macOS. Plain `python3 -m http.server 4173` also works, and so does
+double-clicking `index.html` — every path on the site is relative.
 
 ---
 
@@ -25,8 +27,14 @@ also works — all paths are relative.)
 
 ```
 index.html            Homepage
-about/  resources/  oweek/  calendar/
-                      One index.html each — structure only, no content
+404.html              Served for any missing URL (absolute paths, any depth)
+robots.txt            Allows everything, points at the sitemap
+sitemap.xml           All 16 pages
+about/  calendar/     One index.html each — structure only, no content
+resources/            Spaces & Equipment (the first section lives here)
+resources/funding/        resources/governance/    resources/support/
+oweek/                The newest O-Week (2027)
+oweek/2026/           DragO-Week: the coordinators, the letter, the photographs
 people/               Landing page linking to the six sections below
 people/team/          Magisters, Coordinator, Resident Associates (bios)
 people/government/    The Chabinet
@@ -45,7 +53,15 @@ assets/
   css/styles.css      Layout and components — references tokens, never raw colors
   js/site.js          Renders the header, footer and all data-driven sections
   img/                Photos (see assets/img/README.md)
+tools/
+  devserver.py        Local preview server
+  apply-worklist.py   Bulk content edits from a CSV round-trip; kept for reuse
 ```
+
+Resources and O-Week are split into subpages the same way People is: the parent
+URL renders the first section (or newest year) and the nav item becomes a
+dropdown. A subpage says which one it is with `data-group` or `data-year` on
+`<body>`; the parent says nothing and gets the first entry.
 
 The `.html` files contain only page structure and mount points. **Content lives
 in `data/`.** A student webmaster can update the whole site without opening an
@@ -242,7 +258,7 @@ nothing to take — those remain placeholders here.
 
 `data/people.js` is transcribed from **Chao College Contact Sheet** (Google
 Drive, Chao Secretaries). Counts match the sheet exactly: 5 leadership entries,
-11 Chabinet positions, 6 court/class reps, 14 committees (27 members), 4 RHAs,
+11 Chabinet positions, 7 court/class reps, 15 committees, 4 RHAs,
 13 AJs, 9 PAAs, and 20 faculty / 11 staff / 17 community associates.
 
 `about.sections[0]` on the About page is the "About the Chaos" text from
@@ -259,11 +275,12 @@ Addmyra Robles. The Laundry Room Representative is now named.
 Still open, all straight from the sheet:
 
 - `Sophmore Rep` (×2) → *Sophomore*?
-- Prasanna Bendalam is listed as `pa67@rice.edu` under Court but `pb67@rice.edu`
-  under AJs and PAAs.
-- Three PAAs are marked Head PAA (`Y`): Ashley Wang, Graham Bixby, Jehad Mahmoud.
-- Rex Rutchik and Jake Pessin each have two plausible addresses — a shared role
-  address on the sheet and a personal one in the EC Info Doc.
+- Three PAAs are marked Head PAA (`Y`) in the data — Ashley Wang, Graham Bixby,
+  Jehad Mahmoud — but the flag is no longer displayed anywhere.
+
+Settled since: Prasanna Bendalam is `pb67@rice.edu` throughout; Rex Rutchik and
+Jake Pessin each use the role address where they hold that role and their own
+address elsewhere.
 
 From the draft site:
 
@@ -293,8 +310,11 @@ From Rice's own sites:
 
 ### Photos
 
-Eleven photos are in place: a hero rendering of the building, five leadership
-portraits, and five scene photos across the homepage. Full-resolution originals
+In place: a hero rendering of the building, 37 portraits in
+`assets/img/people/`, nine O-Week photographs in `assets/img/oweek/`, the
+coordinators' group photo, and the scene photos across the homepage. Six people
+declined a portrait (`optOut: true`) and some have none yet — both render a
+lettered tile. Full-resolution originals
 are archived in `brand/photo-originals/` — re-crop from those, never from the
 web-sized copies in `assets/img/`.
 
@@ -313,12 +333,50 @@ too small to read.
 
 ## Deploying to chaocollege.rice.edu
 
-The whole repository is the deployable artifact — there is nothing to compile.
-Hand Rice IT the folder (excluding `.claude/`, which is local tooling only), or
-point their static host at it. Requirements: none beyond serving files.
+The whole repository is the deployable artifact — there is nothing to compile,
+install or configure. Point Rice IT's static host at it, or hand them the
+folder. Requirements: none beyond serving files over HTTPS.
 
-The site is host-agnostic: all paths are relative, so it also works from a
-subdirectory or straight off the filesystem.
+The site is host-agnostic: every path is relative, so it also works from a
+subdirectory or straight off the filesystem. The one exception is `404.html`,
+which uses absolute paths because the server serves it for missing URLs at any
+depth.
+
+### What IT needs to do
+
+1. Serve the repository root as the document root.
+2. Serve `index.html` for a directory request (`/people/` → `/people/index.html`).
+   This is the default nearly everywhere; without it every link on the site 404s.
+3. Point the server's not-found handler at `/404.html`
+   (Apache: `ErrorDocument 404 /404.html`; nginx: `error_page 404 /404.html;`).
+4. Serve over HTTPS. Nothing on the site is loaded over plain HTTP.
+
+### Do not deploy
+
+`.claude/` (local editor tooling), `brand/photo-originals/` and
+`content-worklist.csv` are all gitignored and are not in the repository. `tools/`
+is a local convenience and harmless to ship, but nothing serves from it.
+
+### Before launch
+
+- [ ] Fill the three remaining `[PLACEHOLDER: …]` slots, then delete the `.tbd`
+      rule at the end of `assets/css/styles.css` so nothing can render hatched.
+- [ ] Sign off the **DRAFT**-tagged copy — it came from the preliminary site and
+      has not been approved (see *Where the content came from*).
+- [ ] Confirm the Donate URL and set `navCta` in `data/site.js`.
+- [ ] Check the room booking page (below) is reachable by students.
+- [ ] Re-run the sitemap dates if launch is far from the last edit.
+
+### External dependencies
+
+Two things the site links to but does not host:
+
+| What | Where | Note |
+|---|---|---|
+| Room booking | `resources/` → Book a Space | A Claude-hosted page with its own database, not a Rice URL. **Confirm students outside the owner's organization can open it before launch** — if they cannot, point the card back at a spreadsheet. |
+| Calendar | `/calendar/` | A Google Calendar embed, set by `calendar.embedSrc` in `data/pages.js`. |
+
+Everything else is a plain outbound link to a Rice or Google page.
 
 ---
 

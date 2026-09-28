@@ -21,3 +21,7 @@ brand/photo-originals/
 # applied into data/, so the data files are the source of truth, not this.
 # tools/apply-worklist.py is committed; regenerate a fresh CSV any time.
 content-worklist.csv
+
+# Resume state for tools/apply-worklist.py. Regenerated on demand and specific
+# to one CSV run, so it is never worth committing.
+tools/.worklist-state.json

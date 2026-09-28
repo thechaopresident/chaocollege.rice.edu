@@ -6,9 +6,10 @@ never with a path. The renderer prefixes the correct directory.
 | What | Where it goes | Set in | As |
 |---|---|---|---|
 | Homepage hero | `assets/img/hero.jpg` | `data/site.js` → `hero.image` | ✅ in place |
-| Homepage photo strip | `assets/img/` | `data/site.js` → `photos[].image` | ✅ 4 in place |
+| Homepage photo strip | `assets/img/` | `data/site.js` → `photos[].image` | ✅ in place |
 | Photo strip captions | — | `data/site.js` → `photos[].caption` | off; `alt` still set |
-| Person photos | `assets/img/people/` | `data/people.js` → `photo` | ✅ 5 in place |
+| Person photos | `assets/img/people/` | `data/people.js` → `photo` | ✅ 37 in place |
+| O-Week photos | `assets/img/oweek/` | `data/pages.js` → `oweek.years[].gallery` | ✅ 9 in place |
 | Crest | `assets/img/crest.png` | `data/site.js` → `crestImage` | `"crest.png"` |
 | Favicon | `assets/img/favicon.png` | — | replace the file |
 

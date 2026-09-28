@@ -1,0 +1,5 @@
+# chaocollege.rice.edu
+User-agent: *
+Allow: /
+
+Sitemap: https://chaocollege.rice.edu/sitemap.xml
