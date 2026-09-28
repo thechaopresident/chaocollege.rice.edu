@@ -108,7 +108,11 @@ window.CHAO_PAGES = {
     groups: [
       {
         id: "spaces",
+        path: "resources/spaces/",
         heading: "Spaces & Equipment",
+        /* WRITTEN FOR THE SITE — one line per section, for the cards on
+           /resources/. They describe what is on each page. Reword freely. */
+        blurb: "Booking a room, the common spaces and the kitchen, and reporting anything that breaks.",
         cards: [
           /* Booking moved off the shared spreadsheet onto a booking page that
              checks for clashes itself, so the old line about waiting two
@@ -153,7 +157,9 @@ window.CHAO_PAGES = {
       },
       {
         id: "funding",
+        path: "resources/funding/",
         heading: "Funding",
+        blurb: "Where Chao's money goes, how to ask for some, and keeping cost from shutting anyone out.",
         cards: [
           { title: "Financial Inclusivity",
             /* DRAFT */
@@ -176,7 +182,9 @@ window.CHAO_PAGES = {
       },
       {
         id: "forms",
+        path: "resources/governance/",
         heading: "Governance & Communication",
+        blurb: "Telling the Cabinet what you think, the rules they work under, and getting an event into the weekly email.",
         cards: [
           { title: "Give Feedback",
             /* DRAFT */
@@ -193,7 +201,9 @@ window.CHAO_PAGES = {
       },
       {
         id: "support",
+        path: "resources/support/",
         heading: "Academic & Wellbeing Support",
+        blurb: "The advisors, health advisors and campus offices behind you, academically and otherwise.",
         cards: [
           { title: "RHAs",
             /* DRAFT */

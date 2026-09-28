@@ -57,7 +57,15 @@ window.CHAO_SITE = {
         { label: "Associates",         path: "people/associates/" }
       ]
     },
-    { label: "Resources", path: "resources/" },
+    /* Sections of the Resources page, each its own page. Keep in step with
+       PAGES.resources.groups. */
+    { label: "Resources", path: "resources/",
+      children: [
+        { label: "Spaces & Equipment",          path: "resources/spaces/" },
+        { label: "Funding",                     path: "resources/funding/" },
+        { label: "Governance & Communication",  path: "resources/governance/" },
+        { label: "Academic & Wellbeing Support", path: "resources/support/" }
+      ] },
     /* Years newest first; the bare O-Week link goes to the newest. Add a year
        here when you add one to PAGES.oweek.years. */
     { label: "O-Week",    path: "oweek/",

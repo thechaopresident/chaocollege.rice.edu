@@ -923,10 +923,10 @@
   function renderResources() {
     var host = mount("resources");
     if (!host || !PAGES.resources) return;
-    var r = PAGES.resources;
+    var groups = (PAGES.resources.groups || []);
 
-    var groups = (r.groups || []).map(function (g, i) {
-      var cards = (g.cards || []).map(function (c) {
+    function cards(g) {
+      return (g.cards || []).map(function (c) {
         var inner =
           "<h3>" + fmt(c.title) + "</h3>" +
           "<p>" + fmt(c.body) + "</p>" +
@@ -941,17 +941,26 @@
             (isExternal(c.path) ? ' target="_blank" rel="noopener"' : "") + ">" + inner + "</a>"
           : '<article class="card">' + inner + "</article>";
       }).join("");
-      return '<section id="' + esc(g.id) + '" class="section' + (i % 2 ? " section--tint" : "") + '">' +
-        '<div class="wrap"><h2>' + fmt(g.heading) + "</h2>" +
-        '<div class="grid grid--3">' + cards + "</div></div></section>";
-    }).join("");
+    }
 
-    /* With no intro the whole band goes, not just the text — an empty
-       .section would still hold its padding open. */
-    var lead = r.intro
-      ? '<div class="wrap section"><p class="section__lead">' + fmt(r.intro) + "</p></div>"
-      : "";
-    host.innerHTML = lead + groups;
+    /* A page naming a group shows that group alone; /resources/ shows one
+       card per group instead. The group's heading is the banner <h1> on its
+       own page, so it is not repeated as an <h2> below it. */
+    var want = document.body.getAttribute("data-group");
+    if (want) {
+      var g = groups.filter(function (x) { return x.id === want; })[0];
+      if (!g) return;
+      host.innerHTML = '<section class="section"><div class="wrap">' +
+        (g.blurb ? '<p class="section__lead">' + fmt(g.blurb) + "</p>" : "") +
+        '<div class="grid grid--3">' + cards(g) + "</div></div></section>";
+      return;
+    }
+
+    var index = groups.map(function (g) {
+      return '<a class="card" href="' + esc(url(g.path)) + '">' +
+        "<h3>" + fmt(g.heading) + "</h3><p>" + fmt(g.blurb) + "</p></a>";
+    }).join("");
+    host.innerHTML = '<div class="wrap section"><div class="grid grid--2">' + index + "</div></div>";
   }
 
   /* ======================================================================
