@@ -244,8 +244,9 @@ window.CHAO_PAGES = {
           start: "2027-08-15",
           end:   "2027-08-21"
         },
-        /* DRAFT */
-        intro: "Your first week at Chao turns a hallway of strangers into a Dragon family, whether you are ready or not.",
+        /* No lead line yet. The renderer omits the paragraph when this is
+           null, so nothing is left holding space open. */
+        intro: null,
         /* Not announced yet. The 2026 entry has the real one. */
         coordinatorsPhoto: null,
         sections: [

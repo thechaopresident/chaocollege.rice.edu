@@ -979,7 +979,11 @@
     }).join("");
 
     host.innerHTML =
-      '<div class="wrap section">' +
+      /* With no lead line this band is just the year and the dates, and its
+         bottom padding would stack with the next section's top padding into
+         an empty gap. */
+      '<div class="wrap section' +
+        (o.intro || o.introLink ? "" : " section--flush") + '">' +
         (o.year
           ? '<p class="eyebrow">O-Week ' + esc(o.year) +
             (o.theme ? " &middot; " + esc(o.theme) : "") + "</p>"
