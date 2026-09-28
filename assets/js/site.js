@@ -960,7 +960,17 @@
   function renderOweek() {
     var host = mount("oweek");
     if (!host || !PAGES.oweek) return;
-    var o = PAGES.oweek;
+
+    /* A page states its year with data-year; /oweek/ states none and gets the
+       newest, so the bare URL always lands on the O-Week being planned. */
+    var years = PAGES.oweek.years || [];
+    var want = document.body.getAttribute("data-year");
+    var o = null;
+    if (want) {
+      o = years.filter(function (y) { return String(y.year) === want; })[0];
+    }
+    if (!o) o = years[0];
+    if (!o) return;
 
 
     var sections = (o.sections || []).map(function (s) {
@@ -970,7 +980,10 @@
 
     host.innerHTML =
       '<div class="wrap section">' +
-        (o.year ? '<p class="eyebrow">O-Week ' + esc(o.year) + "</p>" : "") +
+        (o.year
+          ? '<p class="eyebrow">O-Week ' + esc(o.year) +
+            (o.theme ? " &middot; " + esc(o.theme) : "") + "</p>"
+          : "") +
         (o.dates && o.dates.label
           ? '<p class="oweek-dates">' +
               (o.dates.start && o.dates.end
@@ -979,12 +992,12 @@
                 : fmt(o.dates.label)) +
             "</p>"
           : "") +
-        '<p class="section__lead">' + fmt(o.intro) + "</p>" +
+        (o.intro ? '<p class="section__lead">' + fmt(o.intro) + "</p>" : "") +
       "</div>" +
-      '<section class="section section--tint"><div class="wrap">' +
-        "<h2>Coordinators</h2>" +
-        (o.coordinatorsPhoto
-          ? '<figure class="oweek-photo">' + figure({
+      (o.coordinatorsPhoto
+        ? '<section class="section section--tint"><div class="wrap">' +
+            "<h2>Coordinators</h2>" +
+            '<figure class="oweek-photo">' + figure({
               className: "oweek-photo__img",
               image: ROOT + "assets/img/" + o.coordinatorsPhoto.image,
               alt:   o.coordinatorsPhoto.alt,
@@ -994,9 +1007,9 @@
               ? '<figcaption class="oweek-photo__caption">' +
                   fmt(o.coordinatorsPhoto.caption) + "</figcaption>"
               : "") +
-            "</figure>"
-          : "") +
-      "</div></section>" +
+            "</figure>" +
+          "</div></section>"
+        : "") +
       (o.gallery && o.gallery.length
         ? '<section class="section"><div class="wrap">' +
             '<div class="gallery">' + o.gallery.map(function (g) {

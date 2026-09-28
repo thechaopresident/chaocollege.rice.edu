@@ -227,80 +227,105 @@ window.CHAO_PAGES = {
      O-WEEK
      ================================================================== */
   oweek: {
-    year: "2027",
-    /* `label` is what readers see; `start` and `end` are ISO so the <time>
-       elements are machine-readable. Update all three together each year. */
-    dates: {
-      label: "Sunday, August 15 \u2013 Saturday, August 21, 2027",
-      start: "2027-08-15",
-      end:   "2027-08-21"
-    },
-    /* DRAFT */
-    intro: "Your first week at Chao turns a hallway of strangers into a Dragon family, whether you are ready or not.",
-    /* Group photo of the coordinators, named in the caption beneath it rather
-       than given a card each — there is nothing to put on a card except the
-       name the caption already carries. `alt` describes the scene for screen
-       readers; the caption does the naming, so the two do not repeat. */
-    coordinatorsPhoto: {
-      image:   "oweek-coords.jpg",
-      alt:     "Chao O-Week coordinators in front of an O-Week 26 chalkboard",
-      focus:   "center 35%",
-      caption: "From left: Abbie Wang, Samantha Mahung and Prasanna Bendalam"
-    },
-    sections: [
-      { heading: "Your First Week At Chao",
-        /* DRAFT, with one change: "floor mates" -> "peers", at Gabi's request. */
-        body: [
-          "O-Week pairs every new student with upperclass advisors and a small crew of peers, and gets you through registration, campus life, and Rice tradition before your first class even starts.",
-          "By Friday you will know your way around campus, your O-Week group by name, and the people down the hall well enough to borrow their charger."
-        ] },
-      /* WRITTEN BY THE COORDINATORS, verbatim. Their words, their spellings,
-         their sign-off: reflowed into paragraphs from the text they supplied
-         and otherwise untouched. Do not tidy or rewrite it. */
-      { heading: "Letter to New Students",
-        body: [
-          "Welcome to Rice, and welcome to Chao!",
-          "We are your Orientation Week Coordinators, Prasanna, Sammie, and Abbie and we are so excited to finally meet you. Out of all the places you could have called home at Rice, you have become part of something truly special. You are joining Chao during its earliest chapters, and that means each of you will help shape the traditions, memories, and community that future generations of Chaosens will look back on.",
-          "Starting college is exciting, but it can also feel a little overwhelming. You may be counting down the days until move-in, feeling nervous about meeting new people, or wondering what these next few years will hold. No matter what emotions you are bringing with you, we want you to know one thing from the very beginning:",
-          "You belong here.",
-          "O-Week is more than your first week on campus. It is the start of friendships that may last a lifetime, memories that will stay with you long after graduation, and a community that will support you through every high and low of your Rice journey. Our hope is that by the end of this week, the unfamiliar begins to feel familiar and Chao starts to feel like home.",
-          "Throughout this week, you will meet your Advisors, Affiliates, and fellow New Students. Lean into those conversations. Introduce yourself to someone new. Be open to the unexpected. Some of the people you meet during O-Week may become your closest friends, your favorite study partners, your biggest supporters, and the people who make Rice feel like home.",
-          "You are becoming part of a family and a community that is still being built. Every tradition you start, every memory you make, and every connection you form will become part of Chao's story.",
-          "Thank you for letting us be part of the beginning of yours.",
-          "Once again, welcome to Rice, welcome to Chao, and welcome home.",
-          "KaChao,",
-          "Prasanna, Sammie, and Abbie"
-        ] },
-      /* Replaces the separate Move-In, Housing and What to Bring sections —
-         all three are sent by email rather than published here. Written for
-         the site at Gabi's request; reword freely. */
-      { heading: "Before You Arrive",
-        body: [
-          "Check your email frequently in the weeks before O-Week. Information about housing, what to bring, and move-in instructions will all be sent there."
-        ] }
-    ],
+    /* One entry per O-Week, NEWEST FIRST. /oweek/ renders years[0]; a page
+       with data-year renders the entry whose `year` matches, so adding a
+       year means adding an entry here and a folder with that data-year.
+       The nav's O-Week link points at years[0]. */
+    years: [
 
-    /* Photographs from the college's O-Week archive. Filenames describe the
-       scene; the `alt` strings were written from the photographs themselves,
-       since none came with captions. Correct them freely. */
-    gallery: [
-      { image: "welcome-signs.jpg",       alt: "Students holding handmade welcome signs on move-in day" },
-      { image: "move-in-procession.jpg",  alt: "Students walking up to the college carrying signs on move-in day" },
-      { image: "move-in-crew.jpg",        alt: "The move-in crew waiting to welcome new students" },
-      { image: "stadium.jpg",             alt: "Chao students filling a section of the stands in Chao shirts" },
-      { image: "commons-cheer.jpg",       alt: "Students cheering at tables in the Chao commons" },
-      { image: "theme-posters.jpg",       alt: "Chao students in front of hand-painted O-Week theme posters" },
-      { image: "family-group-1.jpg",      alt: "An O-Week family group outside the college" },
-      { image: "family-group-2.jpg",      alt: "An O-Week family group outside the college" },
-      { image: "family-group-3.jpg",      alt: "An O-Week family group outside the college" }
-    ],
+      { year: "2027",
+        /* No theme chosen yet; the nav shows this one as TBD. */
+        theme: null,
+        path:  "oweek/",
+        /* `label` is what readers see; `start` and `end` are ISO so the <time>
+         elements are machine-readable. Update all three together each year. */
+      dates: {
+        label: "Sunday, August 15 \u2013 Saturday, August 21, 2027",
+        start: "2027-08-15",
+        end:   "2027-08-21"
+      },
+      /* DRAFT */
+      intro: "Your first week at Chao turns a hallway of strangers into a Dragon family, whether you are ready or not.",
+      /* Group photo of the coordinators, named in the caption beneath it rather
+         than given a card each — there is nothing to put on a card except the
+         name the caption already carries. `alt` describes the scene for screen
+         readers; the caption does the naming, so the two do not repeat. */
+      coordinatorsPhoto: {
+        image:   "oweek-coords.jpg",
+        alt:     "Chao O-Week coordinators in front of an O-Week 26 chalkboard",
+        focus:   "center 35%",
+        caption: "From left: Abbie Wang, Samantha Mahung and Prasanna Bendalam"
+      },
+      sections: [
+        { heading: "Your First Week At Chao",
+          /* DRAFT, with one change: "floor mates" -> "peers", at Gabi's request. */
+          body: [
+            "O-Week pairs every new student with upperclass advisors and a small crew of peers, and gets you through registration, campus life, and Rice tradition before your first class even starts.",
+            "By Friday you will know your way around campus, your O-Week group by name, and the people down the hall well enough to borrow their charger."
+          ] },
+        /* WRITTEN BY THE COORDINATORS, verbatim. Their words, their spellings,
+           their sign-off: reflowed into paragraphs from the text they supplied
+           and otherwise untouched. Do not tidy or rewrite it. */
+        { heading: "Letter to New Students",
+          body: [
+            "Welcome to Rice, and welcome to Chao!",
+            "We are your Orientation Week Coordinators, Prasanna, Sammie, and Abbie and we are so excited to finally meet you. Out of all the places you could have called home at Rice, you have become part of something truly special. You are joining Chao during its earliest chapters, and that means each of you will help shape the traditions, memories, and community that future generations of Chaosens will look back on.",
+            "Starting college is exciting, but it can also feel a little overwhelming. You may be counting down the days until move-in, feeling nervous about meeting new people, or wondering what these next few years will hold. No matter what emotions you are bringing with you, we want you to know one thing from the very beginning:",
+            "You belong here.",
+            "O-Week is more than your first week on campus. It is the start of friendships that may last a lifetime, memories that will stay with you long after graduation, and a community that will support you through every high and low of your Rice journey. Our hope is that by the end of this week, the unfamiliar begins to feel familiar and Chao starts to feel like home.",
+            "Throughout this week, you will meet your Advisors, Affiliates, and fellow New Students. Lean into those conversations. Introduce yourself to someone new. Be open to the unexpected. Some of the people you meet during O-Week may become your closest friends, your favorite study partners, your biggest supporters, and the people who make Rice feel like home.",
+            "You are becoming part of a family and a community that is still being built. Every tradition you start, every memory you make, and every connection you form will become part of Chao's story.",
+            "Thank you for letting us be part of the beginning of yours.",
+            "Once again, welcome to Rice, welcome to Chao, and welcome home.",
+            "KaChao,",
+            "Prasanna, Sammie, and Abbie"
+          ] },
+        /* Replaces the separate Move-In, Housing and What to Bring sections —
+           all three are sent by email rather than published here. Written for
+           the site at Gabi's request; reword freely. */
+        { heading: "Before You Arrive",
+          body: [
+            "Check your email frequently in the weeks before O-Week. Information about housing, what to bring, and move-in instructions will all be sent there."
+          ] }
+      ],
 
-    /* Rice's own O-Week pages, which cover the university-wide schedule. */
-    links: [
-      { label: "Rice O-Week",            path: "https://success.rice.edu/first-year-programs/o-week" },
-      { label: "O-Week schedule",        path: "https://success.rice.edu/first-year-programs/o-week/o-week-schedule" },
-      { label: "New student checklist",  path: "https://success.rice.edu/first-year-programs/o-week/new-student-checklist" },
-      { label: "O-Week FAQs",            path: "https://success.rice.edu/first-year-programs/o-week/o-week-faqs" }
+      /* Photographs from the college's O-Week archive. Filenames describe the
+         scene; the `alt` strings were written from the photographs themselves,
+         since none came with captions. Correct them freely. */
+      gallery: [
+        { image: "welcome-signs.jpg",       alt: "Students holding handmade welcome signs on move-in day" },
+        { image: "move-in-procession.jpg",  alt: "Students walking up to the college carrying signs on move-in day" },
+        { image: "move-in-crew.jpg",        alt: "The move-in crew waiting to welcome new students" },
+        { image: "stadium.jpg",             alt: "Chao students filling a section of the stands in Chao shirts" },
+        { image: "commons-cheer.jpg",       alt: "Students cheering at tables in the Chao commons" },
+        { image: "theme-posters.jpg",       alt: "Chao students in front of hand-painted O-Week theme posters" },
+        { image: "family-group-1.jpg",      alt: "An O-Week family group outside the college" },
+        { image: "family-group-2.jpg",      alt: "An O-Week family group outside the college" },
+        { image: "family-group-3.jpg",      alt: "An O-Week family group outside the college" }
+      ],
+
+      /* Rice's own O-Week pages, which cover the university-wide schedule. */
+      links: [
+        { label: "Rice O-Week",            path: "https://success.rice.edu/first-year-programs/o-week" },
+        { label: "O-Week schedule",        path: "https://success.rice.edu/first-year-programs/o-week/o-week-schedule" },
+        { label: "New student checklist",  path: "https://success.rice.edu/first-year-programs/o-week/new-student-checklist" },
+        { label: "O-Week FAQs",            path: "https://success.rice.edu/first-year-programs/o-week/o-week-faqs" }
+      ]
+      },
+
+      /* ARCHIVE. Only the theme is known so far. NOTE: the coordinators
+         photo and the gallery currently sit on 2027, but that photo is
+         captioned as an O-Week 26 chalkboard, so they may belong here
+         instead — move them once Gabi confirms which year they are. */
+      { year: "2026",
+        theme: "DragO-Week",
+        path:  "oweek/2026/",
+        dates: null,
+        intro: "[PLACEHOLDER: a line or two about DragO-Week, Chao's 2026 O-Week.]",
+        coordinatorsPhoto: null,
+        sections: [],
+        gallery: [],
+        links: [] }
     ]
   },
 

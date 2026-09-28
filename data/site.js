@@ -58,7 +58,13 @@ window.CHAO_SITE = {
       ]
     },
     { label: "Resources", path: "resources/" },
-    { label: "O-Week",    path: "oweek/" },
+    /* Years newest first; the bare O-Week link goes to the newest. Add a year
+       here when you add one to PAGES.oweek.years. */
+    { label: "O-Week",    path: "oweek/",
+      children: [
+        { label: "2027: TBD",        path: "oweek/" },
+        { label: "2026: DragO-Week", path: "oweek/2026/" }
+      ] },
     { label: "Calendar",  path: "calendar/" }
   ],
 
