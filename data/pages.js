@@ -128,7 +128,7 @@ window.CHAO_PAGES = {
              STILL MISSING: what counts as a private party, and how far ahead
              it has to be registered. */
           { title: "Private Party Registration",
-            body: "Register a private party with the Chief Justice. Any one of these is enough: text 724-717-4931, email thechaocj@gmail.com, or fill in the form.",
+            body: "Register a private party with the Chief Justice. Any one of these is enough: text 724-717-4931, email thechaocj@gmail.com, or fill out the form.",
             path: "https://docs.google.com/forms/d/e/1FAIpQLSdMLi5YGcB2EdTH3pms2JGIj146x4YQ0VmJoBb5ePGwRLtFfQ/viewform",
             cta: "Open the registration form" },
           /* Replaces the Laundry card. Rice Facilities takes maintenance
