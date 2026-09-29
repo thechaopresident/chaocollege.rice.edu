@@ -128,13 +128,6 @@ window.CHAO_PAGES = {
             body: "Reserve the Commons, Upper Commons, Quad or Terrace. These requests go to the Executive Council, which reviews them on Sunday evenings.",
             path: "https://docs.google.com/forms/d/e/1FAIpQLScJ-OJG-LNycEnsamaEqv7mXy-e08xQBFhxKOTZm8gWhKJKyw/viewform",
             cta: "Request a space" },
-          /* One card for every shared space rather than one per space. Wording
-             written for the site. The link goes to the Improvements
-             Representatives, whose stated job is upgrading and maintaining
-             these spaces. */
-          { title: "Common Spaces",
-            body: "Chao's shared spaces are the flobby on each floor, the commons, and the upper commons. If you have an idea for making any of them better, bring it to the Improvements Representatives.",
-            path: "people/committees/#improvements-representatives", cta: "Meet the Improvements Reps" },
           /* Three routes, supplied by Gabi; a card carries one link, so the
              form takes it and the other two are named in the body. The
              address is the Chief Justice's, per data/people.js.
