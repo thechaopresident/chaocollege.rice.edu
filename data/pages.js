@@ -113,13 +113,21 @@ window.CHAO_PAGES = {
         path: "resources/",
         heading: "Spaces & Equipment",
         cards: [
-          /* Booking moved off the shared spreadsheet onto a booking page that
-             checks for clashes itself, so the old line about waiting two
-             business days for a response no longer describes anything. */
-          { title: "Book a Space",
-            body: "Chao's shared spaces are yours. Book the PDR, Flex Room, 1st Floor Study Room or Music Room.",
-            path: "https://claude.ai/artifact/HtMkm7iUQLaLCnF7hvyNBK",
-            cta: "Reserve a space" },
+          /* Two forms because Chao runs two processes: the four rooms are
+             confirmed by return email, while the big spaces go to the
+             Executive Council. Both facts are stated on the forms themselves.
+             These replace the booking page at
+             https://claude.ai/artifact/HtMkm7iUQLaLCnF7hvyNBK, which is built
+             and still holds the bookings imported from the old spreadsheet.
+             It is unlinked, not deleted — see the README. */
+          { title: "Book a Room",
+            body: "Reserve the PDR, Flex Room, 1st Floor Study Room or Music Room. A reservation counts only once you get an email back confirming it.",
+            path: "https://docs.google.com/forms/d/e/1FAIpQLScvHySzP5MHmjIng5V1q8R9J5WywptVhpj8-Crt5KFuFOry9w/viewform",
+            cta: "Request a room" },
+          { title: "Book a Commons Space",
+            body: "Reserve the Commons, Upper Commons, Quad or Terrace. These requests go to the Executive Council, which reviews them on Sunday evenings.",
+            path: "https://docs.google.com/forms/d/e/1FAIpQLScJ-OJG-LNycEnsamaEqv7mXy-e08xQBFhxKOTZm8gWhKJKyw/viewform",
+            cta: "Request a space" },
           /* One card for every shared space rather than one per space. Wording
              written for the site. The link goes to the Improvements
              Representatives, whose stated job is upgrading and maintaining

@@ -370,7 +370,7 @@ is a local convenience and harmless to ship, but nothing serves from it.
 - [ ] Sign off the **DRAFT**-tagged copy — it came from the preliminary site and
       has not been approved (see *Where the content came from*).
 - [ ] Confirm the Donate URL and set `navCta` in `data/site.js`.
-- [ ] Check the room booking page (below) is reachable by students.
+- [ ] Check both Google booking forms accept responses from students.
 - [ ] Re-run the sitemap dates if launch is far from the last edit.
 
 ### External dependencies
@@ -379,8 +379,22 @@ Two things the site links to but does not host:
 
 | What | Where | Note |
 |---|---|---|
-| Room booking | `resources/` → Book a Space | A Claude-hosted page with its own database, not a Rice URL. **Confirm students outside the owner's organization can open it before launch** — if they cannot, point the card back at a spreadsheet. |
+| Room booking | `resources/` → Book a Room / Book a Commons Space | Two Google Forms. The four rooms are confirmed by return email; the Commons, Upper Commons, Quad and Terrace go to the Executive Council on Sunday evenings. |
 | Calendar | `/calendar/` | A Google Calendar embed, set by `calendar.embedSrc` in `data/pages.js`. |
+
+### Shelved: the booking page
+
+<https://claude.ai/artifact/HtMkm7iUQLaLCnF7hvyNBK>
+
+A working self-serve booking page for the four rooms — a to-scale day timeline,
+drag to set a length, genuine overlap checking, self-cancel by email. It still
+holds the eleven live reservations imported from the old *Space Reservations*
+spreadsheet.
+
+It is **unlinked, not deleted.** It was set aside in favour of the Google Forms
+above, which fit how the college already works and need no special access. The
+page is still there if the forms prove too slow, and its booking logic is a
+working spec for anything Rice IT might host later.
 
 Everything else is a plain outbound link to a Rice or Google page.
 
