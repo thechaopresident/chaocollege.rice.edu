@@ -80,8 +80,14 @@
         (opts.title   ? "<b>" + fmt(opts.title) + "</b>" : "") +
         (opts.caption ? fmt(opts.caption) : "") + "</span>";
     }
-    return '<div class="' + cls.trim() + '" role="img" aria-label="' +
-      esc(opts.alt || opts.title || "Placeholder image") + '">' + img + initial + label + "</div>";
+    /* WCAG 1.1.1. The wrapper used to carry role="img" in every case, which
+       announced a decorative tile as "Placeholder image" and, where a real
+       photo was present, spoke the wrapper's label instead of the <img> alt.
+       Now: a real photo is described by its own alt; a tile carrying a visible
+       label is read as the text it shows; a bare tile is decoration and is
+       hidden. */
+    var a11y = (opts.image || label) ? "" : ' aria-hidden="true"';
+    return '<div class="' + cls.trim() + '"' + a11y + ">" + img + initial + label + "</div>";
   }
   /* ======================================================================
      HEADER
@@ -154,7 +160,11 @@
           "<span>" + esc(SITE.name || "") + "</span></a>" +
         '<button class="nav__hamburger" type="button" aria-expanded="false" aria-label="Menu">' +
           "<span></span><span></span><span></span></button>" +
-        '<ul class="nav__menu">' + items + (cta ? '<li class="nav__item">' + cta + "</li>" : "") + "</ul>" +
+        /* A real <nav> landmark, so a screen reader can jump to the menu
+           and skip past it. */
+        '<nav class="nav__nav" aria-label="Main">' +
+          '<ul class="nav__menu">' + items + (cta ? '<li class="nav__item">' + cta + "</li>" : "") + "</ul>" +
+        "</nav>" +
       "</div>";
 
     /* Behaviour */
@@ -296,6 +306,11 @@
     var dupe = slides.map(function (sl) { return card(sl, true);  }).join("");
 
     return '<div class="strip" data-strip>' +
+        '<button class="strip__pause" type="button" data-strip-pause' +
+          ' aria-pressed="false" aria-label="Pause the photo strip">' +
+          '<span class="strip__pause-icon" aria-hidden="true"></span>' +
+          '<span class="strip__pause-text">Pause</span>' +
+        "</button>" +
         '<button class="strip__nav strip__nav--prev" type="button" aria-label="Scroll photos left">' +
           '<span aria-hidden="true">&lsaquo;</span></button>' +
         '<div class="strip__row" tabindex="0" role="region" aria-label="' + esc(label || "Photos") + '">' +
@@ -314,6 +329,9 @@
       if (!row) return;
 
       var held = false, last = null, raf = null, resume = null;
+      /* Set by the pause button. While it is true the ticker never runs
+         again, whatever the pointer, focus or observer do. */
+      var stopped = false;
       /* Position is tracked as a float: at ~0.4px per frame, relying on
          scrollLeft += would lose the remainder wherever the engine rounds. */
       var pos = 0;
@@ -340,7 +358,7 @@
       }
 
       function start() {
-        if (calm || raf != null) return;
+        if (calm || stopped || raf != null) return;
         last = null; pos = row.scrollLeft;
         raf = requestAnimationFrame(tick);
       }
@@ -381,8 +399,24 @@
            never animate it), fall back to jumping so the button always works. */
         setTimeout(function () {
           if (Math.abs(row.scrollLeft - from) < 1) row.scrollLeft = from + dir * step;
-          resumeWhenSettled();
+          if (!stopped) resumeWhenSettled();
         }, 400);
+      }
+
+      var pauseBtn = root.querySelector("[data-strip-pause]");
+      if (calm) {
+        /* Nothing is moving, so there is nothing to pause. */
+        pauseBtn.hidden = true;
+      } else {
+        pauseBtn.addEventListener("click", function () {
+          stopped = !stopped;
+          pauseBtn.setAttribute("aria-pressed", stopped ? "true" : "false");
+          pauseBtn.setAttribute("aria-label",
+            stopped ? "Play the photo strip" : "Pause the photo strip");
+          pauseBtn.querySelector(".strip__pause-text").textContent = stopped ? "Play" : "Pause";
+          root.classList.toggle("strip--stopped", stopped);
+          if (stopped) stop(); else start();
+        });
       }
 
       root.querySelector(".strip__nav--prev").addEventListener("click", function () { page(-1); });
@@ -441,7 +475,7 @@
       }).join("");
       hero.className = "hero ph";
       hero.innerHTML =
-        (h.image ? '<img src="' + esc(ROOT + "assets/img/" + h.image) + '" alt=""' +
+        (h.image ? '<img src="' + esc(ROOT + "assets/img/" + h.image) + '" alt="' + esc(h.alt || "") + '"' +
           (h.focus ? ' style="object-position:' + esc(h.focus) + '"' : "") + ">" : "") +
         '<div class="hero__inner">' +
           crestAbove +
@@ -623,7 +657,8 @@
       '<dl class="info-list">' + rows.join("") + "</dl></div>";
   }
 
-  function profile(entry, asCard) {
+  function profile(entry, asCard, level) {
+    level = level || "h3";
     var people = entry.people || [{ name: entry.name, email: entry.email, pronouns: entry.pronouns }];
     var names = people.map(function (n) {
       return esc(n.name) +
@@ -644,7 +679,7 @@
     return '<article class="profile' + (asCard ? " profile--card" : "") + '">' +
       '<div class="profile__head">' +
         (entry.role ? '<p class="profile__role">' + esc(entry.role) + "</p>" : "") +
-        '<h3 class="profile__name">' + names + "</h3>" +
+        "<" + level + ' class="profile__name">' + names + "</" + level + ">" +
         (contacts ? '<p class="profile__contact">' + contacts + "</p>" : "") +
       "</div>" +
       '<div class="profile__body">' +
@@ -715,7 +750,7 @@
     if (!host) return;
     var cards = (SITE.peopleSections || []).map(function (s) {
       return '<a class="card" href="' + esc(url(s.path)) + '">' +
-        "<h3>" + esc(s.label) + "</h3><p>" + fmt(s.blurb) + "</p></a>";
+        "<h2>" + esc(s.label) + "</h2><p>" + fmt(s.blurb) + "</p></a>";
     }).join("");
     host.innerHTML = '<div class="wrap section"><div class="grid grid--3">' + cards + "</div></div>";
   }
@@ -769,7 +804,7 @@
     var ras   = all.filter(isRA);
 
     host.innerHTML = '<div class="wrap section">' +
-      leads.map(function (e) { return profile(e, false); }).join("") +
+      leads.map(function (e) { return profile(e, false, "h2"); }).join("") +
       (ras.length ? '<div class="group-head team__divider"><h2>Resident Associates</h2></div>' +
                     packColumns(ras, 2) : "") +
       "</div>";
@@ -822,7 +857,7 @@
           respList(c.responsibilities) + "</details>"
         : "";
       return '<section class="committee" id="' + esc(slug(c.name)) + '">' +
-        '<div class="group-head"><h3>' + fmt(c.name) + "</h3>" + juris +
+        '<div class="group-head"><h2>' + fmt(c.name) + "</h2>" + juris +
           (c.description ? "<p>" + fmt(c.description) + "</p>" : "") + "</div>" +
         roster(c.members, { layout: "roster-row" }) + resp + "</section>";
     }
@@ -884,7 +919,7 @@
     });
 
     function panel(title, lead, link, list) {
-      return '<div class="group-head"><h3>' + esc(title) + "</h3>" +
+      return '<div class="group-head"><h2>' + esc(title) + "</h2>" +
         (lead ? "<p>" + fmt(lead) + "</p>" : "") +
         (link ? '<p><a href="' + esc(link.path) + '" target="_blank" rel="noopener">' +
           esc(link.label) + "</a></p>" : "") +
@@ -928,10 +963,12 @@
     if (!host || !PAGES.resources) return;
     var groups = (PAGES.resources.groups || []);
 
-    function cards(g) {
+    /* On a section's own page the cards are the first thing under the <h1>,
+       so they are <h2>; on /resources/ they sit below the section's <h2>. */
+    function cards(g, level) {
       return (g.cards || []).map(function (c) {
         var inner =
-          "<h3>" + fmt(c.title) + "</h3>" +
+          "<" + level + ">" + fmt(c.title) + "</" + level + ">" +
           "<p>" + fmt(c.body) + "</p>" +
           (c.cta
             ? '<p class="card__foot">' +
@@ -958,7 +995,7 @@
 
     host.innerHTML = '<section class="section"><div class="wrap">' +
       (want ? "" : "<h2>" + fmt(g.heading) + "</h2>") +
-      '<div class="grid grid--3">' + cards(g) + "</div></div></section>";
+      '<div class="grid grid--3">' + cards(g, want ? "h2" : "h3") + "</div></div></section>";
   }
 
   /* ======================================================================

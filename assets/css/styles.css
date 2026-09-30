@@ -25,6 +25,10 @@ h1, h2, h3, h4 {
   color: var(--color-heading);
   line-height: 1.2;
   margin: 0 0 var(--space-4);
+  /* WCAG 1.4.10. At 320px a single long word in a banner heading
+     ("Representatives", "Communication") is wider than the column and pushes
+     the whole page sideways. Break only words that cannot otherwise fit. */
+  overflow-wrap: break-word;
 }
 h1 { font-size: clamp(2rem, 4.5vw, 3rem); }
 h2 { font-size: clamp(1.6rem, 3vw, 2.25rem); }
@@ -254,7 +258,7 @@ a:hover { color: var(--color-link-hover); }
 }
 .hero::after {
   content: ""; position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(to bottom, rgba(0,0,0,.42), rgba(0,0,0,.62));
+  background: linear-gradient(to bottom, rgba(0,0,0,.62), rgba(0,0,0,.88));
 }
 .hero__inner { position: relative; z-index: 2; padding: var(--space-9) var(--space-5); }
 .hero__wordmark {
@@ -272,7 +276,7 @@ a:hover { color: var(--color-link-hover); }
 }
 .hero__tagline {
   font-family: var(--font-ui); font-size: 1.05rem;
-  color: rgba(255,255,255,.9); margin: 0 0 var(--space-6);
+  color: var(--color-text-invert); margin: 0 0 var(--space-6);
 }
 .hero__links { display: flex; flex-wrap: wrap; gap: var(--space-3); justify-content: center; }
 
@@ -661,6 +665,31 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
   position: relative;
   margin-top: var(--space-6);
 }
+/* WCAG 2.2.2 pause control. Visible at rest rather than on hover: a control
+   that only appears on hover is not reachable by touch or keyboard. */
+.strip__pause {
+  position: absolute; top: calc(-1 * var(--space-6)); right: 0; z-index: 3;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-ui); font-size: .78rem; font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-page-bg);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-pill);
+  padding: 4px 11px 4px 9px;
+  cursor: pointer;
+}
+.strip__pause:hover { color: var(--color-heading); border-color: var(--color-heading); }
+.strip__pause-icon {
+  width: 9px; height: 10px;
+  border-left: 3px solid currentColor; border-right: 3px solid currentColor;
+}
+/* Pressed: the icon becomes a play triangle. */
+.strip--stopped .strip__pause-icon {
+  width: 0; height: 0;
+  border-left: 8px solid currentColor; border-right: 0;
+  border-top: 5px solid transparent; border-bottom: 5px solid transparent;
+}
+
 .strip__row {
   display: flex;
   gap: var(--strip-gap);

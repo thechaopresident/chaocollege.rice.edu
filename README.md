@@ -372,6 +372,7 @@ is a local convenience and harmless to ship, but nothing serves from it.
 - [ ] Confirm the Donate URL and set `navCta` in `data/site.js`.
 - [ ] Check both Google booking forms accept responses from students.
 - [ ] Re-run the sitemap dates if launch is far from the last edit.
+- [ ] Re-check hero contrast if `hero.jpg` is replaced (see *Accessibility*).
 
 ### External dependencies
 
@@ -400,14 +401,51 @@ Everything else is a plain outbound link to a Rice or Google page.
 
 ---
 
-## Accessibility notes
+## Accessibility
 
-Skip link, visible focus rings, `aria-expanded` on menu toggles, `aria-current`
-on the active nav item, keyboard-dismissable menus (Escape), reduced-motion
-support, and tables with real `<th>` headers. Keep these when editing.
+**Rice requires WCAG 2.1 Level AA** for every publicly available web page, under
+[Policy 851, Digital Information Accessibility](https://policy.rice.edu/851).
+Rice's own guidance is at [access.rice.edu](https://access.rice.edu/web-accessibility-guidelines).
+This site was audited against that standard across all 17 pages.
 
-Measured contrast on the current palette (WCAG AA needs 4.5:1 for body text,
-3:1 for large text):
+Built in, and worth keeping when editing:
+
+- **Skip link**, visible focus rings, `aria-expanded` on menu toggles,
+  `aria-current` on the active nav item, Escape-dismissable menus.
+- **A `<nav>` landmark** around the menu, one `<h1>` per page, and headings that
+  never skip a level. A card's heading level depends on what sits above it, so
+  the renderers pass it in rather than hard-coding `<h3>`.
+- **Alt text** on every photograph. Decorative tiles — the lettered squares
+  where someone has no portrait, the banner ground — are `aria-hidden`, not
+  labelled "Placeholder image".
+- **A pause button on the photo strip** (WCAG 2.2.2). Anything that moves by
+  itself for more than five seconds needs a control that stops it; hover and
+  focus do not count, because neither is reachable by touch or keyboard.
+- **`prefers-reduced-motion`** stops the strip animating at all, and the pause
+  button hides itself because there is nothing left to pause.
+- **No horizontal scrolling** at 320px (WCAG 1.4.10), verified on every page.
+  Long words in a banner heading break rather than widen the page.
+- Real `<th>` headers on tables, `lang` on `<html>`, a `title` on the calendar
+  iframe, and unique page titles.
+
+### Contrast
+
+White type over the hero photograph is the one place this needed real care.
+Measured against the brightest pixels actually behind each element, at the
+weakest point of the scrim over it:
+
+| | Ratio | Needs | |
+|---|---|---|---|
+| Hero wordmark (72px) | 3.99:1 | 3:1 | large text |
+| Hero tagline | 4.80:1 | 4.5:1 | |
+| Hero buttons | 5.69:1 | 4.5:1 | |
+| Banner `<h1>` on navy | 7.17–12.45:1 | 3:1 | |
+
+The hero scrim is `rgba(0,0,0,.62)` to `rgba(0,0,0,.88)`. **If you replace
+`hero.jpg`, re-check this** — a brighter photograph needs a stronger scrim, and
+the previous image failed at `.42/.62` (wordmark 2.29:1, tagline 2.36:1).
+
+Palette contrast, unchanged:
 
 | Pair | Ratio | |
 |---|---|---|

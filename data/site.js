@@ -92,6 +92,9 @@ window.CHAO_SITE = {
     tagline: "Home of the Chaosens",
     /* Architectural rendering of the college. Master in brand/photo-originals/. */
     image: "hero.jpg",
+    /* Describes the photograph for anyone who cannot see it. Set to null and
+       the image is treated as decoration instead. */
+    alt: "An architectural rendering of Chao College",
     focus: "center 60%",
     links: [
       { label: "Calendar",      path: "calendar/" },
