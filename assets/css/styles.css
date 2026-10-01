@@ -105,7 +105,12 @@ a:hover { color: var(--color-link-hover); }
    arrives, put an <img> inside the same element and it covers the pattern.   */
 .ph {
   position: relative; overflow: hidden;
-  background:
+  /* An opaque colour as well as the gradient. A gradient is a background
+     IMAGE, so background-color stayed transparent and anything measuring the
+     contrast of text over one of these walked up to the white page instead,
+     concluding white-on-white. */
+  background-color: var(--placeholder-a);
+  background-image:
     linear-gradient(135deg, var(--placeholder-a) 0%, var(--placeholder-b) 55%, var(--placeholder-a) 100%);
   isolation: isolate;
 }
@@ -283,6 +288,13 @@ a:hover { color: var(--color-link-hover); }
 /* --- Page banner (interior pages) --------------------------------------- */
 .banner {
   position: relative; color: var(--color-text-invert);
+  /* The ground (.banner__bg) and the scrim both paint over this, so it changes
+     nothing visually. It matters twice: a contrast checker walking up from the
+     breadcrumb finds a real colour instead of the white page, and if the
+     renderer never injects .banner__bg the white text still has something dark
+     behind it. The real ground is the gradient under a 42% black scrim, which
+     is darker than this, so measuring against navy understates the margin. */
+  background-color: var(--brand-primary);
   /* Was a flat 6rem top and bottom, which put 192px of padding around about
      90px of content. Scales with the viewport now instead. */
   padding-block: clamp(2rem, 4.5vw, 3.25rem);

@@ -126,9 +126,15 @@
   --color-btn-bg-hover:   var(--brand-accent-dark);
   --color-btn-text-hover: var(--neutral-000);   /* 5.1:1 on --brand-accent-dark */
 
-  --color-ghost-border:   rgba(255, 255, 255, 0.55);
-  --color-ghost-bg:       rgba(255, 255, 255, 0.12);
-  --color-ghost-bg-hover: rgba(255, 255, 255, 0.28);
+  /* Ghost buttons sit on the hero photograph. The fill used to be white at
+     12%, which LIGHTENED the ground beneath white text and left it at
+     4.34:1 against a 4.5 requirement. A dark fill darkens instead (8.02:1),
+     and the border is raised to clear 3:1 against the hero for WCAG 1.4.11.
+     Keeping the fill dark also means a contrast checker that ignores alpha
+     reads it as black rather than white, so it measures the right way. */
+  --color-ghost-border:   rgba(255, 255, 255, 0.75);
+  --color-ghost-bg:       rgba(0, 0, 0, 0.22);
+  --color-ghost-bg-hover: rgba(0, 0, 0, 0.34);
 
   --color-footer-bg:      var(--brand-primary-dark);
   --color-footer-text:    rgba(255, 255, 255, 0.82);
