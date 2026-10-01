@@ -171,14 +171,15 @@ No color is hardcoded anywhere outside `brand/tokens.css`.
 
 ## Crest, motto and mascot
 
-- **Crest** — `brand/crest-master.png` is the master artwork: 3508x3508,
+- **Crest** — `brand/crest-master.png` is the master artwork: 2000x2000,
   transparent. The web-ready derivatives in `assets/img/` (`crest.png`,
   `crest.webp`, `favicon.png`, `apple-touch-icon.png`) are generated from it.
   The master carries a wide transparent margin, so the derivatives are trimmed
   to the artwork's alpha bounding box — otherwise the 34px nav mark would
   render tiny inside an empty box. `crest.png` is palette-quantized (the
-  artwork is three flat colors plus antialiasing), which takes it from 343KB to
-  61KB with no visible difference. It appears in the nav bar and
+  artwork is three flat colors plus antialiasing), which takes it from 376KB to
+  69KB with no visible difference. The square icons are the trimmed crest
+  letterboxed on a transparent canvas, not cropped, so nothing is cut off. It appears in the nav bar and
   set between "Chao" and "College" in the hero. Because the crest is drawn in
   navy on a transparent ground it would vanish against the navy nav bar, so in
   the header only it sits on a cream plate. Set `crestImage: null` in
@@ -189,8 +190,9 @@ No color is hardcoded anywhere outside `brand/tokens.css`.
   `data/pages.js` if the college wants it published.
 - **Mascot** — Dragons. In `data/site.js` (`mascot`) and the About facts.
 
-The master is high-resolution enough for print. If a true vector (SVG/EPS/PDF)
-ever turns up it is still worth swapping in, but nothing on the site needs it.
+At 2000px the master is comfortable for the web and for small print, but it is
+not what you would hand a banner printer. If a true vector (SVG/EPS/PDF) ever
+turns up it is worth swapping in — nothing on the site needs it, but print will.
 
 ## Placeholder policy
 
