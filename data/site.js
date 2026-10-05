@@ -180,11 +180,11 @@ window.CHAO_SITE = {
     /* Moved here from the Resources page, where dated content would go stale.
        HEADLINE AND POST DATE are mine — the college supplied the body text and
        the deadlines, not a headline or a date to publish it under. */
+    { date: "10/2/2026", datetime: "2026-10-02", title: "We have a website!",
+      body: "It’s what you’re looking at right now", link: null },
     { date: "9/15/2026", datetime: "2026-09-15", title: "Housing jack is September 24",
       body: "The housing jack is September 24. To take part, the eligibility form must be filled out by September 21. Reach out to Barbare Tetvadze, Chao's Internal Vice President, with any questions.",
       link: "https://docs.google.com/forms/d/e/1FAIpQLSf0cKHKgSyrkg9WNT_QiPaamJQ7f1_l28vRwhgWh0uwwi7O4A/viewform" },
-    { date: "9/7/2026", datetime: "2026-09-07", title: "We have a website!",
-      body: "It’s what you’re looking at right now", link: null },
     { date: "9/5/2026", datetime: "2026-09-05", title: "We got a ping-pong table!",
       body: "Pretty self-explanatory…", link: null }
   ],
