@@ -160,10 +160,13 @@ window.CHAO_PAGES = {
         path: "resources/funding/",
         heading: "Funding",
         cards: [
+          /* Wording supplied by Gabi, verbatim. The Accessibility Fund form is
+             also listed under Forms; it is linked from both because this is
+             where someone looks when cost is the problem. */
           { title: "Financial Inclusivity",
-            /* DRAFT */
-            body: "Chao's staff and student government keep the real cost of college life low, subsidizing tickets and keeping merch and formals affordable for everyone, not just whoever can swipe first. If money is ever the reason you are sitting something out, tell Chao's Coordinator or student government. Help is available and it stays between you and them.",
-            path: null, cta: null },
+            body: "Chao's staff and student government want to keep the cost of college life low, subsidizing tickets and keeping merch affordable. If money is ever the reason you are sitting something out, tell Chao's Coordinator or student government. Support is available and it stays between you and them.",
+            path: "https://docs.google.com/forms/d/e/1FAIpQLSemJmQcWoXY12Z2hkIDJG1VMwjewqLgSNwDZqW-VOtQM_Lc9A/viewform",
+            cta: "Accessibility Fund request" },
           /* WRITTEN FOR THE SITE — see the note at the top of this section.
              Carries the Treasurers' address, which used to sit on a card of
              its own. STILL MISSING: the actual request process — if there is
@@ -180,7 +183,7 @@ window.CHAO_PAGES = {
         ]
       },
       {
-        id: "forms",
+        id: "governance",
         path: "resources/governance/",
         heading: "Governance & Communication",
         cards: [
@@ -197,6 +200,28 @@ window.CHAO_PAGES = {
           { title: "Weekly Email",
             body: "The Secretaries send a college-wide email each week. To have your event included, submit it through the form.",
             path: "https://forms.gle/sdqcVMR9prTSYPVd9", cta: "Submit an event" }
+        ]
+      },
+      {
+        /* Descriptions are drawn from what each form says about itself.
+           The Birthday and Transfer links arrived wrapped in Rice's
+           urldefense scanner and are unwrapped here. */
+        id: "forms",
+        path: "resources/forms/",
+        heading: "Forms",
+        cards: [
+          { title: "Accessibility Fund",
+            body: "For students who need help affording part of college life. The fund exists so that everyone can take part regardless of their means, and requests are kept confidential.",
+            path: "https://docs.google.com/forms/d/e/1FAIpQLSemJmQcWoXY12Z2hkIDJG1VMwjewqLgSNwDZqW-VOtQM_Lc9A/viewform",
+            cta: "Request from the fund" },
+          { title: "Birthday Opt-In",
+            body: "Chao celebrates birthdays by the month. Opt in if you would like yours listed.",
+            path: "https://forms.gle/JmznXUjS4kFwQ1x66",
+            cta: "Opt in" },
+          { title: "Transfer to Chao",
+            body: "For students at another residential college who want to move to Chao. Requests are reviewed by the magisters and depend on the space available.",
+            path: "https://forms.gle/GbdWYEhZzwhZ2zNK7",
+            cta: "Request a transfer" }
         ]
       },
       {

@@ -64,6 +64,7 @@ window.CHAO_SITE = {
         { label: "Spaces & Equipment",          path: "resources/" },
         { label: "Funding",                     path: "resources/funding/" },
         { label: "Governance & Communication",  path: "resources/governance/" },
+        { label: "Forms",                       path: "resources/forms/" },
         { label: "Academic & Wellbeing Support", path: "resources/support/" }
       ] },
     /* Years newest first; the bare O-Week link goes to the newest. Add a year
