@@ -1,5 +1,5 @@
-# chaocollege.rice.edu
+# chao.rice.edu
 User-agent: *
 Allow: /
 
-Sitemap: https://chaocollege.rice.edu/sitemap.xml
+Sitemap: https://chao.rice.edu/sitemap.xml

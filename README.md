@@ -1,6 +1,6 @@
 # Chao College website
 
-Static site for **chaocollege.rice.edu**. Plain HTML, CSS and JavaScript — no
+Static site for **chao.rice.edu**. Plain HTML, CSS and JavaScript — no
 build step, no npm, no framework. Every file you need to edit is plain text.
 
 Layout follows the pattern used by Rice's other residential college sites
@@ -338,25 +338,46 @@ too small to read.
 
 ---
 
-## Deploying to chaocollege.rice.edu
+## Deploying to chao.rice.edu
 
-The whole repository is the deployable artifact — there is nothing to compile,
-install or configure. Point Rice IT's static host at it, or hand them the
-folder. Requirements: none beyond serving files over HTTPS.
+**The site is live at <https://chao.rice.edu> and deploys itself.** It is served
+by GitHub Pages from the `main` branch of this repository, root folder.
 
-The site is host-agnostic: every path is relative, so it also works from a
-subdirectory or straight off the filesystem. The one exception is `404.html`,
-which uses absolute paths because the server serves it for missing URLs at any
-depth.
+### Publishing a change
 
-### What IT needs to do
+Push to `main`. That is the whole deploy — GitHub rebuilds in well under a
+minute, so an edit made in GitHub's web editor is live without anyone running
+anything. To force a rebuild without a content change:
 
-1. Serve the repository root as the document root.
-2. Serve `index.html` for a directory request (`/people/` → `/people/index.html`).
-   This is the default nearly everywhere; without it every link on the site 404s.
-3. Point the server's not-found handler at `/404.html`
-   (Apache: `ErrorDocument 404 /404.html`; nginx: `error_page 404 /404.html;`).
-4. Serve over HTTPS. Nothing on the site is loaded over plain HTTP.
+```bash
+git commit --allow-empty -m "Rebuild" && git push
+```
+
+If the site ever serves 404 on every path while the build reports success,
+request a fresh build; that has happened once and republishing fixed it.
+
+### How the domain is wired
+
+`CNAME` in the repository root holds `chao.rice.edu`, and Rice's DNS points that
+name at GitHub. The old project URL
+(`thechaopresident.github.io/chaocollege.rice.edu/`) 301-redirects to it, so
+links shared before the cutover still work. Note the repository is still *named*
+after the old domain; that is cosmetic.
+
+Every canonical URL, `og:url`, `robots.txt` and `sitemap.xml` entry names
+`chao.rice.edu`. If the domain ever changes again, those are the places to
+update along with `CNAME` and `site.domain` in `data/site.js`.
+
+### Moving off GitHub Pages
+
+The repository is also the deployable artifact for any static host: nothing to
+compile or install, and every path is relative, so it works from a subdirectory
+or straight off the filesystem. The one exception is `404.html`, which uses
+absolute paths because a server serves it for missing URLs at any depth. A
+different host would need to serve `index.html` for directory requests
+(`/people/` → `/people/index.html`) and point its not-found handler at
+`/404.html` (Apache: `ErrorDocument 404 /404.html`; nginx:
+`error_page 404 /404.html;`).
 
 ### Do not deploy
 
@@ -375,6 +396,9 @@ is a local convenience and harmless to ship, but nothing serves from it.
 - [ ] Check both Google booking forms accept responses from students.
 - [ ] Re-run the sitemap dates if launch is far from the last edit.
 - [ ] Re-check hero contrast if `hero.jpg` is replaced (see *Accessibility*).
+- [ ] Turn on **Enforce HTTPS** in Settings → Pages. The certificate is issued
+      and `https://chao.rice.edu` works, but it is not yet compulsory, so the
+      redirect from the old project URL still lands on `http://`.
 
 ### External dependencies
 

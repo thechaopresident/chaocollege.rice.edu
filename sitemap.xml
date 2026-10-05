@@ -1,83 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://chaocollege.rice.edu/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://chao.rice.edu/</loc>
+    <lastmod>2026-10-05</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://chaocollege.rice.edu/about/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://chao.rice.edu/about/</loc>
+    <lastmod>2026-10-05</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://chaocollege.rice.edu/people/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://chao.rice.edu/people/</loc>
+    <lastmod>2026-10-05</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://chaocollege.rice.edu/people/team/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://chao.rice.edu/people/team/</loc>
+    <lastmod>2026-10-05</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://chaocollege.rice.edu/people/government/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://chao.rice.edu/people/government/</loc>
+    <lastmod>2026-10-05</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://chaocollege.rice.edu/people/court/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://chao.rice.edu/people/court/</loc>
+    <lastmod>2026-10-05</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://chaocollege.rice.edu/people/committees/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://chao.rice.edu/people/committees/</loc>
+    <lastmod>2026-10-05</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://chaocollege.rice.edu/people/student-staff/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://chao.rice.edu/people/student-staff/</loc>
+    <lastmod>2026-10-05</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://chaocollege.rice.edu/people/associates/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://chao.rice.edu/people/associates/</loc>
+    <lastmod>2026-10-05</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://chaocollege.rice.edu/resources/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://chao.rice.edu/resources/</loc>
+    <lastmod>2026-10-05</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://chaocollege.rice.edu/resources/funding/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://chao.rice.edu/resources/funding/</loc>
+    <lastmod>2026-10-05</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://chaocollege.rice.edu/resources/governance/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://chao.rice.edu/resources/governance/</loc>
+    <lastmod>2026-10-05</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://chaocollege.rice.edu/resources/support/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://chao.rice.edu/resources/forms/</loc>
+    <lastmod>2026-10-05</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://chaocollege.rice.edu/oweek/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://chao.rice.edu/resources/support/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://chao.rice.edu/oweek/</loc>
+    <lastmod>2026-10-05</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://chaocollege.rice.edu/oweek/2026/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://chao.rice.edu/oweek/2026/</loc>
+    <lastmod>2026-10-05</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://chaocollege.rice.edu/calendar/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <loc>https://chao.rice.edu/calendar/</loc>
+    <lastmod>2026-10-05</lastmod>
     <priority>0.8</priority>
   </url>
 </urlset>

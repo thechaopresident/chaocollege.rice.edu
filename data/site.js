@@ -20,7 +20,7 @@ window.CHAO_SITE = {
   /* --- Identity -------------------------------------------------------- */
   name:        "Chao College",
   shortName:   "Chao",
-  domain:      "chaocollege.rice.edu",
+  domain:      "chao.rice.edu",
 
   /* From the college crest. */
   motto:       "Una Domus, Multae Viae",
