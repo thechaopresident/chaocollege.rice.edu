@@ -51,6 +51,8 @@
   document.documentElement.classList.add("intro-active");
 
   var crest = stage.querySelector(".intro__crest");
+  var field = stage.querySelector(".intro__field");
+  var hero  = stage.querySelector(".intro__hero");
   var mark  = stage.querySelector(".intro__wordmark");
   var skip  = stage.querySelector(".intro__skip");
 
@@ -59,6 +61,43 @@
   var hintTimer = setTimeout(function () {
     stage.classList.add("show-hint");
   }, 2000);
+
+  /* Where the crest and the name sit in the real hero, in viewport
+     coordinates, as they will appear once the pin lets go. Measured rather
+     than guessed: hard-coded scales drift the moment the type scale, the
+     header height or the hero's proportions change, and the whole point is
+     that the last frame of the intro and the first frame of the page line up.
+     Returns null if the hero is not on this page, in which case the intro
+     simply fades. */
+  function heroTargets() {
+    var hero = document.querySelector(".hero");
+    var hc = document.querySelector(".hero__crest img") || document.querySelector(".hero__crest");
+    var hm = document.querySelector(".hero__wordmark");
+    if (!hero || !hc || !hm) return null;
+    var h = hero.getBoundingClientRect();
+    var c = hc.getBoundingClientRect();
+    var m = hm.getBoundingClientRect();
+    if (!c.height || !m.height) return null;
+    var head = document.querySelector(".site-header");
+    var top = head ? head.getBoundingClientRect().height : 0;
+    return {
+      crestH: c.height, crestY: top + (c.top - h.top) + c.height / 2,
+      markH:  m.height, markY:  top + (m.top - h.top) + m.height / 2
+    };
+  }
+
+  /* Measured fresh each time ScrollTrigger refreshes, so a resize or a font
+     landing late does not leave the landing position stale. */
+  function land(el, prop) {
+    return function () {
+      var t = heroTargets();
+      if (!t) return prop === "scale" ? 0.4 : 0;
+      var r = el.getBoundingClientRect();
+      var isCrest = el === crest;
+      if (prop === "scale") return (isCrest ? t.crestH : t.markH) / r.height;
+      return (isCrest ? t.crestY : t.markY) - (r.top + r.height / 2);
+    };
+  }
 
   var done = false;
 
@@ -83,6 +122,7 @@
       onUpdate: function (self) {
         if (self.progress > 0.02) stage.classList.add("has-moved");
       },
+      invalidateOnRefresh: true,
       onLeave: function () { finish(true); }
     }
   });
@@ -90,9 +130,16 @@
   /* Both walk to roughly the size and place they occupy in the hero, so the
      handover reads as the same object settling rather than as a cut. The
      crest leads and the name follows a beat behind it. */
-  tl.to(crest, { scale: 0.30, yPercent: -34, ease: "power2.inOut", duration: 1 }, 0)
-    .to(mark,  { scale: 0.44, yPercent: -22, ease: "power2.inOut", duration: 1 }, 0.1)
-    .to(stage, { autoAlpha: 0, ease: "power1.in", duration: 0.3 }, 0.75);
+  tl.to(crest, { scale: land(crest, "scale"), y: land(crest, "y"),
+                 ease: "power2.inOut", duration: 1 }, 0)
+    .to(mark,  { scale: land(mark, "scale"),  y: land(mark, "y"),
+                 ease: "power2.inOut", duration: 1 }, 0.1)
+    /* The opening field gives way to the hero photograph, so what the reader
+       is looking at by the end is the homepage itself. No fade to white and
+       no cut: the last frame of the intro and the first frame of the page are
+       the same picture. */
+    .to(hero,  { opacity: 1, ease: "power1.inOut", duration: 0.55 }, 0.3)
+    .to(field, { opacity: 0, ease: "power1.inOut", duration: 0.55 }, 0.3);
 
   if (skip) {
     skip.addEventListener("click", function () {

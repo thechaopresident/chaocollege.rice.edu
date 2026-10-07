@@ -18,6 +18,15 @@
   display: grid;
   place-items: center;
   overflow: hidden;
+  isolation: isolate;
+}
+
+/* The field the crest opens on. It fades out as the hero fades in, so the
+   intro ends up looking like the homepage rather than like nothing. */
+.intro__field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   background:
     radial-gradient(120% 90% at 50% 40%,
                     var(--brand-primary-light) 0%,
@@ -25,8 +34,34 @@
                     var(--brand-primary-dark) 100%);
 }
 
+/* The homepage hero, reproduced exactly — same photograph, same crop, same
+   scrim as .hero in styles.css. By the end of the scroll the intro IS the
+   hero, so releasing the pin swaps one for the other with nothing to see. */
+.intro__hero {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+}
+.intro__hero img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+}
+.intro__hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, .62), rgba(0, 0, 0, .88));
+}
+
 .intro__crest {
   grid-area: 1 / 1;
+  position: relative;
+  z-index: 1;
   width: min(74vh, 86vw);
   max-width: 100%;
   transform-origin: 50% 50%;
@@ -35,6 +70,8 @@
 
 .intro__wordmark {
   grid-area: 1 / 1;
+  position: relative;
+  z-index: 1;
   align-self: end;
   margin-bottom: 6vh;
   font-family: var(--font-display);
