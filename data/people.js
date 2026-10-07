@@ -136,7 +136,7 @@ window.CHAO_PEOPLE = {
 
     { name: "Matthias Canon", year: "'27", role: "Community Vice President (CVP)", pronouns: "he/him", email: "thechaocvp@gmail.com",
       description: "Chao's Community Vice President (CVP) is the second-highest executive member of the Chabinet regarding the student body of Chao College, facilitating and maintaining Chao's social and cultural wellbeing and traditions.",
-      photo: null, photoDrive: null },
+      photo: "matthias-canon.jpg", focus: "center center", photoDrive: null },
 
     { name: "Ian Rodriguez", year: "'28", role: "Senior Treasurer", pronouns: "he/him", email: "chaotreasurers@gmail.com",
       description: "Chao's Treasurers are the highest financial officers of the Chabinet, overseeing all financial transactions at Chao College.",
