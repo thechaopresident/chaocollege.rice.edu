@@ -50,22 +50,50 @@
     }
   }
 
+  /* Hands the page back: the header returns and the parts that were waiting
+     fade up.
+
+     It deliberately does NOT hand scroll restoration back. Handing it back
+     here defeats the whole arrangement: this runs when the intro finishes, so
+     scrolling through it would re-arm restoration just in time for the next
+     reload to restore a position past the intro and kill it the instant it
+     appeared. The setting belongs to this page's history entry alone. */
+  function release() {
+    document.documentElement.classList.remove("intro-active");
+  }
+
   /* Every exit runs through here, so there is one definition of "the intro is
      over".
 
-     It deliberately does NOT hand scroll restoration back. Handing it back
-     here defeats the whole arrangement: release() runs when the intro
-     finishes, so scrolling through it re-armed restoration just in time for
-     the next reload to restore a position past the intro, which killed it the
-     instant it appeared. The setting belongs to this page's history entry
-     alone and is left as it is. */
-  function release() {
-    document.documentElement.classList.remove("intro-active");
+     The stage and the pin's spacer stand about 2,200px tall, and the real hero
+     begins directly below them. Take that height away and the reader's scroll
+     position, which was measured against it, now points deep into the page —
+     which is what dropped them near the bottom. Leaving the height in place is
+     no better: the reader would then scroll on through the intro's last frame
+     and meet a second copy of the hero sliding up beneath it.
+
+     So both happen together, in one frame: the stage comes out and the page
+     goes to the top. The reader does not see a jump, because the intro's last
+     frame IS the hero — same photograph, same scrim, crest and name already
+     measured onto their hero positions — so the picture before and the picture
+     after are the same picture. */
+  function finish() {
+    if (done) return;
+    done = true;
+    clearTimeout(hintTimer);
+    if (tl.scrollTrigger) tl.scrollTrigger.kill();
+    tl.kill();
     stage.remove();
+    window.scrollTo(0, 0);
+    release();
   }
 
+  /* The intro is not going to run: asked for stillness, already inside the
+     site, or GSAP did not load. Nothing has been pinned, so there is no height
+     to lose — the stage comes straight out, and the page is an ordinary page. */
   if (calm || !arriving() || !window.gsap || !window.ScrollTrigger) {
     release();
+    stage.remove();
     return;
   }
 
@@ -143,15 +171,6 @@
 
   var done = false;
 
-  function finish() {
-    if (done) return;
-    done = true;
-    clearTimeout(hintTimer);
-    if (tl.scrollTrigger) tl.scrollTrigger.kill();
-    tl.kill();
-    release();
-  }
-
   var tl = gsap.timeline({
     scrollTrigger: {
       trigger: stage,
@@ -165,7 +184,7 @@
         if (self.progress > 0.02) stage.classList.add("has-moved");
       },
       invalidateOnRefresh: true,
-      onLeave: function () { finish(); }
+      onLeave: function () { clearTimeout(hintTimer); settle(); }
     }
   });
 
@@ -183,17 +202,27 @@
     .to(hero,  { opacity: 1, ease: "power1.inOut", duration: 0.55 }, 0.3)
     .to(field, { opacity: 0, ease: "power1.inOut", duration: 0.55 }, 0.3);
 
-  if (skip) {
-    skip.addEventListener("click", function () {
-      finish();
-      window.scrollTo(0, 0);
-    });
+  /* onLeave fires the moment the SCROLL passes the end, but with scrub the
+     animation is deliberately a beat behind the scroll and is still catching
+     up — the crest has not finished landing yet. Handing the page over on that
+     signal cuts the landing short. So wait for the animation itself to arrive,
+     and let go then.
+
+     If the reader scrolls back up in the meantime the intro is theirs again,
+     so this quietly stops waiting and onLeave will call it afresh next time. */
+  function settle() {
+    if (done) return;
+    var st = tl.scrollTrigger;
+    if (!st || st.progress < 1) return;
+    if (tl.progress() > 0.999) { finish(); return; }
+    requestAnimationFrame(settle);
   }
+
+  if (skip) skip.addEventListener("click", finish);
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && !done &&
         document.documentElement.classList.contains("intro-active")) {
       finish();
-      window.scrollTo(0, 0);
     }
   });
 })();

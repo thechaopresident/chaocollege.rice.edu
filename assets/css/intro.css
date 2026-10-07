@@ -10,13 +10,27 @@
   z-index: 50;
 }
 
-/* The pinned screen. GSAP pins this element; everything inside is centred. */
+/* The pinned screen. GSAP pins this element.
+
+   The crest and the name are a column, not a stack. They used to share one
+   grid cell — the crest centred, the name pinned to the bottom — which left
+   nothing deciding the space between them: on a tall screen the name rode up
+   into the crest, and on a short one it collided with the scroll hint. Laying
+   them out one above the other makes that space a real quantity.
+
+   The foot padding is the hint's room. The hint is positioned over the stage
+   rather than in the column, so the column has to leave it somewhere to be. */
 .intro__stage {
   position: relative;
   height: 100vh;
   height: 100svh;              /* avoids the phone URL bar resizing the stage */
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  padding: var(--space-6) var(--space-5)
+           calc(var(--space-6) + 5rem + env(safe-area-inset-bottom, 0px));
   overflow: hidden;
   isolation: isolate;
 }
@@ -58,22 +72,26 @@
   background: linear-gradient(to bottom, rgba(0, 0, 0, .62), rgba(0, 0, 0, .88));
 }
 
+/* Sized to the screen, but allowed to give way: min-height 0 lets the column
+   shrink it when there is not enough height for it at full size, rather than
+   letting it push the name off the bottom. The landing scale is measured from
+   whatever size it ends up at, so shrinking costs nothing. */
 .intro__crest {
-  grid-area: 1 / 1;
   position: relative;
   z-index: 1;
-  width: min(74vh, 86vw);
+  width: min(68vh, 82vw);
   max-width: 100%;
+  min-height: 0;
+  object-fit: contain;
   transform-origin: 50% 50%;
   will-change: transform;
 }
 
 .intro__wordmark {
-  grid-area: 1 / 1;
   position: relative;
   z-index: 1;
-  align-self: end;
-  margin-bottom: 6vh;
+  flex: none;
+  margin: 0;
   font-family: var(--font-display);
   font-weight: var(--display-weight);
   letter-spacing: var(--display-tracking);
@@ -83,7 +101,6 @@
   text-align: center;
   transform-origin: 50% 100%;
   will-change: transform;
-  margin-top: 0;
 }
 
 .intro__motto {
