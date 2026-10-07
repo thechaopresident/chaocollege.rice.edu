@@ -152,29 +152,6 @@
   50%      { transform: rotate(45deg) translate(3px, 3px); opacity: 1; }
 }
 
-/* --- Skip ---------------------------------------------------------------- */
-
-.intro__skip {
-  position: absolute;
-  top: calc(var(--space-5) + env(safe-area-inset-top, 0px));
-  right: var(--space-5);
-  font-family: var(--font-ui);
-  font-size: .78rem;
-  font-weight: 600;
-  letter-spacing: .06em;
-  color: var(--color-text-invert);
-  background: rgba(0, 0, 0, .3);
-  border: 1px solid rgba(255, 255, 255, .75);
-  border-radius: var(--radius-pill);
-  padding: 7px 15px;
-  cursor: pointer;
-}
-.intro__skip:hover { background: rgba(0, 0, 0, .45); }
-.intro__skip:focus-visible {
-  outline: 2px solid var(--brand-accent-light);
-  outline-offset: 3px;
-}
-
 /* --- While the intro holds the screen ------------------------------------ *
    The homepage stays in the document the whole time — present for screen
    readers, search engines and anyone who skips — it simply sits underneath. */

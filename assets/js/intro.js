@@ -12,7 +12,7 @@
    for reduced motion, never runs twice in a session, and never holds the page
    back — the homepage is in the document and reachable throughout, so a deep
    link, a screen reader or a search engine never meets a locked gate. Escape
-   and a Skip button both end it at once.
+   ends it at once.
    ========================================================================= */
 
 (function () {
@@ -124,7 +124,6 @@
   var field = stage.querySelector(".intro__field");
   var hero  = stage.querySelector(".intro__hero");
   var mark  = stage.querySelector(".intro__wordmark");
-  var skip  = stage.querySelector(".intro__skip");
 
   /* The hint arrives after a beat, so the first thing on screen is the crest
      rather than an instruction. */
@@ -218,7 +217,10 @@
     requestAnimationFrame(settle);
   }
 
-  if (skip) skip.addEventListener("click", finish);
+  /* There is no Skip button: the intro is a few seconds of scrolling, and a
+     button to leave it was more furniture than help. Escape stays as a quiet
+     way out — it costs nothing and it is what someone stuck would try. Anyone
+     who asked for reduced motion never arrives here at all. */
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && !done &&
         document.documentElement.classList.contains("intro-active")) {
