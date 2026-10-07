@@ -51,7 +51,14 @@
   }
 
   /* Every exit runs through here, so there is one definition of "the intro is
-     over". */
+     over".
+
+     It deliberately does NOT hand scroll restoration back. Handing it back
+     here defeats the whole arrangement: release() runs when the intro
+     finishes, so scrolling through it re-armed restoration just in time for
+     the next reload to restore a position past the intro, which killed it the
+     instant it appeared. The setting belongs to this page's history entry
+     alone and is left as it is. */
   function release() {
     document.documentElement.classList.remove("intro-active");
     stage.remove();
@@ -61,6 +68,26 @@
     release();
     return;
   }
+
+  /* A reload puts the reader back where they were, and "where they were" is
+     usually past the intro. ScrollTrigger would then be beyond its end before
+     anyone saw anything, fire onLeave and tear the intro down — a flash of the
+     intro and then nothing.
+
+     Turning restoration off applies to the NEXT load of this history entry,
+     which is the reload we are guarding against, so it has to be set now and
+     left set. It scopes to this page only; everywhere else on the site keeps
+     the browser's own behaviour. */
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  window.scrollTo(0, 0);
+  /* Restoration can already have happened by the time this runs, so the top is
+     asserted again once loading finishes. */
+  window.addEventListener("load", function () {
+    if (document.documentElement.classList.contains("intro-active")) {
+      window.scrollTo(0, 0);
+      ScrollTrigger.refresh();
+    }
+  });
 
   gsap.registerPlugin(ScrollTrigger);
   document.documentElement.classList.add("intro-active");
