@@ -5,9 +5,14 @@
    brand/tokens.css, like the rest of the site.
    ========================================================================= */
 
+/* The intro is an overlay, not a section: fixed, so it occupies no part of
+   the document. The homepage lies underneath it at its full height, already
+   scrolled to the top, for the whole of the intro — which is what lets the
+   overlay simply be lifted off at the end with nothing moving. */
 .intro {
-  position: relative;
-  z-index: 50;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
 }
 
 /* The pinned screen. GSAP pins this element.
@@ -22,8 +27,7 @@
    rather than in the column, so the column has to leave it somewhere to be. */
 .intro__stage {
   position: relative;
-  height: 100vh;
-  height: 100svh;              /* avoids the phone URL bar resizing the stage */
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -156,18 +160,11 @@
    The homepage stays in the document the whole time — present for screen
    readers, search engines and anyone who skips — it simply sits underneath. */
 
-.intro-active body { overflow-x: hidden; }
-
-/* The intro owns the screen while it runs, so the sticky header is held back
-   rather than floating over it. Taking it out of flow matters as much as
-   hiding it: a sticky header still holds its 64px of the page at zero
-   opacity, and that showed as a white band above the intro. It returns to
-   sticky the moment the intro releases. */
+/* The header waits out the intro and fades up with the rest of the page. It
+   keeps its place in the flow while it waits — the overlay is covering it
+   anyway, and moving it would shift the hero underneath by the header's own
+   height, which is exactly the hero the crest is being measured against. */
 .intro-active .site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   opacity: 0;
   pointer-events: none;
   transition: opacity .4s ease;
