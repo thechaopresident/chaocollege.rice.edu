@@ -21,29 +21,44 @@
   var stage = document.querySelector("[data-intro]");
   if (!stage) return;
 
-  var SKIP_KEY = "chao-intro-seen";
   var calm = window.matchMedia &&
              window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function seenThisSession() {
-    try { return sessionStorage.getItem(SKIP_KEY) === "1"; } catch (e) { return false; }
-  }
+  /* The intro greets an arrival, so it plays for someone coming to the site
+     and stays out of the way for someone already moving around inside it.
 
-  /* Every exit runs through here, so there is one definition of "the intro is
-     over". `seen` is only true when it actually had its turn — played out, or
-     the reader skipped it. Bailing because the browser cannot run it must not
-     mark the session, or a fault would look exactly like a returning visitor
-     and would never retry. */
-  function release(seen) {
-    document.documentElement.classList.remove("intro-active");
-    stage.remove();
-    if (seen) {
-      try { sessionStorage.setItem(SKIP_KEY, "1"); } catch (e) { /* private window */ }
+       reload           -> play. Asking for the page again asks for the intro.
+       back / forward   -> skip. That is moving within the site, not arriving.
+       no referrer      -> play. Typed, bookmarked, or opened from an app.
+       referrer is ours -> skip. Followed a link from another Chao page.
+       referrer is not  -> play. Came from a search result or someone's link.
+
+     Nothing is remembered between loads: the question is only ever where this
+     particular visit came from. */
+  function arriving() {
+    var nav = (performance.getEntriesByType &&
+               performance.getEntriesByType("navigation")[0]) || null;
+    if (nav && nav.type === "reload") return true;
+    if (nav && nav.type === "back_forward") return false;
+
+    var ref = document.referrer;
+    if (!ref) return true;
+    try {
+      return new URL(ref).host !== location.host;
+    } catch (e) {
+      return true;                 /* unparseable referrer: treat as outside */
     }
   }
 
-  if (calm || seenThisSession() || !window.gsap || !window.ScrollTrigger) {
-    release(false);
+  /* Every exit runs through here, so there is one definition of "the intro is
+     over". */
+  function release() {
+    document.documentElement.classList.remove("intro-active");
+    stage.remove();
+  }
+
+  if (calm || !arriving() || !window.gsap || !window.ScrollTrigger) {
+    release();
     return;
   }
 
@@ -101,13 +116,13 @@
 
   var done = false;
 
-  function finish(seen) {
+  function finish() {
     if (done) return;
     done = true;
     clearTimeout(hintTimer);
     if (tl.scrollTrigger) tl.scrollTrigger.kill();
     tl.kill();
-    release(seen);
+    release();
   }
 
   var tl = gsap.timeline({
@@ -123,7 +138,7 @@
         if (self.progress > 0.02) stage.classList.add("has-moved");
       },
       invalidateOnRefresh: true,
-      onLeave: function () { finish(true); }
+      onLeave: function () { finish(); }
     }
   });
 
@@ -143,14 +158,14 @@
 
   if (skip) {
     skip.addEventListener("click", function () {
-      finish(true);
+      finish();
       window.scrollTo(0, 0);
     });
   }
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && !done &&
         document.documentElement.classList.contains("intro-active")) {
-      finish(true);
+      finish();
       window.scrollTo(0, 0);
     }
   });
