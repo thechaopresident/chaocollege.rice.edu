@@ -165,12 +165,40 @@
 .intro-active body { overflow-x: hidden; }
 
 /* The intro owns the screen while it runs, so the sticky header is held back
-   rather than floating over it. It is hidden, not removed: it returns the
-   moment the intro releases, and skipping restores it instantly. */
+   rather than floating over it. Taking it out of flow matters as much as
+   hiding it: a sticky header still holds its 64px of the page at zero
+   opacity, and that showed as a white band above the intro. It returns to
+   sticky the moment the intro releases. */
 .intro-active .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   opacity: 0;
   pointer-events: none;
   transition: opacity .4s ease;
+}
+
+/* Parts of the homepage that should arrive with it rather than being there
+   all along: the hero's buttons, and the welcome panel whose white edge sits
+   under the hero photograph. They wait at zero while the intro holds the
+   screen and fade up when it lets go.
+
+   A page that never runs the intro never gets the class, so nothing here
+   applies and both are simply visible. */
+.hero__links,
+[data-mount="welcome"] {
+  transition: opacity .9s ease .15s;
+}
+.intro-active .hero__links,
+.intro-active [data-mount="welcome"] {
+  opacity: 0;
+}
+
+/* Nothing should fade in for a reader who asked for stillness. */
+@media (prefers-reduced-motion: reduce) {
+  .hero__links,
+  [data-mount="welcome"] { transition: none; opacity: 1 !important; }
 }
 
 /* Nothing of the intro moves for a reader who asked for stillness. The script
