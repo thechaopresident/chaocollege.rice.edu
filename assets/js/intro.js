@@ -222,8 +222,14 @@
             ScrollTrigger.refresh();
             return;
           }
+          /* Normally the handover has already happened, while the stage was
+             still pinned — see watch(). Reaching here means the reader moved
+             faster than the scrub could follow, so the landing is forced to
+             its end and the page handed over at once. A snap on a hard flick
+             is a far smaller thing than two heroes sliding past each other. */
           clearTimeout(hintTimer);
-          settle();
+          if (tl.progress() < motionEnd) tl.progress(motionEnd);
+          finish();
         }
       }
     });
@@ -241,23 +247,45 @@
          the same picture. */
       .to(hero,  { opacity: 1, ease: "power1.inOut", duration: 0.55 }, 0.3)
       .to(field, { opacity: 0, ease: "power1.inOut", duration: 0.55 }, 0.3);
+
+    /* Everything above is the motion. What follows is slack: scrolling that
+       advances the timeline past the end of the animation without anything
+       moving.
+
+       It exists so the crest finishes landing while the stage is still
+       pinned. Without it the animation can only complete at the very moment
+       the pin lets go, and with scrub it is a beat behind even then — so the
+       page was handed over late, after the stage had begun to scroll away
+       and the real hero had started rising underneath it. Two heroes.
+
+       The slack turns the last stretch of the scroll into room for the scrub
+       to catch up in, with the stage still holding the screen. */
+    var motionDur = tl.duration();
+    tl.to({}, { duration: 0.45 });
+    motionEnd = motionDur / tl.duration();
   }
 
 
-  /* onLeave fires the moment the SCROLL passes the end, but with scrub the
-     animation is deliberately a beat behind the scroll and is still catching
-     up — the crest has not finished landing yet. Handing the page over on that
-     signal cuts the landing short. So wait for the animation itself to arrive,
-     and let go then.
+  /* Where in the timeline the animation stops and the slack begins. */
+  var motionEnd = 1;
 
-     If the reader scrolls back up in the meantime the intro is theirs again,
-     so this quietly stops waiting and onLeave will call it afresh next time. */
-  function settle() {
-    if (done || !tl) return;
-    var st = tl.scrollTrigger;
-    if (!st || st.progress < 1) return;
-    if (tl.progress() > 0.999) { finish(); return; }
-    requestAnimationFrame(settle);
+  /* The handover is driven by the ANIMATION arriving, not by the scroll
+     reaching the end. Those are different moments — scrub keeps the first
+     behind the second — and the gap between them is where two heroes were
+     visible: the pin had released and the stage was sliding away while the
+     real hero rose underneath.
+
+     Watching the animation instead means the page is handed over at the exact
+     frame the crest comes to rest, with the stage still pinned and the slack
+     absorbing the rest of the scroll. Nothing is ever seen sliding. */
+  function watch() {
+    if (done) return;
+    if (engaged && tl && tl.progress() >= motionEnd - 0.0005) {
+      clearTimeout(hintTimer);
+      finish();
+      return;
+    }
+    requestAnimationFrame(watch);
   }
 
   /* There is no Skip button: the intro is a few seconds of scrolling, and a
@@ -311,6 +339,7 @@
     build();
     ScrollTrigger.refresh();
     holdTop(performance.now() + 1500);
+    watch();
   }
 
   if (document.readyState === "complete") begin();
