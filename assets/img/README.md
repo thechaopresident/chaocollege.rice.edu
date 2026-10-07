@@ -1,5 +1,9 @@
 # Images
 
+> Adding or replacing a person's photo? **[../../UPDATING.md](../../UPDATING.md)**
+> is the step-by-step version. This file is the reference: sizes, crop focus,
+> and how the crest files are generated.
+
 Drop image files here and reference them **by filename** from the data files —
 never with a path. The renderer prefixes the correct directory.
 

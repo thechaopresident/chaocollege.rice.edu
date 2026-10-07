@@ -3,6 +3,11 @@
 Static site for **chao.rice.edu**. Plain HTML, CSS and JavaScript — no
 build step, no npm, no framework. Every file you need to edit is plain text.
 
+> **Just want to post an announcement or add someone's photo?**
+> → **[UPDATING.md](UPDATING.md)** has step-by-step instructions, all of it
+> doable from github.com in a browser. The rest of this file is how the site is
+> built.
+
 Layout follows the pattern used by Rice's other residential college sites
 (sticky college-colored nav with dropdowns, full-bleed hero with the crest set
 into the wordmark, quick links, announcements, photo strip, "Find us at Rice"
@@ -71,27 +76,20 @@ HTML file.
 
 ## Editing content
 
+**Announcements, photos, people, Resources cards and the calendar are all in
+[UPDATING.md](UPDATING.md)**, written for someone editing on github.com without
+a terminal. What follows is the parts that need more than a data edit.
+
 ### Add or rename a nav item
 
 `data/site.js` → `nav`. Add `children: [...]` to make it a dropdown.
 If the item points at a new page, create the folder and copy an existing
-`index.html` into it, changing `data-page` and the `<h1>`.
+`index.html` into it, changing `data-page` and the `<h1>`. Sections of Resources
+and years of O-Week also need an entry in `data/pages.js` — the pattern is
+described beside each.
 
-### Update an announcement
-
-`data/site.js` → `announcements`. Newest first. Delete an entry to remove its row.
-
-### Update a person
-
-`data/people.js`. Grouped by section: `leadership`, `government`, `court`,
-`committees`, `rhas`, `ajs`, `paas`, `associates`.
-
-### Add a photo
-
-Drop the file in `assets/img/` (or `assets/img/people/`) and set the filename in
-the data file. See `assets/img/README.md`. Every image slot shows a
-brand-colored placeholder until a real file is set, so nothing looks broken
-while you wait on photography.
+Every image slot shows a brand-colored placeholder until a real file is set, so
+nothing looks broken while you wait on photography.
 
 ### The calendar
 
