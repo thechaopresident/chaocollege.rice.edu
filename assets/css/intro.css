@@ -1,0 +1,156 @@
+/* ============================================================================
+   CHAO — SCROLL INTRO
+   ----------------------------------------------------------------------------
+   Loaded only by pages that carry the intro. Every colour comes from
+   brand/tokens.css, like the rest of the site.
+   ========================================================================= */
+
+.intro {
+  position: relative;
+  z-index: 50;
+}
+
+/* The pinned screen. GSAP pins this element; everything inside is centred. */
+.intro__stage {
+  position: relative;
+  height: 100vh;
+  height: 100svh;              /* avoids the phone URL bar resizing the stage */
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 50% 40%,
+                    var(--brand-primary-light) 0%,
+                    var(--brand-primary) 55%,
+                    var(--brand-primary-dark) 100%);
+}
+
+/* The crest's own dragons are painted out; the WebGL canvas draws the live
+   ones on top, in exactly the place they were cut from. */
+.intro__crest {
+  grid-area: 1 / 1;
+  width: min(74vh, 86vw);
+  max-width: 100%;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.intro__wordmark {
+  grid-area: 1 / 1;
+  align-self: end;
+  margin-bottom: 6vh;
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  letter-spacing: var(--display-tracking);
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.05;
+  color: var(--color-text-invert);
+  text-align: center;
+  transform-origin: 50% 100%;
+  will-change: transform;
+  margin-top: 0;
+}
+
+.intro__motto {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: clamp(.62rem, 1.5vw, .82rem);
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--brand-accent-light);
+  margin-top: var(--space-3);
+}
+
+/* Sits above the crest so the dragons read as being in front of the shield. */
+.intro__gl {
+  grid-area: 1 / 1;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* --- The scroll hint ----------------------------------------------------- */
+
+.intro__hint {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-ui);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--brand-accent-light);
+  opacity: 0;
+  transition: opacity .6s ease;
+  pointer-events: none;
+}
+.intro.show-hint .intro__hint { opacity: 1; }
+/* Once the reader starts scrolling it has done its job. */
+.intro.has-moved .intro__hint { opacity: 0; }
+
+.intro__chevron {
+  width: 18px;
+  height: 18px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  animation: intro-nudge 1.8s ease-in-out infinite;
+}
+@keyframes intro-nudge {
+  0%, 100% { transform: rotate(45deg) translate(0, 0); opacity: .55; }
+  50%      { transform: rotate(45deg) translate(3px, 3px); opacity: 1; }
+}
+
+/* --- Skip ---------------------------------------------------------------- */
+
+.intro__skip {
+  position: absolute;
+  top: calc(var(--space-5) + env(safe-area-inset-top, 0px));
+  right: var(--space-5);
+  font-family: var(--font-ui);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  color: var(--color-text-invert);
+  background: rgba(0, 0, 0, .3);
+  border: 1px solid rgba(255, 255, 255, .75);
+  border-radius: var(--radius-pill);
+  padding: 7px 15px;
+  cursor: pointer;
+}
+.intro__skip:hover { background: rgba(0, 0, 0, .45); }
+.intro__skip:focus-visible {
+  outline: 2px solid var(--brand-accent-light);
+  outline-offset: 3px;
+}
+
+/* --- While the intro holds the screen ------------------------------------ *
+   The homepage stays in the document the whole time — present for screen
+   readers, search engines and anyone who skips — it simply sits underneath. */
+
+.intro-active body { overflow-x: hidden; }
+
+/* The intro owns the screen while it runs, so the sticky header is held back
+   rather than floating over it. It is hidden, not removed: it returns the
+   moment the intro releases, and skipping restores it instantly. */
+.intro-active .site-header {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s ease;
+}
+
+/* Nothing of the intro moves for a reader who asked for stillness. The script
+   removes the stage outright in that case; this is the belt to its braces. */
+@media (prefers-reduced-motion: reduce) {
+  .intro { display: none !important; }
+  .intro__chevron { animation: none; }
+}
