@@ -77,14 +77,43 @@
      frame IS the hero — same photograph, same scrim, crest and name already
      measured onto their hero positions — so the picture before and the picture
      after are the same picture. */
+  /* The site scrolls smoothly, for the anchor links on the longer pages. That
+     turns this jump into a journey: the reader is set down deep in the page
+     the instant the stage's height goes, and then watches the browser travel
+     all the way back up to the top. It reads as the intro ending at the bottom
+     of the page and scrolling itself up.
+
+     So smooth scrolling is held off for this one movement and handed straight
+     back, rather than being given up site-wide. The scroll happens
+     synchronously, so putting the property back on the next line is safe. */
+  function jumpToTop() {
+    var root = document.documentElement;
+    var prior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    /* Setting the property is not enough on its own: nothing has recalculated
+       style yet, so the scroll below would still be performed against the old
+       value and glide anyway. Reading a layout property forces the recalc. */
+    void root.offsetHeight;
+    try {
+      /* Said on the call itself, where no computed style is consulted. */
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    } catch (e) {
+      window.scrollTo(0, 0);     /* older browsers: the property above governs */
+    }
+    root.style.scrollBehavior = prior;
+  }
+
   function finish() {
     if (done) return;
     done = true;
     clearTimeout(hintTimer);
-    if (tl.scrollTrigger) tl.scrollTrigger.kill();
-    tl.kill();
+    /* Escape can land before the timeline is built, so neither is assumed. */
+    if (tl) {
+      if (tl.scrollTrigger) tl.scrollTrigger.kill();
+      tl.kill();
+    }
     stage.remove();
-    window.scrollTo(0, 0);
+    jumpToTop();
     release();
   }
 
@@ -98,24 +127,18 @@
   }
 
   /* A reload puts the reader back where they were, and "where they were" is
-     usually past the intro. ScrollTrigger would then be beyond its end before
-     anyone saw anything, fire onLeave and tear the intro down — a flash of the
-     intro and then nothing.
+     usually past the intro. Build the pin while the page sits at 1,600px and
+     ScrollTrigger is created beyond its own end: it fires onLeave immediately
+     and tears the intro down before anyone sees it — a flash, and then the
+     ordinary page.
 
-     Turning restoration off applies to the NEXT load of this history entry,
-     which is the reload we are guarding against, so it has to be set now and
-     left set. It scopes to this page only; everywhere else on the site keeps
-     the browser's own behaviour. */
+     Asking the browser not to restore is worth doing but is NOT the guard.
+     It is a property of this history entry, and it does not survive the
+     reload in every browser — Chrome hands back "auto" on the way in, which
+     is exactly the case being defended against. So it is set as a courtesy
+     and nothing is allowed to depend on it. */
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-  window.scrollTo(0, 0);
-  /* Restoration can already have happened by the time this runs, so the top is
-     asserted again once loading finishes. */
-  window.addEventListener("load", function () {
-    if (document.documentElement.classList.contains("intro-active")) {
-      window.scrollTo(0, 0);
-      ScrollTrigger.refresh();
-    }
-  });
+  jumpToTop();
 
   gsap.registerPlugin(ScrollTrigger);
   document.documentElement.classList.add("intro-active");
@@ -169,37 +192,57 @@
   }
 
   var done = false;
+  var tl = null;
 
-  var tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: stage,
-      start: "top top",
-      end: "+=" + Math.round(window.innerHeight * 1.6),
-      /* Pin the trigger itself. Pinning a child takes it out of flow and
-         leaves the parent with no height, which collapses the page under it. */
-      pin: true,
-      scrub: 0.7,
-      onUpdate: function (self) {
-        if (self.progress > 0.02) stage.classList.add("has-moved");
-      },
-      invalidateOnRefresh: true,
-      onLeave: function () { clearTimeout(hintTimer); settle(); }
-    }
-  });
 
-  /* Both walk to roughly the size and place they occupy in the hero, so the
-     handover reads as the same object settling rather than as a cut. The
-     crest leads and the name follows a beat behind it. */
-  tl.to(crest, { scale: land(crest, "scale"), y: land(crest, "y"),
-                 ease: "power2.inOut", duration: 1 }, 0)
-    .to(mark,  { scale: land(mark, "scale"),  y: land(mark, "y"),
-                 ease: "power2.inOut", duration: 1 }, 0.1)
-    /* The opening field gives way to the hero photograph, so what the reader
-       is looking at by the end is the homepage itself. No fade to white and
-       no cut: the last frame of the intro and the first frame of the page are
-       the same picture. */
-    .to(hero,  { opacity: 1, ease: "power1.inOut", duration: 0.55 }, 0.3)
-    .to(field, { opacity: 0, ease: "power1.inOut", duration: 0.55 }, 0.3);
+  function build() {
+    tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: stage,
+        start: "top top",
+        end: "+=" + Math.round(window.innerHeight * 1.6),
+        /* Pin the trigger itself. Pinning a child takes it out of flow and
+           leaves the parent with no height, which collapses the page under it. */
+        pin: true,
+        scrub: 0.7,
+        onUpdate: function (self) {
+          if (self.progress > 0.02) stage.classList.add("has-moved");
+        },
+        invalidateOnRefresh: true,
+        onLeave: function () {
+          /* Reaching the end means nothing on its own: a restored scroll
+             position arrives as one jump straight past it, which is identical
+             from here to a reader who scrolled the whole way. What is not
+             identical is that scrolling takes a wheel, a key, a finger or a
+             pointer. With no input behind it, this is the browser putting the
+             page back, not the reader arriving — so go to the top and let the
+             intro play rather than ending it unseen. */
+          if (!engaged) {
+            jumpToTop();
+            ScrollTrigger.refresh();
+            return;
+          }
+          clearTimeout(hintTimer);
+          settle();
+        }
+      }
+    });
+
+    /* Both walk to roughly the size and place they occupy in the hero, so the
+       handover reads as the same object settling rather than as a cut. The
+       crest leads and the name follows a beat behind it. */
+    tl.to(crest, { scale: land(crest, "scale"), y: land(crest, "y"),
+                   ease: "power2.inOut", duration: 1 }, 0)
+      .to(mark,  { scale: land(mark, "scale"),  y: land(mark, "y"),
+                   ease: "power2.inOut", duration: 1 }, 0.1)
+      /* The opening field gives way to the hero photograph, so what the reader
+         is looking at by the end is the homepage itself. No fade to white and
+         no cut: the last frame of the intro and the first frame of the page are
+         the same picture. */
+      .to(hero,  { opacity: 1, ease: "power1.inOut", duration: 0.55 }, 0.3)
+      .to(field, { opacity: 0, ease: "power1.inOut", duration: 0.55 }, 0.3);
+  }
+
 
   /* onLeave fires the moment the SCROLL passes the end, but with scrub the
      animation is deliberately a beat behind the scroll and is still catching
@@ -210,7 +253,7 @@
      If the reader scrolls back up in the meantime the intro is theirs again,
      so this quietly stops waiting and onLeave will call it afresh next time. */
   function settle() {
-    if (done) return;
+    if (done || !tl) return;
     var st = tl.scrollTrigger;
     if (!st || st.progress < 1) return;
     if (tl.progress() > 0.999) { finish(); return; }
@@ -227,4 +270,49 @@
       finish();
     }
   });
+
+  /* The pin is built only once the page has finished loading AND has been put
+     back at the top. Building it earlier is the whole bug: the browser restores
+     the reader's old scroll position around load, and a ScrollTrigger created
+     at 1,600px is created past its own end, so it ends the intro before it has
+     begun. Forcing the top first and measuring afterwards means it is always
+     built against the position the intro actually starts from. */
+  /* The reader has touched something: from here on, a scroll is theirs. */
+  var engaged = false;
+  ["wheel", "touchstart", "keydown", "pointerdown"].forEach(function (t) {
+    window.addEventListener(t, function () { engaged = true; },
+                            { once: true, passive: true });
+  });
+
+  /* Scroll restoration does not always happen before load — Chrome put the
+     page back at 4,102px well after the intro had started, and a jump that
+     size reads to ScrollTrigger exactly like a reader who has scrolled all
+     the way through, so the intro ended on the spot.
+
+     Nothing can distinguish those two after the fact, so the top is simply
+     held: while the intro is up and the reader has not touched wheel, key,
+     pointer or screen, scroll position is not theirs and is put back. The
+     hold lifts the moment they do touch something, and in any case after a
+     second and a half, by which time restoration has long since happened. */
+  function holdTop(until) {
+    if (done || engaged) return;
+    if (window.scrollY !== 0) {
+      jumpToTop();
+      ScrollTrigger.refresh();
+    }
+    if (performance.now() < until) {
+      requestAnimationFrame(function () { holdTop(until); });
+    }
+  }
+
+  function begin() {
+    if (done) return;
+    jumpToTop();
+    build();
+    ScrollTrigger.refresh();
+    holdTop(performance.now() + 1500);
+  }
+
+  if (document.readyState === "complete") begin();
+  else window.addEventListener("load", begin);
 })();
