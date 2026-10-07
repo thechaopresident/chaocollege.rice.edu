@@ -245,5 +245,7 @@ window.CHAO_SITE = {
     ]}
   ],
 
-  footerNote: null
+  /* Sits in the bottom bar of the footer, opposite the copyright line, on
+     every page. Set to null to remove it. */
+  footerNote: "Designed by Gabriel M Brent"
 };
