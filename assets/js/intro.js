@@ -222,80 +222,25 @@
   }
   measure();
 
+  /* The end is noticed here, on every frame, rather than when the catch-up
+     tween reports itself complete. Each new wheel event replaces that tween
+     and pushes its completion back, so during a flick — a stream of events
+     arriving over several hundred milliseconds — "complete" kept being
+     deferred and the intro sat on its last frame waiting for the reader to
+     stop pushing. Watching the value instead ends it the moment it arrives. */
   function render() {
     if (tl) tl.progress(shown.p);
     if (shown.p > 0.02) stage.classList.add("has-moved");
+    if (!done && target >= 1 && shown.p > 0.999) finish();
   }
 
-  /* The two things that decide how it moves: the fastest it may travel, in
-     progress per second, and how hard it may change that speed, in the same
-     units per second. */
-  var MAX_RATE = 1.3;
-  var ACCEL    = 3.6;
-
-  var rate = 0;
-  var last = 0;
-
-  /* Nothing but a number: where the reader has pushed to. What is drawn is a
-     separate thing that follows it. */
   function advance(px) {
     if (done) return;
     target = Math.min(1, Math.max(0, target + px / distance));
-  }
-
-  /* The follower, running every frame for as long as the intro is up.
-
-     It carries a speed, and the speed itself is what is steered: each frame it
-     works out how fast it would like to be going — proportional to the
-     distance left, never above MAX_RATE — and then moves its actual speed
-     toward that, by no more than ACCEL allows.
-
-     Bounding the speed was not enough on its own, and that is worth spelling
-     out, because it looked like it was. A capped follower still went from a
-     standstill to full speed in a single frame; only the acceleration was
-     unbounded. From a standing start that is invisible, because the easing on
-     the lettering is flat at the beginning and hides it. Pick the intro up
-     again from halfway, where the easing is at its steepest, and the same
-     instant jump to full speed is plainly visible — which is why it looked
-     smooth on a first flick and jumped on a second.
-
-     With the speed itself steered there is no step anywhere: it winds up,
-     holds at the cap if there is far to go, and winds down as it arrives, from
-     wherever the reader happens to have left it. */
-  function follow(now) {
-    if (done) return;
-
-    var dt = last ? Math.min((now - last) / 1000, 0.05) : 1 / 60;
-    last = now;
-
-    var gap = target - shown.p;
-
-    /* The fastest it could be going and still be able to stop exactly on the
-       target, given how hard it is allowed to brake. Simply aiming at a speed
-       proportional to the distance left is the obvious thing and is worse: it
-       approaches without ever quite arriving, so the last of the movement
-       crawls — a tenth of the travel taking as long as the first half. */
-    var want = Math.sqrt(2 * ACCEL * Math.abs(gap));
-    if (want > MAX_RATE) want = MAX_RATE;
-    if (gap < 0) want = -want;
-
-    var dv = ACCEL * dt;
-    if (want > rate + dv) rate += dv;
-    else if (want < rate - dv) rate -= dv;
-    else rate = want;
-
-    if (rate) {
-      shown.p += rate * dt;
-      /* Never past the reader's own position. */
-      if ((gap > 0 && shown.p >= target) || (gap < 0 && shown.p <= target)) {
-        shown.p = target;
-        rate = 0;
-      }
-      render();
-    }
-
-    if (target >= 1 && shown.p > 0.999) { finish(); return; }
-    requestAnimationFrame(follow);
+    gsap.to(shown, {
+      p: target, duration: 0.5, ease: "power3.out",
+      overwrite: true, onUpdate: render, onComplete: render
+    });
   }
 
   /* --- the end ------------------------------------------------------------ *
@@ -306,6 +251,16 @@
     if (done) return;
     done = true;
     clearTimeout(hintTimer);
+
+    /* Begin swallowing NOW, in the same breath as finishing.
+
+       The teardown below waits a frame, and the swallowing used to start
+       there with it. For that one frame the intro was over and nothing was
+       refusing input — and a flick is still delivering events at that moment.
+       They went straight through to the page, which scrolled. That is the
+       page jumping down the instant the intro ends. */
+    draining = true;
+    stillGoing();
     /* The end is noticed from inside the catch-up tween's own callback, and
        the first thing the teardown does is kill that tween — killing the
        thing that is in the middle of calling you. The teardown therefore
@@ -315,19 +270,9 @@
   }
 
   function teardown() {
+    gsap.killTweensOf(shown);
     if (tl) { tl.progress(1); tl.kill(); tl = null; }
-
-    /* The page's own crest, name and motto come back first, underneath the
-       copies that are sitting exactly on them, and the buttons begin to
-       arrive. Then the overlay is faded off rather than cut away — see
-       .intro.is-leaving — and only then taken out of the document. */
-    release();
-    stage.classList.add("is-leaving");
-    setTimeout(function () {
-      if (stage.parentNode) stage.parentNode.removeChild(stage);
-    }, 260);
-
-    drain();
+    discard();
   }
 
   /* A flick does not stop when the intro does. Its remaining wheel events keep
@@ -340,18 +285,29 @@
      again. What the reader sees is the homepage arriving, and staying put. */
   var draining = false;
   var quiet = null;
+  var drainUntil = 0;
 
-  function drain() {
-    draining = true;
-    stillGoing();
+  /* How long the gesture must be silent before the page is handed back, and
+     the longest the whole business may last.
+
+     160ms was not enough. The tail of a flick is not a steady stream: the
+     events thin out as it decays and the gaps between the last of them grow
+     well past a sixth of a second. The swallowing stopped in one of those
+     gaps, and the rest of the gesture landed on the page.
+
+     The ceiling is there because this refuses the reader's input, and a
+     device that never goes quiet must not hold the page for ever. */
+  function stillGoing() {
+    if (!drainUntil) drainUntil = Date.now() + 2500;
+    clearTimeout(quiet);
+    if (Date.now() > drainUntil) { stopDraining(); return; }
+    quiet = setTimeout(stopDraining, 400);
   }
 
-  function stillGoing() {
+  function stopDraining() {
     clearTimeout(quiet);
-    quiet = setTimeout(function () {
-      draining = false;
-      detach();
-    }, 160);
+    draining = false;
+    detach();
   }
 
   /* --- input -------------------------------------------------------------- */
@@ -411,8 +367,13 @@
   /* The reader cannot scroll the page while the intro is up, but the browser
      still can — a restored position arriving late, or a dragged scrollbar. It
      is simply put back, and none of it is visible. */
+  /* The belt to the swallowing's braces. Refusing the events ought to be
+     enough, but anything that does get through — an event landing in a gap,
+     a device that scrolls by some other means — moves the page, and this puts
+     it back before it can be seen. It stays on through the drain for exactly
+     that reason. */
   function onScroll() {
-    if (!done && window.scrollY !== 0) toTop();
+    if ((!done || draining) && window.scrollY !== 0) toTop();
   }
 
   var resizeTimer = null;
@@ -455,7 +416,6 @@
     toTop();
     build();
     attach();
-    requestAnimationFrame(follow);
   }
 
   if (document.readyState === "complete") begin();
