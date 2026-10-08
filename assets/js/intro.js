@@ -144,9 +144,9 @@
                          document.querySelector(".hero__crest"),
         by: "box",  at: 0 },
       { el: name,  twin: document.querySelector(".hero__wordmark"),
-        by: "type", at: 0.1 },
+        by: "type", at: 0.07 },
       { el: motto, twin: document.querySelector(".hero .motto"),
-        by: "type", at: 0.16 }
+        by: "type", at: 0.11 }
     ];
   }
 
@@ -188,13 +188,22 @@
 
     /* Each walks to the size and place its counterpart already occupies, so
        the handover reads as the same lettering settling rather than as a cut.
-       The crest leads and the name follows a beat behind it. */
+       The crest leads and the name follows a beat behind it.
+
+       The ease is a sine rather than a cubic, and the beat between them is
+       shorter than it was, because together those two were making the motion
+       very uneven against the scroll: the middle third of the scroll carried
+       about three quarters of the movement, with the crest barely stirring at
+       the start and only the motto still going at the end. It now carries a
+       little over half. Not even — an ease that is even is a linear one, and
+       that starts and stops too abruptly to be worth it — but no longer a
+       lurch in the middle of a scroll that otherwise does nothing. */
     list.forEach(function (piece) {
       if (!piece.el || !piece.twin) return;
       tl.to(piece.el, {
         scale: ratio(piece),
         y: shift(piece),
-        ease: "power2.inOut", duration: 1
+        ease: "sine.inOut", duration: 1
       }, piece.at);
     });
 
