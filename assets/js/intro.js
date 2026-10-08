@@ -301,6 +301,7 @@
        They went straight through to the page, which scrolled. That is the
        page jumping down the instant the intro ends. */
     draining = true;
+    lastSwallowed = Infinity;
     stillGoing();
     /* The end is noticed from inside the catch-up tween's own callback, and
        the first thing the teardown does is kill that tween — killing the
@@ -327,22 +328,38 @@
   var draining = false;
   var quiet = null;
   var drainUntil = 0;
+  var lastSwallowed = Infinity;
 
   /* How long the gesture must be silent before the page is handed back, and
-     the longest the whole business may last.
+     the longest this may go on for in any case.
 
-     160ms was not enough. The tail of a flick is not a steady stream: the
-     events thin out as it decays and the gaps between the last of them grow
-     well past a sixth of a second. The swallowing stopped in one of those
-     gaps, and the rest of the gesture landed on the page.
-
-     The ceiling is there because this refuses the reader's input, and a
-     device that never goes quiet must not hold the page for ever. */
+     Both used to be longer, and the ceiling especially so. Every event put
+     the silence off again, so a reader who flicked to finish the intro and
+     then simply carried on scrolling — which is the ordinary thing to do —
+     kept the page locked against themselves for as long as the ceiling
+     allowed. The way out of that is below, in swallow(); these two are only
+     the backstop now, and can afford to be short. */
   function stillGoing() {
-    if (!drainUntil) drainUntil = Date.now() + 2500;
+    if (!drainUntil) drainUntil = Date.now() + 900;
     clearTimeout(quiet);
     if (Date.now() > drainUntil) { stopDraining(); return; }
-    quiet = setTimeout(stopDraining, 400);
+    quiet = setTimeout(stopDraining, 220);
+  }
+
+  /* Momentum only ever decays: every push of it is weaker than the one
+     before. So a push that is STRONGER than the one before it is not the
+     gesture that ended the intro still running down — it is the reader
+     starting a new one. The page goes back to them on the spot, and the event
+     that told us is theirs to keep rather than being swallowed.
+
+     That is what separates "the rest of the flick, which must not reach the
+     page" from "they want to read on now", which no amount of waiting can. */
+  function swallow(e, delta) {
+    var d = Math.abs(delta);
+    if (d > lastSwallowed * 1.25 + 4) { stopDraining(); return; }
+    lastSwallowed = d;
+    e.preventDefault();
+    stillGoing();
   }
 
   function stopDraining() {
@@ -362,7 +379,7 @@
 
   function onWheel(e) {
     if (done) {
-      if (draining) { e.preventDefault(); stillGoing(); }
+      if (draining) swallow(e, wheelPixels(e));
       return;
     }
     e.preventDefault();
@@ -372,12 +389,18 @@
   var touchY = null;
 
   function onTouchStart(e) {
+    /* A finger put down is unambiguously a new gesture, whatever is left of
+       the last one. */
+    if (done && draining) stopDraining();
     touchY = e.touches.length ? e.touches[0].clientY : null;
   }
 
   function onTouchMove(e) {
     if (done) {
-      if (draining) { e.preventDefault(); stillGoing(); }
+      if (draining && e.touches.length && touchY !== null) {
+        swallow(e, touchY - e.touches[0].clientY);
+        touchY = e.touches[0].clientY;
+      }
       return;
     }
     e.preventDefault();
