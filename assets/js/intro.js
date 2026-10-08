@@ -227,10 +227,13 @@
     if (shown.p > 0.02) stage.classList.add("has-moved");
   }
 
-  /* How fast the animation is allowed to travel, in progress per second, and
-     how eagerly it chases the reader. */
-  var MAX_RATE = 1.15;
-  var CHASE = 0.14;
+  /* The two things that decide how it moves: the fastest it may travel, in
+     progress per second, and how hard it may change that speed, in the same
+     units per second. */
+  var MAX_RATE = 1.3;
+  var ACCEL    = 3.6;
+
+  var rate = 0;
   var last = 0;
 
   /* Nothing but a number: where the reader has pushed to. What is drawn is a
@@ -242,25 +245,23 @@
 
   /* The follower, running every frame for as long as the intro is up.
 
-     What is drawn moves toward the target by a fraction of whatever distance
-     remains, and never by more than MAX_RATE allows. The two parts matter for
-     different reasons.
+     It carries a speed, and the speed itself is what is steered: each frame it
+     works out how fast it would like to be going — proportional to the
+     distance left, never above MAX_RATE — and then moves its actual speed
+     toward that, by no more than ACCEL allows.
 
-     Chasing a fraction of the remaining gap is what keeps the motion
-     continuous. Each wheel event used to start a fresh tween instead, and a
-     tween that eases out begins at full speed — so a flick, which is a burst
-     of events, was a burst of speed spikes, and the lettering jumped. Here an
-     event only moves the target; the speed at the next frame is a hair from
-     the speed at this one, whatever the reader does to the wheel.
+     Bounding the speed was not enough on its own, and that is worth spelling
+     out, because it looked like it was. A capped follower still went from a
+     standstill to full speed in a single frame; only the acceleration was
+     unbounded. From a standing start that is invisible, because the easing on
+     the lettering is flat at the beginning and hides it. Pick the intro up
+     again from halfway, where the easing is at its steepest, and the same
+     instant jump to full speed is plainly visible — which is why it looked
+     smooth on a first flick and jumped on a second.
 
-     The cap is what makes a hard push look like a gentle one. Without it a
-     flick opens a gap of nearly the whole animation and the first frames
-     swallow most of it. With it the animation can only ever travel at a
-     walking pace, so the ending plays at the same speed however hard it was
-     pushed — without taking the intro away from the reader to do it, which
-     was the trouble with handing over at a threshold: whatever speed the
-     lettering had at that moment was thrown away, and it set off again from
-     a standstill. There is no threshold now and nothing is thrown away. */
+     With the speed itself steered there is no step anywhere: it winds up,
+     holds at the cap if there is far to go, and winds down as it arrives, from
+     wherever the reader happens to have left it. */
   function follow(now) {
     if (done) return;
 
@@ -268,14 +269,28 @@
     last = now;
 
     var gap = target - shown.p;
-    if (gap) {
-      /* Framed in sixtieths so the feel does not change with the frame rate. */
-      var step = gap * (1 - Math.pow(1 - CHASE, dt * 60));
-      var cap = MAX_RATE * dt;
-      if (step > cap) step = cap;
-      else if (step < -cap) step = -cap;
-      shown.p += step;
-      if (Math.abs(target - shown.p) < 0.0005) shown.p = target;
+
+    /* The fastest it could be going and still be able to stop exactly on the
+       target, given how hard it is allowed to brake. Simply aiming at a speed
+       proportional to the distance left is the obvious thing and is worse: it
+       approaches without ever quite arriving, so the last of the movement
+       crawls — a tenth of the travel taking as long as the first half. */
+    var want = Math.sqrt(2 * ACCEL * Math.abs(gap));
+    if (want > MAX_RATE) want = MAX_RATE;
+    if (gap < 0) want = -want;
+
+    var dv = ACCEL * dt;
+    if (want > rate + dv) rate += dv;
+    else if (want < rate - dv) rate -= dv;
+    else rate = want;
+
+    if (rate) {
+      shown.p += rate * dt;
+      /* Never past the reader's own position. */
+      if ((gap > 0 && shown.p >= target) || (gap < 0 && shown.p <= target)) {
+        shown.p = target;
+        rate = 0;
+      }
       render();
     }
 
