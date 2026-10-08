@@ -79,7 +79,6 @@
 
   var crest = stage.querySelector(".intro__crest");
   var field = stage.querySelector(".intro__field");
-  var hero  = stage.querySelector(".intro__hero");
   var name  = stage.querySelector(".intro__name");
   var motto = stage.querySelector(".intro__motto");
 
@@ -181,7 +180,6 @@
     if (tl) {
       tl.kill();
       gsap.set([crest, name, motto], { clearProps: "all" });
-      gsap.set(hero, { opacity: 0 });
       gsap.set(field, { opacity: 1 });
       list = pieces();
     }
@@ -200,12 +198,17 @@
       }, piece.at);
     });
 
-    /* The opening field gives way to the hero photograph, so what the reader
-       is looking at by the end is the homepage itself. No fade to white and no
+    /* The opening field dissolves off the photograph, so what the reader is
+       looking at by the end is the homepage itself. No fade to white and no
        cut: the last frame of the intro and the first frame of the page are the
-       same picture. */
-    tl.to(hero,  { opacity: 1, ease: "power1.inOut", duration: 0.55 }, 0.3)
-      .to(field, { opacity: 0, ease: "power1.inOut", duration: 0.55 }, 0.3);
+       same picture.
+
+       Only the field moves. The photograph is painted underneath from the
+       first frame and left alone — fading the two against each other left a
+       moment in the middle where neither covered the screen and the homepage
+       showed through, which read as the page flashing past before the hero
+       had even arrived. */
+    tl.to(field, { opacity: 0, ease: "power1.inOut", duration: 0.55 }, 0.3);
 
     tl.progress(shown.p);
   }

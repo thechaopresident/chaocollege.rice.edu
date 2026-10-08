@@ -37,14 +37,25 @@
            calc(var(--space-6) + 5rem + env(safe-area-inset-bottom, 0px));
   overflow: hidden;
   isolation: isolate;
+  /* A ground of its own. Without it the overlay is only as opaque as whatever
+     is painted on it at that instant, and the page below shows through. */
+  background: var(--brand-primary-dark);
 }
 
-/* The field the crest opens on. It fades out as the hero fades in, so the
-   intro ends up looking like the homepage rather than like nothing. */
+/* The field the crest opens on, sitting ON TOP of the photograph and
+   dissolving off it.
+
+   It used to be the other way about: the field faded out while the hero faded
+   in, two half-transparent layers crossing. At the middle of that crossing
+   neither covered the screen — together they came to about three quarters of
+   it — and the homepage showed through the gap. That was the flash of the
+   page partway through the intro, before the hero had even arrived.
+
+   One layer dissolving off another opaque one has no such middle. */
 .intro__field {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 1;
   background:
     radial-gradient(120% 90% at 50% 40%,
                     var(--brand-primary-light) 0%,
@@ -53,13 +64,15 @@
 }
 
 /* The homepage hero, reproduced exactly — same photograph, same crop, same
-   scrim as .hero in styles.css. By the end of the scroll the intro IS the
-   hero, so releasing the pin swaps one for the other with nothing to see. */
+   scrim as .hero in styles.css. By the end the intro IS the hero, so lifting
+   the overlay swaps one for the other with nothing to see.
+
+   It is painted from the first frame and never animated. The field covers it
+   until the field dissolves. */
 .intro__hero {
   position: absolute;
   inset: 0;
   z-index: 0;
-  opacity: 0;
 }
 .intro__hero img {
   position: absolute;
@@ -82,7 +95,7 @@
    whatever size it ends up at, so shrinking costs nothing. */
 .intro__crest {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   width: min(68vh, 82vw);
   max-width: 100%;
   min-height: 0;
@@ -96,7 +109,7 @@
    beside it — and each has to come to rest on its own counterpart. */
 .intro__wordmark {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   flex: none;
   margin: 0;
   text-align: center;
@@ -146,6 +159,7 @@
 
 .intro__hint {
   position: absolute;
+  z-index: 2;
   left: 50%;
   bottom: calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
   transform: translateX(-50%);
