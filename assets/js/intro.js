@@ -227,8 +227,16 @@
     if (shown.p > 0.02) stage.classList.add("has-moved");
   }
 
-  /* Past this much, the intro stops being scrubbed and plays itself out. */
-  var COMMIT = 0.55;
+  /* Past this much, the intro stops being scrubbed and plays itself out.
+
+     Set late on purpose: the further it sits, the longer the reader is the
+     one moving the crest, which is the whole point of scrubbing it. It costs
+     nothing to set it late, either, because it is not what catches a hard
+     flick — a flick puts the target straight to 1, which is past any
+     threshold, so that case is taken over at once whatever this says. All
+     this decides is how much of a deliberate, gentle scroll stays in the
+     reader's hands before the ending plays itself. */
+  var COMMIT = 0.82;
   var committed = false;
 
   /* Taking over for the ending.
