@@ -231,12 +231,41 @@
   function render() {
     if (tl) tl.progress(shown.p);
     if (shown.p > 0.02) stage.classList.add("has-moved");
-    if (!done && target >= 1 && shown.p > 0.999) finish();
+  }
+
+  var closing = false;
+
+  /* Once the reader has scrolled the whole way, the rest is run off as one
+     known movement and the intro ends when it ends.
+
+     It used to wait for the catch-up tween to creep past 0.999 instead, and
+     that tween eases out, so its last fraction takes far longer than the
+     distance deserves: it covers 98% of the way in 0.37s and needs 0.45s for
+     99.9%. Nothing visible is happening in that time — the crest has finished
+     at 0.862 of the timeline and the name at 0.948 — so the intro sat there
+     looking complete, with the page waiting behind it and the buttons not yet
+     begun. That was the pause before the buttons, and it was never the fade.
+
+     The length is taken from the distance actually left, so a reader who has
+     scrubbed almost to the end gets a short finish rather than the same
+     half-second as someone who flicked from the top. */
+  function close() {
+    closing = true;
+    var left = 1 - shown.p;
+    gsap.to(shown, {
+      p: 1,
+      duration: Math.max(0.18, left * 0.5),
+      ease: "power2.out",
+      overwrite: true,
+      onUpdate: render,
+      onComplete: function () { render(); finish(); }
+    });
   }
 
   function advance(px) {
-    if (done) return;
+    if (done || closing) return;
     target = Math.min(1, Math.max(0, target + px / distance));
+    if (target >= 1) { close(); return; }
     gsap.to(shown, {
       p: target, duration: 0.5, ease: "power3.out",
       overwrite: true, onUpdate: render, onComplete: render
