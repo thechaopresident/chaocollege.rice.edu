@@ -194,7 +194,7 @@
    A page that never runs the intro never gets the class, so they are simply
    there. */
 .hero__links {
-  transition: opacity .4s ease;
+  transition: opacity .6s ease;
 }
 .intro-active .hero__links {
   opacity: 0;
