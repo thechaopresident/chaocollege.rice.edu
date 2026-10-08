@@ -222,21 +222,48 @@
   }
   measure();
 
-  /* The end is noticed here, on every frame, rather than when the catch-up
-     tween reports itself complete. Each new wheel event replaces that tween
-     and pushes its completion back, so during a flick — a stream of events
-     arriving over several hundred milliseconds — "complete" kept being
-     deferred and the intro sat on its last frame waiting for the reader to
-     stop pushing. Watching the value instead ends it the moment it arrives. */
   function render() {
     if (tl) tl.progress(shown.p);
     if (shown.p > 0.02) stage.classList.add("has-moved");
-    if (!done && target >= 1 && shown.p > 0.999) finish();
+  }
+
+  /* Past this much, the intro stops being scrubbed and plays itself out. */
+  var COMMIT = 0.55;
+  var committed = false;
+
+  /* Taking over for the ending.
+
+     Scrubbing is only as smooth as the hand driving it. Each wheel event
+     restarted the catch-up tween, and that tween eased out — most of its
+     distance covered in the first third of its time — so a hard flick threw
+     the lettering most of the way up in a few frames and crawled the rest,
+     while a gentle scroll fed it smooth little increments. Same animation,
+     two quite different things to watch, and the hard one jerked upward: the
+     name and motto travel about 250px up to reach the hero.
+
+     So once the reader has committed to it, the intro finishes under its own
+     power, at its own pace, from wherever they have got it to. The ending
+     looks the same every time, whatever they did to the wheel. Input is
+     refused from here on and swallowed, so a flick that carries on after this
+     point neither races the animation nor lands on the page behind it. */
+  function commit() {
+    if (committed || done) return;
+    committed = true;
+    gsap.killTweensOf(shown);
+    var remaining = 1 - shown.p;
+    gsap.to(shown, {
+      p: 1,
+      duration: Math.max(0.4, remaining * 0.95),
+      ease: "power2.inOut",
+      onUpdate: render,
+      onComplete: function () { render(); finish(); }
+    });
   }
 
   function advance(px) {
-    if (done) return;
+    if (done || committed) return;
     target = Math.min(1, Math.max(0, target + px / distance));
+    if (target >= COMMIT) { commit(); return; }
     gsap.to(shown, {
       p: target, duration: 0.5, ease: "power3.out",
       overwrite: true, onUpdate: render, onComplete: render
