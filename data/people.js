@@ -411,7 +411,8 @@ window.CHAO_PEOPLE = {
     { name: "Eco",
       description: "The Eco Representatives promote sustainability at Chao. They plan fun events that encourage environmental awareness and appreciation.",
       members: [
-        { name: "Sammi Frey",    pronouns: "she/her", email: "sf68@rice.edu", photo: null, photoDrive: null },
+        { name: "Sammi Frey",    pronouns: "she/her", email: "sf68@rice.edu",
+          photo: "sammi-frey.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1NeuAmjBixxlNcwr6yQFZLeo0-iUjLimZ/view?usp=drive_link" },
         { name: "Bianca Dotson", pronouns: null,      email: null, photo: null, photoDrive: null }
       ]},
 
