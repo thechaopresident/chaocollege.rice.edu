@@ -306,6 +306,11 @@
     var dupe = slides.map(function (sl) { return card(sl, true);  }).join("");
 
     return '<div class="strip" data-strip>' +
+        '<button class="strip__pause" type="button" data-strip-pause' +
+          ' aria-pressed="false" aria-label="Pause the photo strip">' +
+          '<span class="strip__pause-icon" aria-hidden="true"></span>' +
+          '<span class="strip__pause-text">Pause</span>' +
+        "</button>" +
         '<button class="strip__nav strip__nav--prev" type="button" aria-label="Scroll photos left">' +
           '<span aria-hidden="true">&lsaquo;</span></button>' +
         '<div class="strip__row" tabindex="0" role="region" aria-label="' + esc(label || "Photos") + '">' +
@@ -324,6 +329,9 @@
       if (!row) return;
 
       var held = false, last = null, raf = null, resume = null;
+      /* Set by the pause button. While it is true the ticker never runs
+         again, whatever the pointer, focus or observer do. */
+      var stopped = false;
       /* Position is tracked as a float: at ~0.4px per frame, relying on
          scrollLeft += would lose the remainder wherever the engine rounds. */
       var pos = 0;
@@ -350,7 +358,7 @@
       }
 
       function start() {
-        if (calm || raf != null) return;
+        if (calm || stopped || raf != null) return;
         last = null; pos = row.scrollLeft;
         raf = requestAnimationFrame(tick);
       }
@@ -391,8 +399,24 @@
            never animate it), fall back to jumping so the button always works. */
         setTimeout(function () {
           if (Math.abs(row.scrollLeft - from) < 1) row.scrollLeft = from + dir * step;
-          resumeWhenSettled();
+          if (!stopped) resumeWhenSettled();
         }, 400);
+      }
+
+      var pauseBtn = root.querySelector("[data-strip-pause]");
+      if (calm) {
+        /* Nothing is moving, so there is nothing to pause. */
+        pauseBtn.hidden = true;
+      } else {
+        pauseBtn.addEventListener("click", function () {
+          stopped = !stopped;
+          pauseBtn.setAttribute("aria-pressed", stopped ? "true" : "false");
+          pauseBtn.setAttribute("aria-label",
+            stopped ? "Play the photo strip" : "Pause the photo strip");
+          pauseBtn.querySelector(".strip__pause-text").textContent = stopped ? "Play" : "Pause";
+          root.classList.toggle("strip--stopped", stopped);
+          if (stopped) stop(); else start();
+        });
       }
 
       root.querySelector(".strip__nav--prev").addEventListener("click", function () { page(-1); });

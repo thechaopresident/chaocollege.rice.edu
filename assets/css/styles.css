@@ -677,6 +677,31 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
   position: relative;
   margin-top: var(--space-6);
 }
+/* WCAG 2.2.2 pause control. Visible at rest rather than on hover: a control
+   that only appears on hover is not reachable by touch or keyboard. */
+.strip__pause {
+  position: absolute; top: calc(-1 * var(--space-6)); right: 0; z-index: 3;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-ui); font-size: .78rem; font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-page-bg);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-pill);
+  padding: 4px 11px 4px 9px;
+  cursor: pointer;
+}
+.strip__pause:hover { color: var(--color-heading); border-color: var(--color-heading); }
+.strip__pause-icon {
+  width: 9px; height: 10px;
+  border-left: 3px solid currentColor; border-right: 3px solid currentColor;
+}
+/* Pressed: the icon becomes a play triangle. */
+.strip--stopped .strip__pause-icon {
+  width: 0; height: 0;
+  border-left: 8px solid currentColor; border-right: 0;
+  border-top: 5px solid transparent; border-bottom: 5px solid transparent;
+}
+
 .strip__row {
   display: flex;
   gap: var(--strip-gap);
