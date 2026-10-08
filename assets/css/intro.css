@@ -12,7 +12,10 @@
 .intro {
   position: fixed;
   inset: 0;
-  z-index: 100;
+  /* Above the sticky header, which is itself at 100. Equal values would leave
+     it to document order, and the header would win or lose depending on where
+     this section happened to be written. */
+  z-index: 200;
 }
 
 /* The pinned screen. GSAP pins this element.
