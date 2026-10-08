@@ -13,6 +13,23 @@
   position: fixed;
   inset: 0;
   z-index: 100;
+  transition: opacity .22s ease;
+}
+
+/* Leaving. The page's own crest and name have already been made visible
+   directly underneath the copies, and they are in the same place to within a
+   hundredth of a pixel, so there is nothing to see move — this is not hiding
+   a change of position.
+
+   What it does hide is a change of rendering. The intro's lettering lives in
+   a composited layer at a fractional scale, where the text is drawn with
+   grey antialiasing; the page's is drawn natively, with subpixel
+   antialiasing. The glyph edges therefore land differently, and swapping one
+   for the other in a single frame reads as the text twitching sideways. Over
+   a fifth of a second it reads as nothing at all. */
+.intro.is-leaving {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* The pinned screen. GSAP pins this element.

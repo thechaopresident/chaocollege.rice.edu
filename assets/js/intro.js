@@ -262,7 +262,17 @@
   function teardown() {
     gsap.killTweensOf(shown);
     if (tl) { tl.progress(1); tl.kill(); tl = null; }
-    discard();
+
+    /* The page's own crest, name and motto come back first, underneath the
+       copies that are sitting exactly on them, and the buttons begin to
+       arrive. Then the overlay is faded off rather than cut away — see
+       .intro.is-leaving — and only then taken out of the document. */
+    release();
+    stage.classList.add("is-leaving");
+    setTimeout(function () {
+      if (stage.parentNode) stage.parentNode.removeChild(stage);
+    }, 260);
+
     drain();
   }
 
