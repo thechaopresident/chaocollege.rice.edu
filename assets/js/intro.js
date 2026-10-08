@@ -80,7 +80,8 @@
   var crest = stage.querySelector(".intro__crest");
   var field = stage.querySelector(".intro__field");
   var hero  = stage.querySelector(".intro__hero");
-  var mark  = stage.querySelector(".intro__wordmark");
+  var name  = stage.querySelector(".intro__name");
+  var motto = stage.querySelector(".intro__motto");
 
   /* The hint arrives after a beat, so the first thing on screen is the crest
      rather than an instruction. */
@@ -131,45 +132,73 @@
      which is what used to drift when the type scale changed.
 
      Measured rather than guessed, and measured again on resize. */
+  /* One piece of the intro and the thing in the hero it has to become.
+
+     The name and the motto are listed separately because the hero keeps them
+     apart — an h1 for the name, a .motto beside it. Moving them as one block,
+     which is what the markup used to invite, meant scaling a box containing
+     both to the size of a box containing only the name: the lettering landed
+     too small and then jumped up to full size at the handover. */
+  function pieces() {
+    return [
+      { el: crest, twin: document.querySelector(".hero__crest img") ||
+                         document.querySelector(".hero__crest"),
+        by: "box",  at: 0 },
+      { el: name,  twin: document.querySelector(".hero__wordmark"),
+        by: "type", at: 0.1 },
+      { el: motto, twin: document.querySelector(".hero .motto"),
+        by: "type", at: 0.16 }
+    ];
+  }
+
+  /* Text is matched on font size rather than on the height of its box. The
+     box carries line-height, margins and whatever else sits in it, so two
+     boxes of equal height can hold letters of different sizes — and the
+     letters are the thing that has to match. An image has no such distinction,
+     so the crest is matched on height. */
+  function ratio(piece) {
+    if (piece.by === "type") {
+      var a = parseFloat(getComputedStyle(piece.twin).fontSize);
+      var b = parseFloat(getComputedStyle(piece.el).fontSize);
+      return (a && b) ? a / b : 1;
+    }
+    var h = piece.el.getBoundingClientRect().height;
+    return h ? piece.twin.getBoundingClientRect().height / h : 1;
+  }
+
+  /* Every piece scales about its own centre, so the centre is the one point
+     that does not move when it is scaled — which is what makes "put this
+     centre where that centre is" the whole of the positioning. */
+  function shift(piece) {
+    var r = piece.el.getBoundingClientRect();
+    var t = piece.twin.getBoundingClientRect();
+    return (t.top + t.height / 2) - (r.top + r.height / 2);
+  }
+
   function build() {
+    var list = pieces();
+
     if (tl) {
       tl.kill();
-      gsap.set([crest, mark], { clearProps: "all" });
+      gsap.set([crest, name, motto], { clearProps: "all" });
       gsap.set(hero, { opacity: 0 });
       gsap.set(field, { opacity: 1 });
+      list = pieces();
     }
-
-    var crestTwin = document.querySelector(".hero__crest img") ||
-                    document.querySelector(".hero__crest");
-    var markTwin  = document.querySelector(".hero__wordmark");
 
     tl = gsap.timeline({ paused: true });
 
-    /* Both walk to the size and place they occupy in the hero, so the handover
-       reads as the same object settling rather than as a cut. The crest leads
-       and the name follows a beat behind it. */
-    if (crestTwin) {
-      var cr = crest.getBoundingClientRect();
-      var ct = crestTwin.getBoundingClientRect();
-      if (cr.height && ct.height) {
-        tl.to(crest, {
-          scale: ct.height / cr.height,
-          y: (ct.top + ct.height / 2) - (cr.top + cr.height / 2),
-          ease: "power2.inOut", duration: 1
-        }, 0);
-      }
-    }
-    if (markTwin) {
-      var mr = mark.getBoundingClientRect();
-      var mt = markTwin.getBoundingClientRect();
-      if (mr.height && mt.height) {
-        tl.to(mark, {
-          scale: mt.height / mr.height,
-          y: (mt.top + mt.height / 2) - (mr.top + mr.height / 2),
-          ease: "power2.inOut", duration: 1
-        }, 0.1);
-      }
-    }
+    /* Each walks to the size and place its counterpart already occupies, so
+       the handover reads as the same lettering settling rather than as a cut.
+       The crest leads and the name follows a beat behind it. */
+    list.forEach(function (piece) {
+      if (!piece.el || !piece.twin) return;
+      tl.to(piece.el, {
+        scale: ratio(piece),
+        y: shift(piece),
+        ease: "power2.inOut", duration: 1
+      }, piece.at);
+    });
 
     /* The opening field gives way to the hero photograph, so what the reader
        is looking at by the end is the homepage itself. No fade to white and no

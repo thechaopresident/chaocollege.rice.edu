@@ -91,31 +91,55 @@
   will-change: transform;
 }
 
+/* Only a container. The name and the motto are moved as separate pieces,
+   because that is how the hero holds them — an h1 for the name and a .motto
+   beside it — and each has to come to rest on its own counterpart. */
 .intro__wordmark {
   position: relative;
   z-index: 1;
   flex: none;
   margin: 0;
+  text-align: center;
+}
+
+/* The face, weight, tracking and transform are .hero__wordmark's, exactly —
+   anything differing here is a change of lettering at the handover, when the
+   two are meant to be the same letters.
+
+   The size deliberately is not. It opens larger and is scaled down onto the
+   hero's size, which is what gives the name something to do while the crest
+   is settling. The scale is worked out from the two font sizes at build time,
+   so wherever this lands it lands exactly. */
+.intro__name {
+  display: block;
   font-family: var(--font-display);
   font-weight: var(--display-weight);
   letter-spacing: var(--display-tracking);
-  font-size: clamp(2.2rem, 7vw, 5rem);
+  text-transform: var(--display-transform);
+  font-size: clamp(2.9rem, 8.6vw, 5.5rem);
   line-height: 1.05;
   color: var(--color-text-invert);
-  text-align: center;
-  transform-origin: 50% 100%;
+  transform-origin: 50% 50%;
   will-change: transform;
 }
 
+/* Likewise .motto's — which is the display face, not the UI one — and
+   likewise opening larger than it ends.
+
+   .motto is a flat .95rem at every width, so the floor here has to clear
+   .95rem and not merely look large: a clamp bottoming out below it made the
+   motto GROW into place on a phone while the name shrank. */
 .intro__motto {
   display: block;
-  font-family: var(--font-ui);
-  font-size: clamp(.62rem, 1.5vw, .82rem);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.05rem, 2.1vw, 1.3rem);
   letter-spacing: .22em;
   text-transform: uppercase;
   color: var(--brand-accent-light);
   margin-top: var(--space-3);
+  transform-origin: 50% 50%;
+  will-change: transform;
 }
 
 /* --- The scroll hint ----------------------------------------------------- */
