@@ -1,0 +1,220 @@
+/* ============================================================================
+   CHAO — SCROLL INTRO
+   ----------------------------------------------------------------------------
+   Loaded only by pages that carry the intro. Every colour comes from
+   brand/tokens.css, like the rest of the site.
+   ========================================================================= */
+
+/* The intro is an overlay, not a section: fixed, so it occupies no part of
+   the document. The homepage lies underneath it at its full height, already
+   scrolled to the top, for the whole of the intro — which is what lets the
+   overlay simply be lifted off at the end with nothing moving. */
+.intro {
+  position: fixed;
+  inset: 0;
+  /* Above the sticky header, which is itself at 100. Equal values would leave
+     it to document order, and the header would win or lose depending on where
+     this section happened to be written. */
+  z-index: 200;
+}
+
+/* The pinned screen. GSAP pins this element.
+
+   The crest and the name are a column, not a stack. They used to share one
+   grid cell — the crest centred, the name pinned to the bottom — which left
+   nothing deciding the space between them: on a tall screen the name rode up
+   into the crest, and on a short one it collided with the scroll hint. Laying
+   them out one above the other makes that space a real quantity.
+
+   The foot padding is the hint's room. The hint is positioned over the stage
+   rather than in the column, so the column has to leave it somewhere to be. */
+.intro__stage {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  padding: var(--space-6) var(--space-5)
+           calc(var(--space-6) + 5rem + env(safe-area-inset-bottom, 0px));
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* The field the crest opens on, sitting ON TOP of the photograph and
+   dissolving off it.
+
+   It used to be the other way about: the field faded out while the hero faded
+   in, two half-transparent layers crossing. At the middle of that crossing
+   neither covered the screen — together they came to about three quarters of
+   it — and the homepage showed through the gap. That was the flash of the
+   page partway through the intro, before the hero had even arrived.
+
+   One layer dissolving off another opaque one has no such middle. */
+.intro__field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(120% 90% at 50% 40%,
+                    var(--brand-primary-light) 0%,
+                    var(--brand-primary) 55%,
+                    var(--brand-primary-dark) 100%);
+}
+
+.intro__crest {
+  position: relative;
+  z-index: 2;
+  width: min(68vh, 82vw);
+  max-width: 100%;
+  min-height: 0;
+  object-fit: contain;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+/* Only a container. The name and the motto are moved as separate pieces,
+   because that is how the hero holds them — an h1 for the name and a .motto
+   beside it — and each has to come to rest on its own counterpart. */
+.intro__wordmark {
+  position: relative;
+  z-index: 2;
+  flex: none;
+  margin: 0;
+  text-align: center;
+}
+
+/* The face, weight, tracking and transform are .hero__wordmark's, exactly —
+   anything differing here is a change of lettering at the handover, when the
+   two are meant to be the same letters.
+
+   The size deliberately is not. It opens larger and is scaled down onto the
+   hero's size, which is what gives the name something to do while the crest
+   is settling. The scale is worked out from the two font sizes at build time,
+   so wherever this lands it lands exactly. */
+.intro__name {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  letter-spacing: var(--display-tracking);
+  text-transform: var(--display-transform);
+  font-size: clamp(2.9rem, 8.6vw, 5.5rem);
+  line-height: 1.05;
+  color: var(--color-text-invert);
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+/* Likewise .motto's — which is the display face, not the UI one — and
+   likewise opening larger than it ends.
+
+   .motto is a flat .95rem at every width, so the floor here has to clear
+   .95rem and not merely look large: a clamp bottoming out below it made the
+   motto GROW into place on a phone while the name shrank. */
+.intro__motto {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.05rem, 2.1vw, 1.3rem);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--brand-accent-light);
+  margin-top: var(--space-3);
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+/* --- The scroll hint ----------------------------------------------------- */
+
+.intro__hint {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-ui);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--brand-accent-light);
+  opacity: 0;
+  transition: opacity .6s ease;
+  pointer-events: none;
+}
+.intro.show-hint .intro__hint { opacity: 1; }
+/* Once the reader starts scrolling it has done its job. */
+.intro.has-moved .intro__hint { opacity: 0; }
+
+.intro__chevron {
+  width: 18px;
+  height: 18px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  animation: intro-nudge 1.8s ease-in-out infinite;
+}
+@keyframes intro-nudge {
+  0%, 100% { transform: rotate(45deg) translate(0, 0); opacity: .55; }
+  50%      { transform: rotate(45deg) translate(3px, 3px); opacity: 1; }
+}
+
+/* --- While the intro holds the screen ------------------------------------ *
+   The homepage stays in the document the whole time — present for screen
+   readers, search engines and anyone who skips — it simply sits underneath. */
+
+/* Only the hero's own crest, name and motto are held back, and only because
+   the intro is carrying its own copies of exactly those three toward exactly
+   those places. Two of each would be visible through the dissolve otherwise.
+
+   visibility, not display or opacity on a parent, because their positions are
+   measured while they are hidden — they are what the intro's copies are aimed
+   at — and only visibility keeps a hidden element's geometry intact.
+
+   Everything else on the page — the header, the tagline, the buttons, the
+   welcome panel below the fold — stays exactly as it is and is revealed by
+   the field dissolving off it, in one movement with everything else. They
+   used to be held at zero and faded in afterwards, which is what made them
+   arrive as a separate event after the intro had already finished. */
+.intro-active .hero__crest,
+.intro-active .hero__wordmark,
+.intro-active .hero .motto {
+  visibility: hidden;
+}
+
+/* The buttons are the exception to all of that, and for a plain reason: they
+   are the only thing on the page meant to be pressed. Revealed with
+   everything else they sit there looking ready while the overlay is still
+   over them, so the first press does nothing. They wait instead, and arrive
+   once the intro has actually let go — the class comes off at the handover,
+   which is also the moment they become pressable.
+
+   A page that never runs the intro never gets the class, so they are simply
+   there. */
+.hero__links {
+  transition: opacity .6s ease;
+}
+.intro-active .hero__links {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Nothing of the intro moves for a reader who asked for stillness. The script
+   removes the stage outright in that case; this is the belt to its braces. */
+@media (prefers-reduced-motion: reduce) {
+  .intro { display: none !important; }
+  .intro__chevron { animation: none; }
+  /* Nothing is carrying a copy of these toward them, so nothing holds them
+     back. Belt to the same braces: were the class ever to be left on, the
+     hero would otherwise be missing its crest and its name for good. */
+  .intro-active .hero__crest,
+  .intro-active .hero__wordmark,
+  .intro-active .hero .motto { visibility: visible !important; }
+  .hero__links { transition: none; }
+  .intro-active .hero__links { opacity: 1 !important; pointer-events: auto; }
+}

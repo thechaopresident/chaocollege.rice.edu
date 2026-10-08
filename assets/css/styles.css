@@ -673,7 +673,7 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
    ========================================================================= */
 .strip {
   --strip-gap: var(--space-4);
-  --cards: 1.15;                       /* mobile shows a peek of the next */
+  --cards: 1.05;                       /* mobile shows a peek of the next */
   position: relative;
   margin-top: var(--space-6);
 }
@@ -750,9 +750,16 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
 .strip__nav--prev { left: calc(-1 * var(--space-3)); }
 .strip__nav--next { right: calc(-1 * var(--space-3)); }
 
-@media (min-width: 560px)  { .strip { --cards: 2; } }
-@media (min-width: 900px)  { .strip { --cards: 3; } }
-@media (min-width: 1280px) { .strip { --cards: 4; } }
+/* How many cards are in view, which is also what sets their size: fewer in
+   view means each is bigger. Each step is about a third fewer than it was,
+   so the photographs are about a third larger.
+
+   Mobile is the exception and barely moves. A card there is already most of
+   the screen, so a third more would simply be wider than the screen; it goes
+   from a card and a peek of the next to very nearly the full width. */
+@media (min-width: 560px)  { .strip { --cards: 1.5; } }
+@media (min-width: 900px)  { .strip { --cards: 2.3; } }
+@media (min-width: 1280px) { .strip { --cards: 3; } }
 
 /* No room to hang the arrows outside the row on small screens. */
 @media (max-width: 720px) {
