@@ -122,6 +122,58 @@ tile and nobody should go looking for a picture of them.
 
 ---
 
+## Change the photos on the homepage
+
+The band of photographs that slides along on its own, under "The college in
+motion." Same two steps as a portrait: put the file in, then add it to the
+list. These are **not** in the `people` folder.
+
+### 1. Prepare the photo
+
+**Landscape, not square.** The cards crop to 4:3 — a little wider than tall —
+so a portrait photo gets its top and bottom cut away.
+
+- Aim for **1200 pixels wide or more**. These are the largest pictures on the
+  site and a small file will look soft.
+- Name it in lower case with dashes: `beer-bike-2027.jpg`.
+
+### 2. Upload it
+
+On GitHub, open the **`assets/img/`** folder — the top one, not
+`assets/img/people/` — then **Add file** → **Upload files** → drag it in →
+**Commit changes**.
+
+### 3. Add it to the list
+
+Open **`data/site.js`** and find `photos:`. Each line is one photograph:
+
+```js
+    { image: "beer-bike-2027.jpg",        focus: "center center",
+      alt: "Chao riders and pit crew lining up before the race" },
+```
+
+| Field | What it does |
+|---|---|
+| `image` | The filename you just uploaded |
+| `focus` | Which part stays visible when it is cropped — same as portraits |
+| `alt` | A plain description of what is in the photograph |
+
+They appear in the order they are written, and the row loops round for as
+long as someone is looking at it. To take one down, delete its whole block —
+from `{` to `},` — and check the comma rule above.
+
+**`alt` is not optional.** It is what someone using a screen reader gets
+instead of the picture, and the site is required to have it. Describe what is
+happening in a few plain words: "Students painting O-Week signs in the
+commons", not "photo" or "IMG_4821". If a photograph is purely decorative and
+says nothing a reader would miss, write `alt: ""` — empty is correct in that
+case, missing is not.
+
+**How many?** Any number works. Below about six the loop comes round often
+enough to notice.
+
+---
+
 ## Other things you may need
 
 ### Change someone's email, pronouns or title

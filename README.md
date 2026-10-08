@@ -442,11 +442,19 @@ Built in, and worth keeping when editing:
 - **Alt text** on every photograph. Decorative tiles — the lettered squares
   where someone has no portrait, the banner ground — are `aria-hidden`, not
   labelled "Placeholder image".
-- **A pause button on the photo strip** (WCAG 2.2.2). Anything that moves by
-  itself for more than five seconds needs a control that stops it; hover and
-  focus do not count, because neither is reachable by touch or keyboard.
-- **`prefers-reduced-motion`** stops the strip animating at all, and the pause
-  button hides itself because there is nothing left to pause.
+- **`prefers-reduced-motion`** stops the photo strip animating at all.
+
+> **Known gap — WCAG 2.2.2, Level A.** The photo strip creeps sideways on its
+> own, and anything that moves by itself for more than five seconds needs a
+> control that stops it. It had a pause button; the button was removed in
+> October 2026 at the college's request, for appearance. The strip still
+> pauses on hover and on keyboard focus, but neither counts for 2.2.2, because
+> neither is reachable by touch.
+>
+> Two ways to close it, whenever it is wanted: put the button back, or stop
+> the strip advancing on its own — set `STRIP_SPEED` to `0` in
+> `assets/js/site.js`, leaving the arrows and dragging to move it. The second
+> needs no control, because nothing moves until the reader moves it.
 - **No horizontal scrolling** at 320px (WCAG 1.4.10), verified on every page.
   Long words in a banner heading break rather than widen the page.
 - Real `<th>` headers on tables, `lang` on `<html>`, a `title` on the calendar
