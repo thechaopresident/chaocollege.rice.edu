@@ -37,9 +37,6 @@
            calc(var(--space-6) + 5rem + env(safe-area-inset-bottom, 0px));
   overflow: hidden;
   isolation: isolate;
-  /* A ground of its own. Without it the overlay is only as opaque as whatever
-     is painted on it at that instant, and the page below shows through. */
-  background: var(--brand-primary-dark);
 }
 
 /* The field the crest opens on, sitting ON TOP of the photograph and
@@ -55,7 +52,7 @@
 .intro__field {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 0;
   background:
     radial-gradient(120% 90% at 50% 40%,
                     var(--brand-primary-light) 0%,
@@ -63,36 +60,6 @@
                     var(--brand-primary-dark) 100%);
 }
 
-/* The homepage hero, reproduced exactly — same photograph, same crop, same
-   scrim as .hero in styles.css. By the end the intro IS the hero, so lifting
-   the overlay swaps one for the other with nothing to see.
-
-   It is painted from the first frame and never animated. The field covers it
-   until the field dissolves. */
-.intro__hero {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-.intro__hero img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 60%;
-}
-.intro__hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, .62), rgba(0, 0, 0, .88));
-}
-
-/* Sized to the screen, but allowed to give way: min-height 0 lets the column
-   shrink it when there is not enough height for it at full size, rather than
-   letting it push the name off the bottom. The landing scale is measured from
-   whatever size it ends up at, so shrinking costs nothing. */
 .intro__crest {
   position: relative;
   z-index: 2;
@@ -198,36 +165,40 @@
    The homepage stays in the document the whole time — present for screen
    readers, search engines and anyone who skips — it simply sits underneath. */
 
-/* The header waits out the intro and fades up with the rest of the page. It
-   keeps its place in the flow while it waits — the overlay is covering it
-   anyway, and moving it would shift the hero underneath by the header's own
-   height, which is exactly the hero the crest is being measured against. */
-.intro-active .site-header {
+/* Only the hero's own crest, name and motto are held back, and only because
+   the intro is carrying its own copies of exactly those three toward exactly
+   those places. Two of each would be visible through the dissolve otherwise.
+
+   visibility, not display or opacity on a parent, because their positions are
+   measured while they are hidden — they are what the intro's copies are aimed
+   at — and only visibility keeps a hidden element's geometry intact.
+
+   Everything else on the page — the header, the tagline, the buttons, the
+   welcome panel below the fold — stays exactly as it is and is revealed by
+   the field dissolving off it, in one movement with everything else. They
+   used to be held at zero and faded in afterwards, which is what made them
+   arrive as a separate event after the intro had already finished. */
+.intro-active .hero__crest,
+.intro-active .hero__wordmark,
+.intro-active .hero .motto {
+  visibility: hidden;
+}
+
+/* The buttons are the exception to all of that, and for a plain reason: they
+   are the only thing on the page meant to be pressed. Revealed with
+   everything else they sit there looking ready while the overlay is still
+   over them, so the first press does nothing. They wait instead, and arrive
+   once the intro has actually let go — the class comes off at the handover,
+   which is also the moment they become pressable.
+
+   A page that never runs the intro never gets the class, so they are simply
+   there. */
+.hero__links {
+  transition: opacity .7s ease .1s;
+}
+.intro-active .hero__links {
   opacity: 0;
   pointer-events: none;
-  transition: opacity .4s ease;
-}
-
-/* Parts of the homepage that should arrive with it rather than being there
-   all along: the hero's buttons, and the welcome panel whose white edge sits
-   under the hero photograph. They wait at zero while the intro holds the
-   screen and fade up when it lets go.
-
-   A page that never runs the intro never gets the class, so nothing here
-   applies and both are simply visible. */
-.hero__links,
-[data-mount="welcome"] {
-  transition: opacity .9s ease .15s;
-}
-.intro-active .hero__links,
-.intro-active [data-mount="welcome"] {
-  opacity: 0;
-}
-
-/* Nothing should fade in for a reader who asked for stillness. */
-@media (prefers-reduced-motion: reduce) {
-  .hero__links,
-  [data-mount="welcome"] { transition: none; opacity: 1 !important; }
 }
 
 /* Nothing of the intro moves for a reader who asked for stillness. The script
@@ -235,4 +206,12 @@
 @media (prefers-reduced-motion: reduce) {
   .intro { display: none !important; }
   .intro__chevron { animation: none; }
+  /* Nothing is carrying a copy of these toward them, so nothing holds them
+     back. Belt to the same braces: were the class ever to be left on, the
+     hero would otherwise be missing its crest and its name for good. */
+  .intro-active .hero__crest,
+  .intro-active .hero__wordmark,
+  .intro-active .hero .motto { visibility: visible !important; }
+  .hero__links { transition: none; }
+  .intro-active .hero__links { opacity: 1 !important; pointer-events: auto; }
 }
