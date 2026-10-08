@@ -227,55 +227,60 @@
     if (shown.p > 0.02) stage.classList.add("has-moved");
   }
 
-  /* Past this much, the intro stops being scrubbed and plays itself out.
+  /* How fast the animation is allowed to travel, in progress per second, and
+     how eagerly it chases the reader. */
+  var MAX_RATE = 1.15;
+  var CHASE = 0.14;
+  var last = 0;
 
-     Set late on purpose: the further it sits, the longer the reader is the
-     one moving the crest, which is the whole point of scrubbing it. It costs
-     nothing to set it late, either, because it is not what catches a hard
-     flick — a flick puts the target straight to 1, which is past any
-     threshold, so that case is taken over at once whatever this says. All
-     this decides is how much of a deliberate, gentle scroll stays in the
-     reader's hands before the ending plays itself. */
-  var COMMIT = 0.82;
-  var committed = false;
-
-  /* Taking over for the ending.
-
-     Scrubbing is only as smooth as the hand driving it. Each wheel event
-     restarted the catch-up tween, and that tween eased out — most of its
-     distance covered in the first third of its time — so a hard flick threw
-     the lettering most of the way up in a few frames and crawled the rest,
-     while a gentle scroll fed it smooth little increments. Same animation,
-     two quite different things to watch, and the hard one jerked upward: the
-     name and motto travel about 250px up to reach the hero.
-
-     So once the reader has committed to it, the intro finishes under its own
-     power, at its own pace, from wherever they have got it to. The ending
-     looks the same every time, whatever they did to the wheel. Input is
-     refused from here on and swallowed, so a flick that carries on after this
-     point neither races the animation nor lands on the page behind it. */
-  function commit() {
-    if (committed || done) return;
-    committed = true;
-    gsap.killTweensOf(shown);
-    var remaining = 1 - shown.p;
-    gsap.to(shown, {
-      p: 1,
-      duration: Math.max(0.4, remaining * 0.95),
-      ease: "power2.inOut",
-      onUpdate: render,
-      onComplete: function () { render(); finish(); }
-    });
+  /* Nothing but a number: where the reader has pushed to. What is drawn is a
+     separate thing that follows it. */
+  function advance(px) {
+    if (done) return;
+    target = Math.min(1, Math.max(0, target + px / distance));
   }
 
-  function advance(px) {
-    if (done || committed) return;
-    target = Math.min(1, Math.max(0, target + px / distance));
-    if (target >= COMMIT) { commit(); return; }
-    gsap.to(shown, {
-      p: target, duration: 0.5, ease: "power3.out",
-      overwrite: true, onUpdate: render, onComplete: render
-    });
+  /* The follower, running every frame for as long as the intro is up.
+
+     What is drawn moves toward the target by a fraction of whatever distance
+     remains, and never by more than MAX_RATE allows. The two parts matter for
+     different reasons.
+
+     Chasing a fraction of the remaining gap is what keeps the motion
+     continuous. Each wheel event used to start a fresh tween instead, and a
+     tween that eases out begins at full speed — so a flick, which is a burst
+     of events, was a burst of speed spikes, and the lettering jumped. Here an
+     event only moves the target; the speed at the next frame is a hair from
+     the speed at this one, whatever the reader does to the wheel.
+
+     The cap is what makes a hard push look like a gentle one. Without it a
+     flick opens a gap of nearly the whole animation and the first frames
+     swallow most of it. With it the animation can only ever travel at a
+     walking pace, so the ending plays at the same speed however hard it was
+     pushed — without taking the intro away from the reader to do it, which
+     was the trouble with handing over at a threshold: whatever speed the
+     lettering had at that moment was thrown away, and it set off again from
+     a standstill. There is no threshold now and nothing is thrown away. */
+  function follow(now) {
+    if (done) return;
+
+    var dt = last ? Math.min((now - last) / 1000, 0.05) : 1 / 60;
+    last = now;
+
+    var gap = target - shown.p;
+    if (gap) {
+      /* Framed in sixtieths so the feel does not change with the frame rate. */
+      var step = gap * (1 - Math.pow(1 - CHASE, dt * 60));
+      var cap = MAX_RATE * dt;
+      if (step > cap) step = cap;
+      else if (step < -cap) step = -cap;
+      shown.p += step;
+      if (Math.abs(target - shown.p) < 0.0005) shown.p = target;
+      render();
+    }
+
+    if (target >= 1 && shown.p > 0.999) { finish(); return; }
+    requestAnimationFrame(follow);
   }
 
   /* --- the end ------------------------------------------------------------ *
@@ -295,7 +300,6 @@
   }
 
   function teardown() {
-    gsap.killTweensOf(shown);
     if (tl) { tl.progress(1); tl.kill(); tl = null; }
 
     /* The page's own crest, name and motto come back first, underneath the
@@ -436,6 +440,7 @@
     toTop();
     build();
     attach();
+    requestAnimationFrame(follow);
   }
 
   if (document.readyState === "complete") begin();
