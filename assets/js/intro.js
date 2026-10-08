@@ -248,13 +248,15 @@
 
      The length is taken from the distance actually left, so a reader who has
      scrubbed almost to the end gets a short finish rather than the same
-     half-second as someone who flicked from the top. */
+     three-quarters of a second as someone who flicked from the top. The floor
+     is what keeps the nearly-done case brisk; the multiplier is what paces a
+     flick. */
   function close() {
     closing = true;
     var left = 1 - shown.p;
     gsap.to(shown, {
       p: 1,
-      duration: Math.max(0.18, left * 0.5),
+      duration: Math.max(0.2, left * 0.9),
       ease: "power2.out",
       overwrite: true,
       onUpdate: render,
@@ -266,8 +268,18 @@
     if (done || closing) return;
     target = Math.min(1, Math.max(0, target + px / distance));
     if (target >= 1) { close(); return; }
+
+    /* How long the animation takes to catch up is measured against how far it
+       has to come. It used to be half a second whatever the distance, which
+       is what made a gentle scroll feel slack: a small push moved the target
+       a little and then the lettering took just as long to cover that little
+       as it would have taken to cover the whole screen. Short pushes arrive
+       quickly now, and only a long one takes a long time. */
+    var gap = Math.abs(target - shown.p);
     gsap.to(shown, {
-      p: target, duration: 0.5, ease: "power3.out",
+      p: target,
+      duration: Math.min(0.5, Math.max(0.15, gap * 1.4)),
+      ease: "power3.out",
       overwrite: true, onUpdate: render, onComplete: render
     });
   }
