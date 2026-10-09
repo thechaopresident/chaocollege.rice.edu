@@ -192,41 +192,44 @@
       });
     }
     document.addEventListener("click", closeMenus);
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") {
-        closeMenus();
-        header.classList.remove("site-header--open");
-        burger.setAttribute("aria-expanded", "false");
-      }
-    });
 
-    /* Coming back with the Back button does not rebuild the page: it is
-       restored as it was left. A submenu that was open when the reader left
-       is therefore open again when they return, hanging there with the
-       pointer nowhere near it.
-
-       What holds it open is the class this code puts on a menu when it is
-       clicked open. The class is part of the DOM, so it comes back with the
-       page, and nothing about the pointer will clear it — only the next click
-       anywhere will, since that is what closes menus. Until then the restored
-       menu hangs open, and hovering a different one opens a second beside it.
-
-       So the state this code set is undone on the way in: that class, the
-       expanded hamburger, and focus left sitting on a submenu link. Focus is
-       taken off an element only if it is inside the header, so a reader
-       returning to their place further down the page keeps theirs.
-
-       Hover needs nothing here — a hovered menu closes itself the moment the
-       pointer leaves. */
-    window.addEventListener("pageshow", function () {
+    /* closeMenus() only undoes the class. A menu is also held open by
+       :focus-within for as long as anything inside it has focus, and that
+       outlives the class — so dismissing one properly means letting go of the
+       focus as well. */
+    function shutEverything() {
       closeMenus();
       header.classList.remove("site-header--open");
       burger.setAttribute("aria-expanded", "false");
-
       var focused = document.activeElement;
       if (focused && focused !== document.body && host.contains(focused)) {
         focused.blur();
       }
+    }
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") shutEverything();
+    });
+
+    /* Coming back with the Back button does not rebuild the page: it is
+       restored as it was left — including which element had focus. The last
+       thing touched before leaving was a link inside a submenu, so focus
+       returns to that link, :focus-within matches its parent, and the menu is
+       open again with the pointer nowhere near it.
+
+       That is why neither moving the mouse nor pressing Escape shifted it:
+       the mouse has no bearing on focus, and Escape was only undoing the
+       class. Only a click did anything, because a click moves focus. Another
+       menu could then be hovered open, and both would sit there together.
+
+       It runs twice over. Focus is restored AFTER this event fires, so doing
+       it once here lets go of nothing — the browser hands focus straight back
+       afterwards. The second pass, a tick later, is the one that catches it.
+       Both are cheap, and on an ordinary load neither finds anything open or
+       anything in the header holding focus. */
+    window.addEventListener("pageshow", function () {
+      shutEverything();
+      setTimeout(shutEverything, 0);
     });
   }
 
