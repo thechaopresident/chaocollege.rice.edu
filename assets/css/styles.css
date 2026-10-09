@@ -413,6 +413,21 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
 @media (min-width: 901px) {
   .nav__item[data-has-menu]:hover .nav__submenu,
   .nav__item[data-has-menu]:focus-within .nav__submenu { display: block; }
+
+  /* Coming back with the Back button restores the page as it was left, and
+     the browser brings the old :hover back with it — the pointer is over the
+     browser's own toolbar at that moment, so nothing has happened to say
+     otherwise. A menu hangs open until the pointer next moves.
+
+     Hover alone is suppressed, until the script says the pointer has moved.
+     The two :not()s matter: a menu that was clicked open, or that holds
+     focus, is open for a reason that has nothing to do with the pointer, and
+     an earlier version of this rule without them shut those too — including
+     menus the reader had just clicked open with the pointer resting on
+     them. */
+  .site-header--stale-hover .nav__item[data-has-menu]:not(.nav__item--open):not(:focus-within):hover .nav__submenu {
+    display: none;
+  }
 }
 
 /* Banner background layer injected into [data-mount="banner"]. */

@@ -230,6 +230,22 @@
     window.addEventListener("pageshow", function () {
       shutEverything();
       setTimeout(shutEverything, 0);
+
+      /* The restored :hover is the other half, and no JavaScript clears it:
+         it is the browser's own idea of where the pointer is, and it holds
+         until the pointer moves. So hover is disregarded until that happens —
+         see .site-header--stale-hover. The moment it does move, hovering
+         means something again, and a pointer genuinely over a menu opens it. */
+      header.classList.add("site-header--stale-hover");
+      var trust = function () {
+        header.classList.remove("site-header--stale-hover");
+        window.removeEventListener("pointermove", trust);
+        window.removeEventListener("mousemove", trust);
+        window.removeEventListener("keydown", trust);
+      };
+      window.addEventListener("pointermove", trust);
+      window.addEventListener("mousemove", trust);
+      window.addEventListener("keydown", trust);
     });
   }
 
