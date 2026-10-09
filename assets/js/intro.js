@@ -86,7 +86,7 @@
      rather than an instruction. */
   var hintTimer = setTimeout(function () {
     stage.classList.add("show-hint");
-  }, 2000);
+  }, 1500);
 
   /* The page must be at the top before anything is measured against it, since
      a reload hands back the reader's old position. None of this is seen: the
