@@ -479,22 +479,25 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
 }
 
 /* --- Section divider ------------------------------------------------------
-   A band of crest motifs where two sections meet. The ground is cream because
-   the artwork's is: its ribbon faces are the same cream, described by their
-   navy outline rather than by a different fill, so there is no transparent
-   version of it to float over something else. */
+   A band of crest motifs where two sections meet, in place of a straight line
+   between two background colours.
+
+   The artwork has a transparent ground, so it is not given a band of its own:
+   it straddles the join, half over the photograph and half over the page
+   below. Its own height is worked out from its proportions, and half of that
+   is taken back off the top — so the overlap stays true at any width without
+   anything being measured in JavaScript. */
 .dv {
-  background: var(--brand-cream);
+  --dv-w: min(100%, 1100px);
+  --dv-h: calc(var(--dv-w) / 8.3);   /* the file is 1909x230 */
+  position: relative;
+  z-index: 3;                        /* over the hero's scrim */
   display: flex;
   justify-content: center;
-  padding-block: var(--space-5);
+  margin-top: calc(var(--dv-h) / -2);
+  pointer-events: none;              /* decoration; never in the way */
 }
-.dv__art {
-  /* Scales with the page up to a limit, past which a decorative band would
-     start to dominate. It stays legible down to a phone: the centre is the
-     part that has to read, and it is the part that survives the shrinking. */
-  width: min(100%, 1100px);
-}
+.dv__art { width: var(--dv-w); }
 
 /* Welcome-section photo sits beside the intro copy. */
 .welcome__photo { aspect-ratio: 4 / 3; border-radius: var(--radius-lg); }

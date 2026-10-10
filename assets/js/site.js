@@ -511,21 +511,22 @@
      curves produced wavy shapes rather than a ribbon — folds, furls and
      swallowtail ends are illustration, and a sine wave does not become one.
 
-     The artwork's ground is the same cream as its ribbon faces: the ribbon is
-     described by its navy outline, not by filling it differently. So the
-     background cannot be made transparent without hollowing the ribbon out,
-     and the band is painted cream to meet it. The file's cream was shifted to
-     match --brand-cream exactly, so the join does not show.
+     The file has a transparent ground, so it needs no band behind it: it sits
+     across the join itself, half on the photograph and half on the page. The
+     overlap is worked out in the stylesheet from the artwork's proportions,
+     so nothing here has to measure anything.
+
+     A PNG rather than the webp that was tried alongside it: the drawing is
+     flat colour, so reduced to a palette it comes to 43KB against the webp's
+     78KB, and the two are indistinguishable magnified. Smaller and supported
+     everywhere leaves nothing for the second format to do.
      ================================================================== */
   function divider(kind) {
     if (!kind || kind === "none") return "";
-    var base = ROOT + "assets/img/divider-" + kind;
     return '<div class="dv" role="presentation">' +
-      "<picture>" +
-        '<source srcset="' + esc(base + ".webp") + '" type="image/webp">' +
-        '<img class="dv__art" src="' + esc(base + '.png') + '" alt=""' +
-          ' aria-hidden="true" decoding="async">' +
-      "</picture></div>";
+      '<img class="dv__art" src="' +
+        esc(ROOT + "assets/img/divider-" + kind + ".png") + '" alt=""' +
+        ' aria-hidden="true" decoding="async"></div>';
   }
 
   /* ======================================================================
