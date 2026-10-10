@@ -502,6 +502,33 @@
   }
 
   /* ======================================================================
+     SECTION DIVIDER
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     A band of crest motifs where two sections meet, instead of a straight
+     edge between two background colours.
+
+     It is artwork, not drawn here. Earlier attempts to generate a ribbon from
+     curves produced wavy shapes rather than a ribbon — folds, furls and
+     swallowtail ends are illustration, and a sine wave does not become one.
+
+     The artwork's ground is the same cream as its ribbon faces: the ribbon is
+     described by its navy outline, not by filling it differently. So the
+     background cannot be made transparent without hollowing the ribbon out,
+     and the band is painted cream to meet it. The file's cream was shifted to
+     match --brand-cream exactly, so the join does not show.
+     ================================================================== */
+  function divider(kind) {
+    if (!kind || kind === "none") return "";
+    var base = ROOT + "assets/img/divider-" + kind;
+    return '<div class="dv" role="presentation">' +
+      "<picture>" +
+        '<source srcset="' + esc(base + ".webp") + '" type="image/webp">' +
+        '<img class="dv__art" src="' + esc(base + '.png') + '" alt=""' +
+          ' aria-hidden="true" decoding="async">' +
+      "</picture></div>";
+  }
+
+  /* ======================================================================
      PAGE: HOME
      ================================================================== */
   function renderHome() {
@@ -533,6 +560,9 @@
           '<div class="hero__links">' + links + "</div>" +
         "</div>";
     }
+
+    var dvHost = mount("divider");
+    if (dvHost) dvHost.innerHTML = divider(h.divider);
 
     var w = mount("welcome");
     if (w && SITE.welcome) {

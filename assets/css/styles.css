@@ -478,6 +478,24 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
   border-radius: var(--radius-sm);
 }
 
+/* --- Section divider ------------------------------------------------------
+   A band of crest motifs where two sections meet. The ground is cream because
+   the artwork's is: its ribbon faces are the same cream, described by their
+   navy outline rather than by a different fill, so there is no transparent
+   version of it to float over something else. */
+.dv {
+  background: var(--brand-cream);
+  display: flex;
+  justify-content: center;
+  padding-block: var(--space-5);
+}
+.dv__art {
+  /* Scales with the page up to a limit, past which a decorative band would
+     start to dominate. It stays legible down to a phone: the centre is the
+     part that has to read, and it is the part that survives the shrinking. */
+  width: min(100%, 1100px);
+}
+
 /* Welcome-section photo sits beside the intro copy. */
 .welcome__photo { aspect-ratio: 4 / 3; border-radius: var(--radius-lg); }
 
