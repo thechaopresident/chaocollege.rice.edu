@@ -93,8 +93,12 @@ window.CHAO_SITE = {
     tagline: "Home of the Chaosens",
     /* Architectural rendering of the college. Master in brand/photo-originals/. */
     /* The band between the hero and the welcome section. Names the artwork in
-       assets/img (divider-<name>.png), or "none" for a plain edge. */
-    divider: "ribbon",
+       assets/img (divider-<name>.png), or "none" for a plain edge.
+
+       Off for now. The artwork is kept at assets/img/divider-ribbon.png and
+       everything that draws it is still here, so putting it back is this one
+       word: "ribbon". */
+    divider: "none",
     image: "hero.jpg",
     /* Describes the photograph for anyone who cannot see it. Set to null and
        the image is treated as decoration instead. */
