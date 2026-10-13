@@ -250,5 +250,8 @@ window.CHAO_SITE = {
 
   /* Sits in the bottom bar of the footer, opposite the copyright line, on
      every page. Set to null to remove it. */
-  footerNote: "Designed by Gabriel M Brent"
+  footerNote: "Designed by Gabriel M Brent",
+  /* The first letter of this word in the note above is a quiet link to that
+     page. Nothing marks it; you have to know. Delete to remove the door. */
+  footerDoor: { word: "Brent", href: "bswb/", label: "BSWB" }
 };

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BSWB</title>
+<!-- Not for finding. No canonical, no social preview, not in the sitemap:
+     the only way here is the B of Brent in the footer. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../brand/tokens.css">
+<link rel="icon" href="../assets/img/favicon.png" type="image/png">
+<style>
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    display: grid;
+    place-items: center;
+    background: var(--brand-primary);
+    overflow: hidden;
+  }
+  /* Sized against the viewport's width AND its height, so it fills a wide
+     screen and a tall phone alike without ever spilling off either. */
+  .bswb {
+    font-family: var(--font-display);
+    font-weight: var(--display-weight);
+    letter-spacing: var(--display-tracking);
+    font-size: min(30vw, 78vh);
+    line-height: 1;
+    color: var(--brand-cream);
+    margin: 0;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+  <h1 class="bswb">BSWB</h1>
+</body>
+</html>

@@ -284,9 +284,29 @@
         "</div>" +
         '<div class="footer__bottom">' +
           "<span>&copy; " + new Date().getFullYear() + " " + esc(SITE.name) + ", Rice University</span>" +
-          (SITE.footerNote ? "<span>" + fmt(SITE.footerNote) + "</span>" : "<span></span>") +
+          "<span>" + footerNote() + "</span>" +
         "</div>" +
       "</div>";
+  }
+
+  /* The credit line, with one letter of it made into a door.
+
+     `footerDoor` names a word in the note and where its first letter leads.
+     The letter is a plain link carrying no styling of its own, so the line
+     reads as ordinary text and only the cursor gives it away — which is the
+     point. It still takes a focus ring and an accessible name, so it is
+     reachable by keyboard and announced as something rather than as a stray
+     "B". Hidden from the eye, not from a screen reader. */
+  function footerNote() {
+    var note = SITE.footerNote;
+    if (!note) return "";
+    var door = SITE.footerDoor, at = door && door.word ? note.indexOf(door.word) : -1;
+    if (at < 0) return fmt(note);
+    return fmt(note.slice(0, at)) +
+      '<a class="footer__door" href="' + esc(url(door.href)) + '"' +
+        ' aria-label="' + esc(door.label || door.word.charAt(0)) + '">' +
+        fmt(door.word.charAt(0)) + "</a>" +
+      fmt(door.word.slice(1) + note.slice(at + door.word.length));
   }
 
   /* ======================================================================
