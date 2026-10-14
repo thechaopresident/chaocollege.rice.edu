@@ -303,7 +303,7 @@
     var door = SITE.footerDoor, at = door && door.word ? note.indexOf(door.word) : -1;
     if (at < 0) return fmt(note);
     return fmt(note.slice(0, at)) +
-      '<a class="footer__door" href="' + esc(url(door.href)) + '"' +
+      '<a class="door" href="' + esc(url(door.href)) + '"' +
         ' aria-label="' + esc(door.label || door.word.charAt(0)) + '">' +
         fmt(door.word.charAt(0)) + "</a>" +
       fmt(door.word.slice(1) + note.slice(at + door.word.length));
@@ -691,6 +691,30 @@
      adds photos later — do not source one for these people — but the card gives
      no sign of it. Plenty of cards have no photo for ordinary reasons, so
      singling these out said more than it needed to. */
+  /* A word inside a set of pronouns made into a door, the same idea as the
+     letter in the footer credit. `door` on the person names the word and
+     where it leads.
+
+     The accessible name is left alone rather than replaced: an aria-label here
+     would make the pronouns announce as something other than pronouns, which
+     is the one thing this line exists to do. The destination is named in a
+     hidden suffix instead, so the link still says where it goes. */
+  function pronounsLine(p) {
+    var text = p.pronouns || "";
+    var door = p.door, at = door && door.word ? text.indexOf(door.word) : -1;
+    if (at < 0) return esc(text);
+    return esc(text.slice(0, at)) +
+      '<a class="door" href="' + esc(door.href) + '" target="_blank" rel="noopener">' +
+        esc(door.word) +
+        /* The space lives inside the hidden span, so the visible word is
+           exactly the word and the link picks up no trailing space. */
+        (door.label
+          ? '<span class="visually-hidden"> (' + esc(door.label) + ")</span>"
+          : "") +
+      "</a>" +
+      esc(text.slice(at + door.word.length));
+  }
+
   function rosterCard(p, opts) {
     opts = opts || {};
     var role = opts.role || p.role || "";
@@ -707,7 +731,7 @@
         (role ? '<p class="rcard__role">' + fmt(role) + "</p>" : "") +
         '<p class="rcard__name">' + fmt(p.name) +
           (p.year ? ' <span class="rcard__year">' + esc(p.year) + "</span>" : "") + "</p>" +
-        '<p class="rcard__pronouns">' + (p.pronouns ? esc(p.pronouns) : "&nbsp;") + "</p>" +
+        '<p class="rcard__pronouns">' + (p.pronouns ? pronounsLine(p) : "&nbsp;") + "</p>" +
         figure({
           className: "rcard__photo",
           image: p.photo ? ROOT + "assets/img/people/" + p.photo : null,

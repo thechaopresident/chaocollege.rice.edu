@@ -154,7 +154,11 @@ window.CHAO_PEOPLE = {
       description: "Chao's Secretaries manage all of Chao College's communication systems, oversee all of Chao's historical documentation and maintain all of Chao's record-keeping.",
       photo: "raymond-xu.jpg", focus: "center 36%", photoDrive: "https://drive.google.com/file/d/1z20SoNAiRoP_G2EvN_2yqVws4lIQr-Wl/view?usp=sharing" },
 
+    /* `door` makes one word of the pronouns a link carrying no styling of its
+       own — see pronounsLine() in assets/js/site.js. `label` is the hidden
+       text that tells a screen reader where it goes. */
     { name: "Jake Pessin", year: "'29", role: "Senator", pronouns: "he/him", email: "chaosenate@gmail.com",
+      door: { word: "him", href: "https://en.wikipedia.org/wiki/Goat", label: "goat, on Wikipedia" },
       description: "Chao's Rice Student Association (RSA) Senator is the primary liaison between Chao's student body and the Student Association, alongside Chao's President. The Senator represents the interests of Chao's student body to the Rice Student Association.",
       photo: "jake-pessin.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1ZVyCrcDrdmTvkuszlN_kP7SKOug918Cj/view?usp=drive_link" },
 

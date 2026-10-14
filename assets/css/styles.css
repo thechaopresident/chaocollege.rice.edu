@@ -478,16 +478,19 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
   border-radius: var(--radius-sm);
 }
 
-/* A letter in the footer credit that happens to be a link. It takes the
-   colour and weight of the text around it and nothing else, so the line reads
-   as a line; the cursor is the only tell. The focus ring is kept, so a
-   keyboard can still find it. */
-.footer__door {
+/* A door: a word or letter that happens to be a link. It takes the colour and
+   weight of the text around it and nothing else, so the line reads as a line
+   and the cursor is the only tell. The focus ring is kept, so a keyboard can
+   still find it. The hover colour is the one part that has to know which
+   background it is sitting on — light accent on the dark footer, dark accent
+   on a white card. */
+.door {
   color: inherit;
   text-decoration: none;
 }
-.footer__door:hover { color: var(--color-nav-text-hover); }
-.footer__door:focus-visible {
+.door:hover { color: var(--color-link-hover); }
+.site-footer .door:hover { color: var(--color-nav-text-hover); }
+.site-footer .door:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 2px;
 }
