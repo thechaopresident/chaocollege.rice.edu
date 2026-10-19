@@ -377,7 +377,7 @@ window.CHAO_PEOPLE = {
       description: "The improvement representative ensures all shared spaces are functional, stocked, and continuously improving.",
       members: [
         { name: "Gabi Brent", pronouns: "he/him", email: "gb83@rice.edu", photo: "gabi-brent.jpg", focus: "center center", photoDrive: null },
-        { name: "Sean Drzewiczewski", pronouns: null, email: "sd167@rice.edu", photo: null, photoDrive: null }
+        { name: "Sean Drzewiczewski", pronouns: null, email: "sd167@rice.edu", photo: "sean-drzewiczewski.jpg", focus: "center center", photoDrive: null }
       ]},
 
     { name: "Kitchen Representatives",
