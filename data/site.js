@@ -183,7 +183,9 @@ window.CHAO_SITE = {
 
   /* --- Homepage announcements ------------------------------------------- *
      Newest first. `date` is the visible label; `datetime` is machine-readable
-     (YYYY-MM-DD) and may be left "". Delete an entry to remove its row.     */
+     (YYYY-MM-DD) and may be left "". Delete an entry to remove its row.
+     `link` makes the headline a link; `bodyLink` { word, href, label } puts
+     the link on one word of the body instead. Use one or the other.         */
   announcements: [
     /* WORDING IS MINE, drawn from the poster — there was no caption with it.
        The lunch/dinner line is not on the poster; Gabi supplied it. Replace
@@ -193,12 +195,19 @@ window.CHAO_SITE = {
        wordmark reads. The designer's file title spelled it "Chaoloween"
        instead; Gabi settled it on 2026-10-27 — the poster wins. Leave it.
 
-       The link goes to the poster itself. An image of text is not readable by
-       a screen reader, so the body above carries the dates and the movie times
-       in words; the rest of the schedule is only in the picture. */
+       The link is on the word "here" in the body, not on the headline, so
+       `link` stays null and `bodyLink` names the word. "here" says nothing on
+       its own, so it carries a hidden label naming the poster; the sentence on
+       screen is unchanged.
+
+       An image of text is not readable by a screen reader, so the body carries
+       the dates and the movie times in words; the rest of the schedule is only
+       in the picture. */
     { date: "10/27/2026", datetime: "2026-10-27", title: "Chaloween week is here",
-      body: "Spooky events, Oct 25 – Oct 31. Two movies play every day, the first at lunch and the second at dinner. The full week is in the poster.",
-      link: "assets/img/chaloween-2026.png" },
+      body: "Spooky events, Oct 25 – Oct 31. Two movies play every day, the first at lunch and the second at dinner. See the full schedule here.",
+      link: null,
+      bodyLink: { word: "here", href: "assets/img/chaloween-2026.png",
+                  label: "the Chaloween week poster" } },
     { date: "10/2/2026", datetime: "2026-10-02", title: "We have a website!",
       body: "It’s what you’re looking at right now", link: null },
     { date: "9/5/2026", datetime: "2026-09-05", title: "We got a ping-pong table!",

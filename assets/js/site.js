@@ -608,7 +608,10 @@
           ? '<a href="' + esc(url(n.link)) + '">' + fmt(n.title) + "</a>" : fmt(n.title);
         return "<li>" +
           "<time" + (n.datetime ? ' datetime="' + esc(n.datetime) + '"' : "") + ">" + fmt(n.date) + "</time>" +
-          "<div><h3>" + title + "</h3><p>" + fmt(n.body) + "</p></div></li>";
+          "<div><h3>" + title + "</h3><p>" +
+            /* `link` puts the link on the headline; `bodyLink` puts it on a
+               word of the body instead. An entry wants one or the other. */
+            linkWord(n.body, n.bodyLink, fmt) + "</p></div></li>";
       }).join("");
       a.innerHTML = '<div class="wrap"><p class="eyebrow">News</p><h2>Announcements</h2>' +
         '<ul class="announce">' + rows + "</ul></div>";
@@ -691,28 +694,41 @@
      adds photos later — do not source one for these people — but the card gives
      no sign of it. Plenty of cards have no photo for ordinary reasons, so
      singling these out said more than it needed to. */
-  /* A word inside a set of pronouns made into a door, the same idea as the
-     letter in the footer credit. `door` on the person names the word and
-     where it leads.
+  /* Turn one word of a line into a link, leaving the rest of the line alone.
 
-     The accessible name is left alone rather than replaced: an aria-label here
-     would make the pronouns announce as something other than pronouns, which
-     is the one thing this line exists to do. The destination is named in a
-     hidden suffix instead, so the link still says where it goes. */
-  function pronounsLine(p) {
-    var text = p.pronouns || "";
-    var door = p.door, at = door && door.word ? text.indexOf(door.word) : -1;
-    if (at < 0) return esc(text);
-    return esc(text.slice(0, at)) +
-      '<a class="door" href="' + esc(door.href) + '" target="_blank" rel="noopener">' +
-        esc(door.word) +
+     `spec` is { word, href, label }. `label` is for a word that says nothing
+     on its own — "here", or a lone letter. It is read out but not seen, so
+     the link still declares where it goes without the sentence changing on
+     screen. It is a hidden suffix rather than an aria-label, because an
+     aria-label replaces the whole name: on a set of pronouns that would make
+     them announce as something other than pronouns, which is the one job that
+     line has.
+
+     `format` is the escaper the surrounding line already uses — fmt() where
+     unfinished copy should still light up, esc() where it need not.
+     `className` is "door" for the links that carry no styling and are meant to
+     be found rather than seen; an ordinary link passes nothing and looks like
+     every other link on the page. */
+  function linkWord(text, spec, format, className) {
+    text = text == null ? "" : String(text);
+    var at = spec && spec.word ? text.indexOf(spec.word) : -1;
+    if (at < 0) return format(text);
+    return format(text.slice(0, at)) +
+      "<a" + (className ? ' class="' + esc(className) + '"' : "") +
+        ' href="' + esc(url(spec.href)) + '"' +
+        (isExternal(spec.href) ? ' target="_blank" rel="noopener"' : "") + ">" +
+        format(spec.word) +
         /* The space lives inside the hidden span, so the visible word is
            exactly the word and the link picks up no trailing space. */
-        (door.label
-          ? '<span class="visually-hidden"> (' + esc(door.label) + ")</span>"
+        (spec.label
+          ? '<span class="visually-hidden"> (' + esc(spec.label) + ")</span>"
           : "") +
       "</a>" +
-      esc(text.slice(at + door.word.length));
+      format(text.slice(at + spec.word.length));
+  }
+
+  function pronounsLine(p) {
+    return linkWord(p.pronouns || "", p.door, esc, "door");
   }
 
   function rosterCard(p, opts) {
