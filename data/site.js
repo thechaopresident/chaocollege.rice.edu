@@ -189,9 +189,9 @@ window.CHAO_SITE = {
        The lunch/dinner line is not on the poster; Gabi supplied it. Replace
        freely with the college's own wording.
 
-       SPELLING: the poster's wordmark reads CHALOWEEN, one L and no second O.
-       The designer's own file title spelled it "Chaoloween". Following what
-       the artwork shows, since that is what is published.
+       SPELLING: "Chaloween", one L and no second O, is what the poster's
+       wordmark reads. The designer's file title spelled it "Chaoloween"
+       instead; Gabi settled it on 2026-10-27 — the poster wins. Leave it.
 
        The link goes to the poster itself. An image of text is not readable by
        a screen reader, so the body above carries the dates and the movie times
