@@ -185,14 +185,22 @@ window.CHAO_SITE = {
      Newest first. `date` is the visible label; `datetime` is machine-readable
      (YYYY-MM-DD) and may be left "". Delete an entry to remove its row.     */
   announcements: [
-    /* Moved here from the Resources page, where dated content would go stale.
-       HEADLINE AND POST DATE are mine — the college supplied the body text and
-       the deadlines, not a headline or a date to publish it under. */
+    /* WORDING IS MINE, drawn from the poster — there was no caption with it.
+       The lunch/dinner line is not on the poster; Gabi supplied it. Replace
+       freely with the college's own wording.
+
+       SPELLING: the poster's wordmark reads CHALOWEEN, one L and no second O.
+       The designer's own file title spelled it "Chaoloween". Following what
+       the artwork shows, since that is what is published.
+
+       The link goes to the poster itself. An image of text is not readable by
+       a screen reader, so the body above carries the dates and the movie times
+       in words; the rest of the schedule is only in the picture. */
+    { date: "10/27/2026", datetime: "2026-10-27", title: "Chaloween week is here",
+      body: "Spooky events, Oct 25 – Oct 31. Two movies play every day, the first at lunch and the second at dinner. The full week is in the poster.",
+      link: "assets/img/chaloween-2026.png" },
     { date: "10/2/2026", datetime: "2026-10-02", title: "We have a website!",
       body: "It’s what you’re looking at right now", link: null },
-    { date: "9/15/2026", datetime: "2026-09-15", title: "Housing jack is September 24",
-      body: "The housing jack is September 24. To take part, the eligibility form must be filled out by September 21. Reach out to Barbare Tetvadze, Chao's Internal Vice President, with any questions.",
-      link: "https://docs.google.com/forms/d/e/1FAIpQLSf0cKHKgSyrkg9WNT_QiPaamJQ7f1_l28vRwhgWh0uwwi7O4A/viewform" },
     { date: "9/5/2026", datetime: "2026-09-05", title: "We got a ping-pong table!",
       body: "Pretty self-explanatory…", link: null }
   ],
