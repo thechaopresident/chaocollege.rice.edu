@@ -203,11 +203,11 @@ window.CHAO_SITE = {
        An image of text is not readable by a screen reader, so the body carries
        the dates and the movie times in words; the rest of the schedule is only
        in the picture. */
-    { date: "10/27/2026", datetime: "2026-10-27", title: "Chaloween week is here",
-      body: "Spooky events, Oct 25 – Oct 31. Two movies play every day, the first at lunch and the second at dinner. See the full schedule here.",
+    { date: "10/27/2026", datetime: "2026-10-27", title: "Chaoloween week is here!",
+      body: "Many spooky events, Oct 25 – Oct 31. Themed movies every day at lunch and dinner. See the full schedule here.",
       link: null,
       bodyLink: { word: "here", href: "assets/img/chaloween-2026.png",
-                  label: "the Chaloween week poster" } },
+                  label: "the Chaoloween week poster" } },
     { date: "10/2/2026", datetime: "2026-10-02", title: "We have a website!",
       body: "It’s what you’re looking at right now", link: null },
     { date: "9/5/2026", datetime: "2026-09-05", title: "We got a ping-pong table!",
