@@ -553,6 +553,15 @@ a.card:hover { border-color: var(--brand-accent); box-shadow: var(--shadow-md); 
   margin-top: 0;
   font-size: 1.075rem;
 }
+/* A standing fact that is not part of the description — who employs a
+   committee's members, say. Set apart from the paragraph above without
+   dropping to fine print. Declared after the :first-child rule so a note
+   with no description before it still reads as a note.                     */
+.group-head .note {
+  margin-top: var(--space-2);
+  font-size: .85rem;
+  font-style: italic;
+}
 
 /* --- Roster card -------------------------------------------------------- *
    Every card is the same shape: role, name, fixed-ratio portrait, contact.

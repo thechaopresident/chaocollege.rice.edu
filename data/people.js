@@ -410,14 +410,20 @@ window.CHAO_PEOPLE = {
       ]},
 
     /* NEW — not on the contact sheet and not in the committees document, so it
-       has no jurisdiction, description or responsibilities yet. Add them the
-       way the other entries carry them once they exist. */
-    { name: "Eco",
+       has no jurisdiction or responsibilities yet. Add them the way the other
+       entries carry them once they exist.
+
+       `note` is Gabi's wording, kept verbatim. It is a standing fact about the
+       people rather than a description of the work, so it renders under the
+       description instead of inside it. */
+    { name: "EcoReps",
       description: "The Eco Representatives promote sustainability at Chao. They plan fun events that encourage environmental awareness and appreciation.",
+      note: "EcoReps are paid student employees of the Office of Sustainability.",
       members: [
         { name: "Sammi Frey",    pronouns: "she/her", email: "sf68@rice.edu",
           photo: "sammi-frey.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1NeuAmjBixxlNcwr6yQFZLeo0-iUjLimZ/view?usp=drive_link" },
-        { name: "Bianca Dotson", pronouns: null,      email: null, photo: null, photoDrive: null }
+        { name: "Bianca Dotson", pronouns: null,      email: "bd63@rice.edu",
+          photo: "bianca-dotson.jpg", focus: "center center", photoDrive: null }
       ]},
 
     { name: "Student Maintenance Representative",

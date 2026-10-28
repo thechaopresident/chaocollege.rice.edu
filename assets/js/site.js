@@ -997,7 +997,10 @@
         : "";
       return '<section class="committee" id="' + esc(slug(c.name)) + '">' +
         '<div class="group-head"><h2>' + fmt(c.name) + "</h2>" + juris +
-          (c.description ? "<p>" + fmt(c.description) + "</p>" : "") + "</div>" +
+          (c.description ? "<p>" + fmt(c.description) + "</p>" : "") +
+          /* A standing fact about the people rather than a description of the
+             work, so it sits apart from the paragraph above it. */
+          (c.note ? '<p class="note">' + fmt(c.note) + "</p>" : "") + "</div>" +
         roster(c.members, { layout: "roster-row" }) + resp + "</section>";
     }
 
