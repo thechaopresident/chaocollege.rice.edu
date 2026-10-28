@@ -187,13 +187,14 @@ window.CHAO_SITE = {
      `link` makes the headline a link; `bodyLink` { word, href, label } puts
      the link on one word of the body instead. Use one or the other.         */
   announcements: [
-    /* WORDING IS MINE, drawn from the poster — there was no caption with it.
-       The lunch/dinner line is not on the poster; Gabi supplied it. Replace
-       freely with the college's own wording.
+    /* The wording here is Gabi's, rewritten 2026-10-27 over a draft of mine.
 
-       SPELLING: "Chaloween", one L and no second O, is what the poster's
-       wordmark reads. The designer's file title spelled it "Chaoloween"
-       instead; Gabi settled it on 2026-10-27 — the poster wins. Leave it.
+       SPELLING: this reads "Chaoloween". The poster's own wordmark reads
+       CHALOWEEN, one L and no second O, and the image file is still named for
+       that spelling; the designer's file title said "Chaoloween". Gabi set the
+       page text to "Chaoloween" in their own commit, so that is what stands —
+       the mismatch with the artwork is recorded here so nobody "corrects"
+       either one without meaning to.
 
        The link is on the word "here" in the body, not on the headline, so
        `link` stays null and `bodyLink` names the word. "here" says nothing on
