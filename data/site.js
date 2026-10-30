@@ -187,6 +187,17 @@ window.CHAO_SITE = {
      `link` makes the headline a link; `bodyLink` { word, href, label } puts
      the link on one word of the body instead. Use one or the other.         */
   announcements: [
+    /* TIME-LIMITED — the campaign closes 21 November 2026; this row should go
+       with it. Condensed from the college's own text on the campaign page.
+       No running total here: it is on the page and would be stale by tomorrow.
+       HEADLINE AND POST DATE are mine. */
+    { date: "10/29/2026", datetime: "2026-10-29", title: "Beer Bike fundraiser",
+      body: "Chao is raising money for more bikes before the season. The goal is $3,000, and the campaign closes on November 21. Donate here.",
+      link: null,
+      bodyLink: { word: "Donate here",
+                  href: "https://donate.rice.edu/chao-college-beer-bike-fundraiser",
+                  label: "on donate.rice.edu" } },
+
     /* The wording here is Gabi's, rewritten 2026-10-27 over a draft of mine.
 
        SPELLING: this reads "Chaoloween". The poster's own wordmark reads

@@ -159,6 +159,8 @@ window.CHAO_PAGES = {
         id: "funding",
         path: "resources/funding/",
         heading: "Funding",
+        /* Four cards, so two by two rather than three and a stray. */
+        layout: "grid grid--2",
         cards: [
           /* Wording supplied by Gabi, verbatim. The Accessibility Fund form is
              also listed under Forms; it is linked from both because this is
@@ -179,7 +181,19 @@ window.CHAO_PAGES = {
           { title: "Budget",
             body: "The Treasurers keep Chao's budget in the open: what every line is allocated for the semester, what has been spent against it, and what is left.",
             path: "https://docs.google.com/spreadsheets/d/1NIBax-QfZ97Nqax1fTy5fJSdm2Szv9kfmn8wa3B69Sg/edit?gid=1118247155#gid=1118247155",
-            cta: "Open the budget sheet" }
+            cta: "Open the budget sheet" },
+          /* TIME-LIMITED — the campaign closes 21 November 2026. Take this
+             card down, or replace it with whatever comes next, once it has.
+
+             Condensed from the college's own text on the campaign page, so
+             the words are theirs. Deliberately no running total or days left:
+             those are on the page itself and would be wrong here within a day.
+             The eleven-bike figure is theirs too, and will date — if the
+             campaign succeeds, it is the first thing to fix. */
+          { title: "Beer Bike Fundraiser",
+            body: "Chao is raising money for more bikes. The team has eleven, which is not enough for the men's and women's teams to practise on, and riders need a range of sizes. The goal is $3,000; $5,000 would buy five more bikes. The campaign closes on November 21.",
+            path: "https://donate.rice.edu/chao-college-beer-bike-fundraiser",
+            cta: "Donate" }
         ]
       },
       {

@@ -1135,9 +1135,13 @@
       : groups[0];
     if (!g) return;
 
+    /* Three to a row by default. A group sets `layout` when its own count
+       divides better another way — four cards go two by two rather than
+       three and a stray. */
     host.innerHTML = '<section class="section"><div class="wrap">' +
       (want ? "" : "<h2>" + fmt(g.heading) + "</h2>") +
-      '<div class="grid grid--3">' + cards(g, want ? "h2" : "h3") + "</div></div></section>";
+      '<div class="' + esc(g.layout || "grid grid--3") + '">' +
+        cards(g, want ? "h2" : "h3") + "</div></div></section>";
   }
 
   /* ======================================================================
