@@ -192,7 +192,7 @@ window.CHAO_SITE = {
        No running total here: it is on the page and would be stale by tomorrow.
        HEADLINE AND POST DATE are mine. */
     { date: "10/29/2026", datetime: "2026-10-29", title: "Beer Bike fundraiser",
-      body: "Chao is raising money for more bikes before the season. The goal is $3,000, and the campaign closes on November 21. Donate here.",
+      body: "Chao is raising money for beer bike!!! Tell your friends and family so we can have an amazing inaugural beer bike! Donate here.",
       link: null,
       bodyLink: { word: "Donate here",
                   href: "https://donate.rice.edu/chao-college-beer-bike-fundraiser",
