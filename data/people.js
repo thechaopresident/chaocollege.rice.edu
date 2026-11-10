@@ -168,29 +168,85 @@ window.CHAO_PEOPLE = {
   ],
 
   /* ======================================================================
-     COURT & CLASS REPRESENTATIVES
+     FLOOR, CLASS & COURT REPRESENTATIVES
+     ----------------------------------------------------------------------
+     Three rosters on one page. The key is `reps` because the page outgrew
+     its old name; the folder stays /people/court/ so links already handed
+     out keep working.
+
+     SOURCE for the floor reps and for the freshmen, junior and senior class
+     reps: the election results Gabi supplied on 10 November 2026, which this
+     file takes as settled. Those rows carry no email, pronouns or photo —
+     the results listed names only, and nothing here is guessed. A card with
+     no address reads "Coming soon" to visitors.
+
+     Where someone elected is already on the site in another role, their
+     contact details and photo are reused from that entry instead of being
+     left blank: Raymond Xu (Secretary and 9th-floor AJ) and Gabi Brent
+     (Improvements Representative).
+
      "Coming Soon..." rows are kept so the vacancy is visible on the page.
+     The 6th and 10th floors have no representative in the results. Both are
+     residential floors, so they are shown as open seats rather than left off.
      ================================================================== */
-  court: [
-    { name: "Amelia Davis", role: "University Court Representative", pronouns: "she/her", email: "awd3@rice.edu",
-      photo: "amelia-davis.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1hRaxyA6TgiyqKUzpmHq389rqp0u9EX2-/view?usp=sharing" },
-    { name: "Coming Soon...", role: "Freshman Rep", pronouns: null, email: null, photo: null, photoDrive: null },
-    { name: "Prasanna Bendalam", role: "Sophomore Rep", pronouns: "he/him", email: "pb67@rice.edu",
-      photo: "prasanna-bendalam.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/16NHr-P1wilsMSGahVfpsB_G2fYCMLeGJ/view?usp=sharing" },
-    { name: "Manny Tejada", role: "Sophomore Rep", pronouns: "he/him", email: "mt181@rice.edu",
-      photo: "manny-tejada.jpg", focus: "center center", photoDrive: null },
-    { name: "Coming Soon...", role: "Junior Rep", pronouns: null, email: null, photo: null, photoDrive: null },
-    { name: "Coming Soon...", role: "Senior Rep", pronouns: null, email: null, photo: null, photoDrive: null },
-    { name: "Kate Dawson", role: "Off-Campus Rep", pronouns: null, email: "kd73@rice.edu", photo: null, photoDrive: null }
-  ],
+  reps: {
+
+    /* Titles follow the results sheet, less its "Chao " prefix, which says
+       nothing on Chao's own site. */
+    floors: [
+      { name: "Benji Strosaker",      role: "2nd Floor Representative",  pronouns: null, email: null, photo: null, photoDrive: null },
+      { name: "Roz Patterson",        role: "3rd Floor Representative",  pronouns: null, email: null, photo: null, photoDrive: null },
+      { name: "Leilah Crosby",        role: "3rd Floor Representative",  pronouns: null, email: null, photo: null, photoDrive: null },
+      { name: "Sadie Kanter",         role: "4th Floor Representative",  pronouns: null, email: null, photo: null, photoDrive: null },
+      { name: "Hannah Rogers",        role: "4th Floor Representative",  pronouns: null, email: null, photo: null, photoDrive: null },
+      { name: "Aylin Garcia",         role: "5th Floor Representative",  pronouns: null, email: null, photo: null, photoDrive: null },
+      { name: "Coming Soon...",       role: "6th Floor Representative",  pronouns: null, email: null, photo: null, photoDrive: null },
+      { name: "Ethan He",             role: "7th Floor Representative",  pronouns: null, email: null, photo: null, photoDrive: null },
+      { name: "Anastasia Sikavitsas", role: "8th Floor Representative",  pronouns: null, email: null, photo: null, photoDrive: null },
+      /* Already on the site as a Secretary and as the 9th-floor AJ. The
+         personal address is the one his AJ entry carries; the Secretaries'
+         shared inbox belongs to that role, not to this one. */
+      { name: "Raymond Xu",           role: "9th Floor Representative",  pronouns: "he/him", email: "rx20@rice.edu",
+        photo: "raymond-xu.jpg", focus: "center 36%", photoDrive: null },
+      { name: "Coming Soon...",       role: "10th Floor Representative", pronouns: null, email: null, photo: null, photoDrive: null }
+    ],
+
+    /* The results named no sophomore class rep: that seat was filled in an
+       earlier election. Those two rows are unchanged apart from the title,
+       which was "Sophomore Rep" and now reads like the rest of the group.
+
+       Kate Dawson represents off-campus members rather than a class or a
+       floor. She sits here because this is the group elected by a body of
+       students rather than by a floor; move her if the college files her
+       somewhere else. */
+    classes: [
+      { name: "Esthecy Cotiere",   role: "Freshmen Class Representative",  pronouns: null, email: null, photo: null, photoDrive: null },
+      { name: "Safiya Azam",       role: "Freshmen Class Representative",  pronouns: null, email: null, photo: null, photoDrive: null },
+      { name: "Prasanna Bendalam", role: "Sophomore Class Representative", pronouns: "he/him", email: "pb67@rice.edu",
+        photo: "prasanna-bendalam.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/16NHr-P1wilsMSGahVfpsB_G2fYCMLeGJ/view?usp=sharing" },
+      { name: "Manny Tejada",      role: "Sophomore Class Representative", pronouns: "he/him", email: "mt181@rice.edu",
+        photo: "manny-tejada.jpg", focus: "center center", photoDrive: null },
+      { name: "Joseph Wright",     role: "Junior Class Representative",    pronouns: null, email: null, photo: null, photoDrive: null },
+      /* Already on the site with the Improvements Representatives. */
+      { name: "Gabi Brent",        role: "Junior Class Representative",    pronouns: "he/him", email: "gb83@rice.edu",
+        photo: "gabi-brent.jpg", focus: "center center", photoDrive: null },
+      { name: "Moti Binyam",       role: "Senior Class Representative",    pronouns: null, email: null, photo: null, photoDrive: null },
+      { name: "Ashley Deng",       role: "Senior Class Representative",    pronouns: null, email: null, photo: null, photoDrive: null },
+      { name: "Kate Dawson",       role: "Off-Campus Representative",      pronouns: null, email: "kd73@rice.edu", photo: null, photoDrive: null }
+    ],
+
+    university: [
+      { name: "Amelia Davis", role: "University Court Representative", pronouns: "she/her", email: "awd3@rice.edu",
+        photo: "amelia-davis.jpg", focus: "center center", photoDrive: "https://drive.google.com/file/d/1hRaxyA6TgiyqKUzpmHq389rqp0u9EX2-/view?usp=sharing" }
+    ]
+  },
 
   /* ======================================================================
      COMMITTEES & REPRESENTATIVES
      Descriptions are verbatim from the sheet, one per committee.
      Names and committee titles have been corrected against the roster the
      college supplied, so they no longer match the contact sheet's spellings
-     in every case. "Sophmore Rep" in the court list below is still the
-     sheet's spelling and has not been confirmed either way.
+     in every case.
      ================================================================== */
   committees: [
     { name: "Arts",

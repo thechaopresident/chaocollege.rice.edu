@@ -959,13 +959,27 @@
       "</div>";
   }
 
-  function renderCourt() {
+  /* Three rosters under one heading: the floors, the class years, and the
+     college's seat on the University Court. The mount is still called
+     "court" because the page is still /people/court/. */
+  function renderReps() {
     var host = mount("court");
     if (!host) return;
+    var R = PPL.reps || {};
+    var B = SITE.blurbs || {};
+
+    /* A group with nobody in it prints nothing at all, heading included, so
+       emptying one in the data is enough to take it off the page. */
+    function group(title, lead, list) {
+      return (list && list.length) ? groupHead(title, lead) + roster(list) : "";
+    }
+
     host.innerHTML = '<div class="wrap section">' +
-      /* Title omitted: the banner <h1> above already says this. */
-      groupHead(null, SITE.blurbs && SITE.blurbs.court) +
-      roster(PPL.court) +
+      /* No title on the lead: the banner <h1> above already says this. */
+      groupHead(null, B.reps) +
+      group("Floor Representatives", B.floorReps, R.floors) +
+      group("Class & Off-Campus Representatives", null, R.classes) +
+      group("University Court", null, R.university) +
       "</div>";
   }
 
@@ -1278,7 +1292,7 @@
     if (page === "people")        renderPeopleIndex();
     if (page === "team")          renderTeam();
     if (page === "government")    renderGovernment();
-    if (page === "court")         renderCourt();
+    if (page === "court")         renderReps();
     if (page === "committees")    renderCommittees();
     if (page === "student-staff") renderStudentStaff();
     if (page === "associates")    renderAssociates();

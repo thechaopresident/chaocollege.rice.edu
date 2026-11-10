@@ -51,7 +51,7 @@ window.CHAO_SITE = {
       children: [
         { label: "The Chao Team",      path: "people/team/" },
         { label: "Student Government", path: "people/government/" },
-        { label: "Court & Class Reps", path: "people/court/" },
+        { label: "Floor, Class & Court Reps", path: "people/court/" },
         { label: "Committees",         path: "people/committees/" },
         { label: "RHAs, AJs & PAAs",   path: "people/student-staff/" },
         { label: "Associates",         path: "people/associates/" }
@@ -120,8 +120,8 @@ window.CHAO_SITE = {
       blurb: "Magisters, the College Coordinator, and the Resident Associates." },
     { label: "Student Government", path: "people/government/",
       blurb: "The Chabinet — Chao's elected executive officers." },
-    { label: "Court & Class Reps", path: "people/court/",
-      blurb: "University Court representative and the class representatives." },
+    { label: "Floor, Class & Court Reps", path: "people/court/",
+      blurb: "Floor representatives, class representatives, and Chao's seat on the University Court." },
     { label: "Committees",         path: "people/committees/",
       blurb: "The committees and representatives that run college life." },
     { label: "RHAs, AJs & PAAs",   path: "people/student-staff/",
@@ -136,7 +136,11 @@ window.CHAO_SITE = {
      site. Everything else is still open.                                   */
   blurbs: {
     government: "The Chabinet is Chao's elected student government. Officers look after the college's finances, facilities, social life, and generally make the college you know and love possible.",
-    court:      "Chao's representative to the university judicial system, alongside the representatives elected to be a voice for each class year. Reach out to yours whenever you have something you want heard \u2014 that is what they are there for.",
+    /* Written before the floor representatives existed, so it still names
+       only the court and the class years. Left as it stands rather than
+       rewritten here; send the sentence you want and it goes straight in. */
+    reps:       "Chao's representative to the university judicial system, alongside the representatives elected to be a voice for each class year. Reach out to yours whenever you have something you want heard \u2014 that is what they are there for.",
+    floorReps:  "[PLACEHOLDER: one or two sentences about what the floor representatives do.]",
     committees: "Chao's committees run the parts of college life that take a team \u2014 Beer Bike, socials, service, merch, sports, the arts and the shared spaces. Each sits under one of the vice presidents.",
     associates: "Rice faculty, staff, and Houston community members who volunteer their time to mentor and support Chao students.",
 

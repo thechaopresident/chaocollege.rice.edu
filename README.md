@@ -43,7 +43,7 @@ oweek/2026/           DragO-Week: the coordinators, the letter, the photographs
 people/               Landing page linking to the six sections below
 people/team/          Magisters, Coordinator, Resident Associates (bios)
 people/government/    The Chabinet
-people/court/         University Court + class representatives
+people/court/         Floor, class and University Court representatives
 people/committees/    Committees and representatives
 people/student-staff/ RHAs, AJs, PAAs
 people/associates/    Faculty, staff and community associates
@@ -265,6 +265,10 @@ nothing to take — those remain placeholders here.
 Drive, Chao Secretaries). Counts match the sheet exactly: 5 leadership entries,
 11 Chabinet positions, 7 court/class reps, 15 committees, 4 RHAs,
 13 AJs, 9 PAAs, and 20 faculty / 11 staff / 17 community associates.
+
+The `reps` section has since outgrown those 7. The floor representatives and
+the freshmen, junior and senior class reps come from the election results of
+10 November 2026, not from the sheet.
 
 `about.sections[0]` on the About page is the "About the Chaos" text from
 **Drive > INFO/TEXT > Main Page**, with its source link preserved.

@@ -183,8 +183,9 @@ enough to notice.
 ### Add a person
 
 Copy a neighbouring entry in the same section, change the details. The sections
-are `leadership`, `government`, `court`, `committees`, `rhas`, `ajs`, `paas`
-and `associates`.
+are `leadership`, `government`, `reps`, `committees`, `rhas`, `ajs`, `paas`
+and `associates`. `reps` is not one list but three — `floors`, `classes` and
+`university` — one per block on the /people/court/ page.
 
 ### Change a Resources card
 
