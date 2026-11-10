@@ -136,11 +136,14 @@ window.CHAO_SITE = {
      site. Everything else is still open.                                   */
   blurbs: {
     government: "The Chabinet is Chao's elected student government. Officers look after the college's finances, facilities, social life, and generally make the college you know and love possible.",
-    /* Written before the floor representatives existed, so it still names
-       only the court and the class years. Left as it stands rather than
-       rewritten here; send the sentence you want and it goes straight in. */
-    reps:       "Chao's representative to the university judicial system, alongside the representatives elected to be a voice for each class year. Reach out to yours whenever you have something you want heard \u2014 that is what they are there for.",
-    floorReps:  "[PLACEHOLDER: one or two sentences about what the floor representatives do.]",
+    /* MINE, NOT CHAO'S. Gabi asked for these two filled in rather than left
+       as placeholders, so they are written here and are the first lines to
+       replace when the college has its own. They claim nothing about what
+       the roles do beyond what their titles say: who elects them, and that
+       they are the people to go to. The closing sentence of `reps` is the
+       one part carried over from the wording that was on the page before. */
+    reps:       "Every floor, every class year, and Chao's off-campus members elect someone to speak for them. Chao also sends one representative to the university judicial system. Reach out to yours whenever you have something you want heard \u2014 that is what they are there for.",
+    floorReps:  "Each residential floor elects its own representatives. They live on the floor they speak for, which makes them the first people to find when something close to home needs raising.",
     committees: "Chao's committees run the parts of college life that take a team \u2014 Beer Bike, socials, service, merch, sports, the arts and the shared spaces. Each sits under one of the vice presidents.",
     associates: "Rice faculty, staff, and Houston community members who volunteer their time to mentor and support Chao students.",
 
