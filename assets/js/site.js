@@ -1282,7 +1282,8 @@
 
     host.innerHTML =
       '<div class="wrap section">' +
-        '<p class="section__lead">' + linkWord(c.intro, c.introLink, fmt) + "</p>" +
+        '<p class="section__lead section__lead--center">' +
+          linkWord(c.intro, c.introLink, fmt) + "</p>" +
         '<div style="margin:var(--space-6) 0">' + view + "</div>" +
         '<h2>Related Calendars</h2><ul class="footer__list">' + links + "</ul>" +
       "</div>";

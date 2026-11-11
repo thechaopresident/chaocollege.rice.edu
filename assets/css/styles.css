@@ -56,6 +56,11 @@ a:hover { color: var(--color-link-hover); }
    two do not stack into an empty band. */
 .section--flush { padding-bottom: 0; }
 .section__lead { color: var(--color-text-muted); font-size: 1.075rem; max-width: var(--measure); }
+/* A lead that sits over a centred control, like the calendar's tab pills.
+   The measure still holds, so the block is centred as well as the text —
+   text-align on its own would centre the words inside a column still
+   pinned to the left edge.                                               */
+.section__lead--center { margin-inline: auto; text-align: center; }
 .eyebrow {
   font-family: var(--font-ui);
   font-size: .8rem; font-weight: 700;
