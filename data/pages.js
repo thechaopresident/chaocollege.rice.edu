@@ -410,7 +410,15 @@ window.CHAO_PAGES = {
        better. The opening sentence is the one that was here before two
        calendars existed; the rest names the two tabs, so the pills below
        read as a choice rather than as decoration. */
-    intro: "From Beer Bike to 2am study breaks, here is everything on Chao's calendar. Events carries Chao's socials and deadlines, kept current by student government all year. Space Reservations fills in on its own as bookings around the college are approved.",
+    intro: "From Beer Bike to 2am study breaks, here is everything on Chao's calendar. Events carries Chao's socials and deadlines, kept current by student government all year. Space Reservations fills in on its own as bookings around the college are approved. Questions about a space reservation go to the secretaries.",
+    /* Turns those two words of the intro into a mailto link, the same way a
+       word of an announcement becomes one — see linkWord() in site.js. The
+       address is the Secretaries' shared inbox, as data/people.js has it.
+       `label` is read out but not seen, so the sentence is unchanged on
+       screen while the link still says where it goes. */
+    introLink: { word: "the secretaries",
+                 href: "mailto:chaosecretaries@gmail.com",
+                 label: "by email at chaosecretaries@gmail.com" },
     calendars: [
       { label: "Events",
         title: "Chao Events Calendar",
