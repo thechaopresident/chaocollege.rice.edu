@@ -406,9 +406,11 @@ window.CHAO_PAGES = {
    its own exactly as it did before there were two.
    ================================================================== */
   calendar: {
-    /* DRAFT — written when this page held one calendar, so it still speaks
-       of events alone. */
-    intro: "From Beer Bike to 2am study breaks, here is everything on Chao's calendar. Scroll below for Chao's upcoming events, socials, and deadlines, kept current by student government all year.",
+    /* DRAFT, and mine rather than Chao's — replace it the moment there is
+       better. The opening sentence is the one that was here before two
+       calendars existed; the rest names the two tabs, so the pills below
+       read as a choice rather than as decoration. */
+    intro: "From Beer Bike to 2am study breaks, here is everything on Chao's calendar. Events carries Chao's socials and deadlines, kept current by student government all year. Space Reservations fills in on its own as bookings around the college are approved.",
     calendars: [
       { label: "Events",
         title: "Chao Events Calendar",
