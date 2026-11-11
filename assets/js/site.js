@@ -1252,14 +1252,26 @@
     if (!host || !PAGES.calendar) return;
     var c = PAGES.calendar;
 
-    var panel = c.embedSrc
-      ? '<iframe class="calendar-embed" title="' + esc(SITE.name) + ' calendar" src="' +
-        esc(c.embedSrc) + '" loading="lazy"></iframe>'
-      : figure({
-          className: "calendar-ph",
-          title: "Calendar",
-          caption: "[PLACEHOLDER: paste the Google Calendar embed URL into data/pages.js]"
-        });
+    /* One panel per calendar, switched by the same pills the People pages
+       use. A hidden panel's iframe is never fetched, because it is lazy and
+       not on screen, so the second calendar costs nothing until it is asked
+       for. With a single calendar listed, tabs() returns the panel alone and
+       no pills are drawn. */
+    function panel(entry) {
+      return entry.src
+        ? '<iframe class="calendar-embed" title="' +
+          esc(entry.title || entry.label || SITE.name + " calendar") +
+          '" src="' + esc(entry.src) + '" loading="lazy"></iframe>'
+        : figure({
+            className: "calendar-ph",
+            title: entry.label || "Calendar",
+            caption: "[PLACEHOLDER: paste the Google Calendar embed URL into data/pages.js]"
+          });
+    }
+
+    var view = tabs((c.calendars || []).map(function (entry) {
+      return { label: entry.label, html: panel(entry) };
+    }), "calendar");
 
     var links = (c.links || []).map(function (l) {
       return l.path
@@ -1271,7 +1283,7 @@
     host.innerHTML =
       '<div class="wrap section">' +
         '<p class="section__lead">' + fmt(c.intro) + "</p>" +
-        '<div style="margin:var(--space-6) 0">' + panel + "</div>" +
+        '<div style="margin:var(--space-6) 0">' + view + "</div>" +
         '<h2>Related Calendars</h2><ul class="footer__list">' + links + "</ul>" +
       "</div>";
   }

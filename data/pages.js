@@ -389,15 +389,37 @@ window.CHAO_PAGES = {
 
   /* ======================================================================
    CALENDAR
-   Paste the Google Calendar "Embed code" src between the quotes below and
-   the placeholder panel is replaced by the live calendar automatically.
+   One entry per calendar below, each becoming a tab on /calendar/. Paste
+   only the `src` URL from Google Calendar's "Embed code", not the whole
+   <iframe> — the renderer builds its own responsive one around it. An
+   entry with no `src` shows a placeholder panel in its place.
+
+   `mode=WEEK` on the end of a URL opens that calendar on the current week.
+   Take it off and Google's own default, the month, comes back. `title` is
+   the iframe's name for a screen reader, which otherwise announces only
+   that there is a frame.
+
+   A calendar has to be PUBLIC for a visitor to see anything in it: in
+   Google Calendar, Settings > the calendar > Access permissions > "Make
+   available to public". Both of the ones below were public when they were
+   added here. List only one calendar and the tabs disappear; it renders on
+   its own exactly as it did before there were two.
    ================================================================== */
   calendar: {
-    /* DRAFT */
+    /* DRAFT — written when this page held one calendar, so it still speaks
+       of events alone. */
     intro: "From Beer Bike to 2am study breaks, here is everything on Chao's calendar. Scroll below for Chao's upcoming events, socials, and deadlines, kept current by student government all year.",
-    /* src pulled from the Google Calendar embed code. The renderer builds its
-       own responsive <iframe> around this, so paste only the URL here. */
-    embedSrc: "https://calendar.google.com/calendar/embed?src=c_30ab1fc200413c925d8590b1f3c5f6db0bffddc931d3b081adcd7629453887c8%40group.calendar.google.com&ctz=America%2FChicago",
+    calendars: [
+      { label: "Events",
+        title: "Chao Events Calendar",
+        src: "https://calendar.google.com/calendar/embed?src=c_30ab1fc200413c925d8590b1f3c5f6db0bffddc931d3b081adcd7629453887c8%40group.calendar.google.com&ctz=America%2FChicago&mode=WEEK" },
+      /* "Chao space requests and reservations will automatically be
+         populated here as they are approved!" — the calendar's own
+         description in Google Calendar. */
+      { label: "Space Reservations",
+        title: "Chao Space Reservations",
+        src: "https://calendar.google.com/calendar/embed?src=af6c1d124ebd57d2bb9baed56b4d4daddb20af2a4c1823943801821848d214fa%40group.calendar.google.com&ctz=America%2FChicago&mode=WEEK" }
+    ],
     links: [
       { label: "Rice Academic Calendar", path: "https://registrar.rice.edu/calendars" },
       { label: "Rice O-Week",            path: "https://success.rice.edu/first-year-programs/o-week" }

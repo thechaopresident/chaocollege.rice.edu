@@ -193,10 +193,18 @@ and `associates`. `reps` is not one list but three — `floors`, `classes` and
 heading, `body` the text, `path` the link, `cta` the button label. Set `path`
 and `cta` to `null` for a card with no button.
 
-### Swap the calendar
+### Swap a calendar, or add another one
 
-`data/pages.js` → `calendar.embedSrc`. Paste only the **`src` URL** from Google
-Calendar's embed code, not the whole `<iframe>`.
+`data/pages.js` → `calendar.calendars`. Each entry is one tab on /calendar/, in
+the order listed; the first is the one that opens. Paste only the **`src` URL**
+from Google Calendar's embed code, not the whole `<iframe>`.
+
+Keep `&mode=WEEK` on the end to open on the current week; drop it for the month.
+
+Two things to check on a calendar you are adding. It has to be **public**, or
+visitors see an empty box — Google Calendar → Settings → that calendar → Access
+permissions → *Make available to public*. And leave only one entry in the list
+and the tabs vanish, which is how you take a calendar down again.
 
 ---
 
